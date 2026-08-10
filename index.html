@@ -1,0 +1,3448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Palaveknatapuram Live Volleyball Auction</title>
+
+<style>
+
+:root{
+    --bg:#100b09;
+    --panel:#1d1512;
+    --panel2:#291b16;
+    --gold:#d6a647;
+    --gold-light:#f4d58b;
+    --cream:#fffaf0;
+    --muted:#b9aa99;
+    --red:#e75b5b;
+    --green:#4da36b;
+    --border:rgba(244,213,139,.18);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter,Arial,sans-serif;
+    color:var(--cream);
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(214,166,71,.18),
+            transparent 35%
+        ),
+        var(--bg);
+}
+
+button,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    padding:20px 5%;
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:50px;
+    height:50px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid var(--gold-light);
+    border-radius:50%;
+
+    font-size:27px;
+}
+
+.brand-title{
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.brand-subtitle{
+    display:block;
+    margin-top:4px;
+
+    color:var(--gold-light);
+
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.mode-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.mode-buttons button{
+    padding:10px 17px;
+
+    border:1px solid var(--border);
+    border-radius:10px;
+
+    background:var(--panel2);
+    color:white;
+
+    font-weight:800;
+}
+
+.mode-buttons button.active{
+    background:var(--gold);
+    color:#211407;
+}
+
+/* ================= MAIN ================= */
+
+main{
+    width:min(1450px,94%);
+    margin:25px auto 60px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+
+    margin-bottom:18px;
+}
+
+.stat{
+    padding:17px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+    border-radius:17px;
+}
+
+.stat span{
+    display:block;
+
+    color:var(--muted);
+    font-size:11px;
+}
+
+.stat strong{
+    display:block;
+
+    margin-top:5px;
+
+    font-size:27px;
+}
+
+/* ================= AUCTION GRID ================= */
+
+.auction-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 430px;
+    gap:18px;
+}
+
+/* ================= AUCTION STAGE ================= */
+
+.auction-stage{
+    min-height:650px;
+
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #241815,
+            #1b1210
+        );
+
+    border:1px solid var(--border);
+    border-radius:25px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.25);
+}
+
+.auction-stage::before{
+    content:"";
+
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    border-radius:50%;
+
+    background:
+        rgba(214,166,71,.06);
+
+    top:-200px;
+    right:-150px;
+}
+
+.kicker{
+    color:var(--gold-light);
+
+    font-size:12px;
+    letter-spacing:4px;
+
+    font-weight:900;
+}
+
+.player-status{
+    margin-top:12px;
+
+    padding:7px 15px;
+
+    border-radius:999px;
+
+    background:
+        rgba(214,166,71,.12);
+
+    color:var(--gold-light);
+
+    font-size:12px;
+    font-weight:900;
+}
+
+/* ================= PLAYER PHOTO ================= */
+
+.player-photo-wrapper{
+    width:190px;
+    height:190px;
+
+    margin:20px 0 10px;
+
+    border-radius:50%;
+    overflow:hidden;
+
+    border:4px solid var(--gold);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
+    background:#291b16;
+
+    animation:
+        playerFloat 2s ease-in-out infinite;
+}
+
+.player-photo{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+@keyframes playerFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+/* ================= PLAYER ================= */
+
+.player-name{
+    font:
+        700 clamp(38px,6vw,72px)
+        Georgia,serif;
+
+    line-height:1;
+
+    margin:10px 0;
+}
+
+.position{
+    color:var(--gold-light);
+
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.starting-bid{
+    margin-top:18px;
+
+    padding:7px 13px;
+
+    border:1px solid rgba(214,166,71,.35);
+
+    border-radius:999px;
+
+    color:var(--gold-light);
+
+    background:
+        rgba(214,166,71,.08);
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.bid-label{
+    margin-top:20px;
+
+    color:var(--muted);
+
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+.current-bid{
+    font-size:75px;
+
+    line-height:1;
+
+    color:var(--gold-light);
+
+    font-weight:1000;
+}
+
+.current-team{
+    font-size:18px;
+    font-weight:900;
+}
+
+.timer{
+    margin-top:12px;
+
+    font-size:45px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+.timer.hot{
+    color:var(--red);
+
+    animation:
+        timerPulse
+        .4s
+        infinite alternate;
+}
+
+@keyframes timerPulse{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.08);
+    }
+
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:9px;
+
+    margin-top:16px;
+}
+
+.btn{
+    padding:13px 17px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    background:var(--panel2);
+
+    color:white;
+
+    font-weight:900;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:var(--gold);
+    color:#211407;
+}
+
+.btn-green{
+    background:#214d32;
+}
+
+.btn-danger{
+    background:#631b1b;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.right-area{
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+}
+
+/* ================= OWNER PANEL ================= */
+
+.owner-panel{
+    padding:18px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+}
+
+.owner-title{
+    font-size:18px;
+
+    color:var(--gold-light);
+
+    font-weight:900;
+
+    margin-bottom:10px;
+}
+
+.owner-select{
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0 12px;
+
+    border:2px solid var(--gold);
+
+    border-radius:10px;
+
+    background:#fffaf0;
+
+    color:#211407;
+
+    font-weight:800;
+
+    outline:none;
+}
+
+/* ================= OWNER INFO ================= */
+
+.owner-info{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px;
+
+    margin-bottom:10px;
+
+    background:
+        rgba(214,166,71,.08);
+
+    border-radius:10px;
+}
+
+.owner-info span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.owner-info strong{
+    color:var(--gold-light);
+    font-size:21px;
+}
+
+/* ================= LIVE PLAYER ================= */
+
+.live-player-card{
+    margin-bottom:12px;
+
+    padding:13px;
+
+    border:
+        1px solid
+        rgba(214,166,71,.35);
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(214,166,71,.12),
+            rgba(255,255,255,.02)
+        );
+}
+
+.live-player-label{
+    color:var(--muted);
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    font-weight:900;
+}
+
+.live-player-name{
+    margin-top:5px;
+
+    color:var(--gold-light);
+
+    font-size:21px;
+
+    font-weight:1000;
+}
+
+.live-player-position{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.live-player-status{
+    margin-top:8px;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+/* ================= BID BUTTONS ================= */
+
+.bid-buttons{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+}
+
+.bid-buttons button{
+    padding:14px;
+
+    background:var(--panel2);
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    font-weight:900;
+}
+
+.bid-buttons button:hover{
+    border-color:var(--gold);
+}
+
+.quote-display{
+    margin-top:10px;
+
+    padding:10px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    background:
+        rgba(214,166,71,.08);
+}
+
+.quote-display span{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    letter-spacing:2px;
+}
+
+.quote-display strong{
+    display:block;
+
+    margin-top:4px;
+
+    color:var(--gold-light);
+
+    font-size:25px;
+}
+
+.bid-now{
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    background:var(--gold);
+
+    color:#211407;
+
+    border:0;
+
+    border-radius:10px;
+
+    font-weight:1000;
+
+    font-size:18px;
+}
+
+.bid-now:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.owner-notice{
+    margin-top:10px;
+
+    color:var(--gold-light);
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+/* ================= SUMMARY ================= */
+
+.summary-board{
+    padding:18px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    max-height:calc(100vh - 150px);
+
+    overflow-y:auto;
+}
+
+.summary-header{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+}
+
+.summary-header h3{
+    margin:0;
+
+    color:var(--gold-light);
+}
+
+.summary-header span{
+    padding:5px 9px;
+
+    border-radius:999px;
+
+    background:
+        rgba(214,166,71,.12);
+
+    color:var(--gold-light);
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+/* ================= TEAM CARD ================= */
+
+.summary-team{
+    margin-bottom:12px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.02);
+}
+
+.summary-team-header{
+    padding:12px;
+
+    background:
+        rgba(214,166,71,.08);
+}
+
+.summary-team-top{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:8px;
+}
+
+.summary-team-name{
+    font-weight:1000;
+}
+
+.summary-team-points{
+    color:var(--gold-light);
+
+    font-weight:1000;
+}
+
+.summary-owner{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.summary-players{
+    padding:7px 12px 10px;
+}
+
+.summary-player{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:8px;
+
+    padding:9px 0;
+
+    border-bottom:
+        1px solid
+        rgba(244,213,139,.08);
+
+    font-size:12px;
+}
+
+.summary-player:last-child{
+    border-bottom:0;
+}
+
+.summary-player-name{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+.summary-player-photo{
+    width:32px;
+    height:32px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:1px solid var(--gold);
+}
+
+.summary-price{
+    color:var(--gold-light);
+
+    font-weight:900;
+}
+
+.empty-roster{
+    padding:9px 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    font-style:italic;
+}
+
+/* ================= HISTORY ================= */
+
+.history-title{
+    margin:18px 0 10px;
+
+    color:var(--gold-light);
+
+    font-size:14px;
+}
+
+.history-item{
+    padding:9px 0;
+
+    border-bottom:
+        1px solid
+        rgba(244,213,139,.08);
+
+    font-size:11px;
+}
+
+.history-player{
+    font-weight:900;
+}
+
+.history-team{
+    color:var(--muted);
+
+    margin-top:3px;
+}
+
+.history-price{
+    color:var(--gold-light);
+
+    font-weight:900;
+}
+
+/* ================= SOLD MODAL ================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    place-items:center;
+
+    background:
+        rgba(0,0,0,.82);
+
+    backdrop-filter:blur(8px);
+
+    z-index:100;
+}
+
+.modal.show{
+    display:grid;
+}
+
+.modal-box{
+    width:min(550px,92%);
+
+    padding:40px 25px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        var(--gold-light);
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3d0d0d,
+            #651b1b,
+            #24120f
+        );
+
+    animation:
+        modalPop
+        .5s
+        cubic-bezier(.17,.89,.32,1.28);
+}
+
+.modal-ball{
+    font-size:90px;
+
+    animation:
+        soldSpin
+        1.2s
+        ease;
+}
+
+.modal-box h2{
+    font:
+        700 45px Georgia,serif;
+
+    margin:10px 0;
+}
+
+.modal-box h2 span{
+    color:var(--gold-light);
+}
+
+.sold-details{
+    font-size:20px;
+
+    font-weight:900;
+
+    color:var(--gold-light);
+}
+
+@keyframes modalPop{
+
+    from{
+        transform:scale(.65);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+@keyframes soldSpin{
+
+    from{
+        transform:
+            rotate(-180deg)
+            scale(.4);
+    }
+
+    to{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:200;
+
+    display:none;
+
+    padding:14px 18px;
+
+    background:var(--cream);
+
+    color:#211407;
+
+    border-radius:12px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.5);
+}
+
+.toast.show{
+    display:block;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1100px){
+
+    .auction-grid{
+        grid-template-columns:1fr;
+    }
+
+    .right-area{
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        align-items:start;
+    }
+
+}
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .mode-buttons{
+        width:100%;
+    }
+
+    .mode-buttons button{
+        flex:1;
+    }
+
+    .auction-stage{
+        min-height:540px;
+        padding:20px;
+    }
+
+    .player-name{
+        font-size:40px;
+    }
+
+    .current-bid{
+        font-size:58px;
+    }
+
+    .right-area{
+        display:flex;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            🏐
+        </div>
+
+        <div>
+
+            <div class="brand-title">
+                PALAVEKNATAPURAM
+            </div>
+
+            <span class="brand-subtitle">
+                LIVE VOLLEYBALL AUCTION • SEASON ONE
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="mode-buttons">
+
+        <button id="adminMode" class="active">
+            🖥️ Admin
+        </button>
+
+        <button id="ownerMode">
+            📱 Owner
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<div class="stats">
+
+    <div class="stat">
+        <span>TEAMS</span>
+        <strong>5</strong>
+    </div>
+
+    <div class="stat">
+        <span>POINTS EACH</span>
+        <strong>100</strong>
+    </div>
+
+    <div class="stat">
+        <span>STARTING BID</span>
+        <strong>5</strong>
+    </div>
+
+    <div class="stat">
+        <span>PLAYERS SOLD</span>
+        <strong id="soldCount">0 / 35</strong>
+    </div>
+
+    <div class="stat">
+        <span>AUCTION TIME</span>
+        <strong>03:00</strong>
+    </div>
+
+</div>
+
+
+<div class="auction-grid">
+
+
+<section>
+
+<div class="auction-stage">
+
+    <div class="kicker">
+        PALAVEKNATAPURAM • LIVE AUCTION
+    </div>
+
+    <div
+        class="player-status"
+        id="playerStatus">
+        WAITING FOR PLAYER
+    </div>
+
+    <div class="player-photo-wrapper">
+
+        <img
+            id="playerPhoto"
+            class="player-photo"
+            src=""
+            alt="Player Photo"
+        >
+
+    </div>
+
+    <div
+        class="player-name"
+        id="playerName">
+        Ready?
+    </div>
+
+    <div
+        class="position"
+        id="playerPosition">
+        35 PLAYERS • 5 TEAMS • 100 POINTS
+    </div>
+
+    <div class="starting-bid">
+        🏷️ STARTING BID: 5 POINTS
+    </div>
+
+    <div class="bid-label">
+        CURRENT BID
+    </div>
+
+    <div
+        class="current-bid"
+        id="currentBid">
+        0
+    </div>
+
+    <div
+        class="current-team"
+        id="currentTeam">
+        No bids yet
+    </div>
+
+    <div
+        class="timer"
+        id="timer">
+        03:00
+    </div>
+
+</div>
+
+
+<div
+    class="controls"
+    id="adminControls">
+
+    <button
+        class="btn btn-primary"
+        id="pickPlayer">
+        🎲 Pick Random Player
+    </button>
+
+    <button
+        class="btn btn-green"
+        id="startAuction">
+        ▶ Start 3-Minute Auction
+    </button>
+
+    <button
+        class="btn btn-primary"
+        id="sellPlayer">
+        🔨 SELL PLAYER
+    </button>
+
+    <button
+        class="btn"
+        id="skipPlayer">
+        ⏭ Skip
+    </button>
+
+    <button
+        class="btn btn-danger"
+        id="undoSale">
+        ↩ Undo Last Sale
+    </button>
+
+</div>
+
+</section>
+
+
+<div class="right-area">
+
+
+<!-- OWNER PANEL -->
+
+<div
+    class="owner-panel hidden"
+    id="ownerPanel">
+
+    <div class="owner-title">
+        📱 TEAM OWNER PANEL
+    </div>
+
+    <select
+        id="ownerSelect"
+        class="owner-select">
+
+        <option value="">
+            Select Team Owner
+        </option>
+
+        <option value="1">
+            1 — Seshu
+        </option>
+
+        <option value="2">
+            2 — Raju
+        </option>
+
+        <option value="3">
+            3 — Anji
+        </option>
+
+        <option value="4">
+            4 — Owner 4
+        </option>
+
+        <option value="5">
+            5 — Owner 5
+        </option>
+
+    </select>
+
+
+    <div
+        class="live-player-card">
+
+        <div class="live-player-label">
+            CURRENT AUCTION PLAYER
+        </div>
+
+        <div
+            class="live-player-name"
+            id="ownerCurrentPlayer">
+            No player selected
+        </div>
+
+        <div
+            class="live-player-position"
+            id="ownerCurrentPosition">
+            Waiting for admin...
+        </div>
+
+        <div
+            class="live-player-status"
+            id="ownerCurrentStatus">
+            🏐 Waiting
+        </div>
+
+    </div>
+
+
+    <div class="owner-info">
+
+        <div>
+
+            <span>
+                Selected Team
+            </span>
+
+            <br>
+
+            <strong id="selectedTeamName">
+                —
+            </strong>
+
+        </div>
+
+        <div style="text-align:right">
+
+            <span>
+                Remaining
+            </span>
+
+            <br>
+
+            <strong id="selectedTeamPoints">
+                100
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="bid-buttons">
+
+        <button data-bid="1">
+            +1
+        </button>
+
+        <button data-bid="2">
+            +2
+        </button>
+
+        <button data-bid="5">
+            +5
+        </button>
+         <button data-bid="10">
+            +10
+        </button>
+
+        <button data-bid="15">
+            +15
+        </button>
+
+        <button data-bid="custom">
+            + Custom
+        </button>
+    </div>
+
+
+    <div class="quote-display">
+
+        <span>
+            YOUR QUOTE
+        </span>
+
+        <strong id="pendingQuote">
+            0
+        </strong>
+
+    </div>
+
+
+    <button
+        class="bid-now"
+        id="bidNow"
+        disabled>
+        🔥 BID NOW
+    </button>
+
+
+    <div
+        class="owner-notice"
+        id="ownerNotice">
+        Select your team owner first.
+    </div>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary-board">
+
+    <div class="summary-header">
+
+        <h3>
+            📋 AUCTION SUMMARY
+        </h3>
+
+        <span id="summaryCount">
+            0 SOLD
+        </span>
+
+    </div>
+
+    <div id="summaryTeams"></div>
+
+    <div class="history-title">
+        🏷️ RECENT AUCTION HISTORY
+    </div>
+
+    <div id="auctionHistory"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- SOLD MODAL -->
+
+<div
+    class="modal"
+    id="soldModal">
+
+    <div class="modal-box">
+
+        <div class="modal-ball">
+            🏐
+        </div>
+
+        <div class="kicker">
+            PLAYER SOLD
+        </div>
+
+        <h2>
+            <span id="soldPlayer">
+                PLAYER
+            </span>
+        </h2>
+
+        <div
+            class="sold-details"
+            id="soldDetails">
+        </div>
+
+        <button
+            class="btn btn-primary"
+            id="closeSold"
+            style="margin-top:25px">
+
+            Continue Auction 🏐
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const STARTING_BID = 5;
+const AUCTION_TIME = 180;
+
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+const teams = [
+
+    {
+        id:1,
+        name:"Team 1",
+        owner:"Linga Reddy",
+        points:100,
+        players:[]
+    },
+
+    {
+        id:2,
+        name:"Team 2",
+        owner:"Shyam",
+        points:100,
+        players:[]
+    },
+
+    {
+        id:3,
+        name:"Team 3",
+        owner:"Hari",
+        points:100,
+        players:[]
+    },
+ 
+    {
+        id:4,
+        name:"Team 4",
+        owner:"Venky (BroadRidge)",
+        points:100,
+        players:[]
+    },
+
+];
+
+
+/* =========================================================
+   35 PLAYERS
+========================================================= */
+
+const players = [
+
+    {
+        id:1,
+        name:"V. Venkatesulu",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=1"
+    },
+
+    {
+        id:2,
+        name:"S. Harsha",
+        position:"Libero",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/6RQssW3B/Screenshot-2026-08-10-004215.png"
+    },
+
+    {
+        id:3,
+        name:"V. Madhu",
+        position:"Libero",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=3"
+    },
+
+    {
+        id:4,
+        name:"V. Anji",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=4"
+    },
+
+    {
+        id:5,
+        name:"B. Ravi",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/Ngwff8kh/Screenshot-2026-08-10-000539.png"
+    },
+
+    {
+        id:6,
+        name:"D. Chandra",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/9H68R5PQ/Screenshot-2026-08-09-183817.png"
+    },
+
+    {
+        id:7,
+        name:"V. Aravindhu",
+        position:"Opposite",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=7"
+    },
+
+    {
+        id:8,
+        name:"B. Devaraju",
+        position:"Middle Blocker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/Q360d4XG/Screenshot-2026-08-10-005139.png"
+    },
+
+    {
+        id:9,
+        name:"P. Dileep",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=9"
+    },
+
+    {
+        id:10,
+        name:"V. Thippeswamy",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=10"
+    },
+
+    {
+        id:11,
+        name:"V. Veeranji",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=17"
+    },
+
+    {
+        id:12,
+        name:"B. Mahendra",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=12"
+    },
+
+    {
+        id:13,
+        name:"P. Ajay",
+        position:"Libero",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=14"
+    },
+
+    {
+        id:14,
+        name:"C. Yerriswamy",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=14"
+    },
+
+    {
+        id:15,
+        name:"B. Vamsi",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=15"
+    },
+
+    {
+        id:16,
+        name:"G. Naresh",
+        position:"Middle Blocker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/B2G2GwG3/Screenshot-2026-08-10-003814.png"
+    },
+ 
+    {
+        id:17,
+        name:"Daresh",
+        position:"Opposite",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=17"
+    },
+
+    {
+        id:18,
+        name:"V. Amaresh",
+        position:"Opposite",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=30"
+    },
+
+    {
+        id:19,
+        name:"V. Harikrishna",
+        position:"Middle Blocker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=27"
+    },
+
+    {
+        id:20,
+        name:"V. Babu",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/6cg9B7FM/Myimage.jpg"
+    },
+
+    {
+        id:21,
+        name:"B. Dinesh",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/3yKZ2QrB/Screenshot-2026-08-10-004643.png"
+    },
+
+    {
+        id:22,
+        name:"B. Maruthi",
+        position:"Libero",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=3"
+    },
+
+    {
+        id:23,
+        name:"G. Ramakrishna",
+        position:"Middle Blocker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.ibb.co/SDpyr5rR/Screenshot-2026-08-10-004421.png"
+    },
+
+    {
+        id:24,
+        name:"V. Duryajaya",
+        position:"Middle Blocker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=24"
+    },
+
+    {
+        id:25,
+        name:"S. Rajasimha",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=25"
+    },
+
+    {
+        id:26,
+        name:"A. Praveen",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=26"
+    },
+
+    {
+        id:27,
+        name:"V. Yerriswamy",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=27"
+    },
+
+    {
+        id:28,
+        name:"S. Tharun",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=28"
+    },
+
+    {
+        id:29,
+        name:"T. Hemadri",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=29"
+    },
+
+    {
+        id:30,
+        name:"Charan Tej",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=20"
+    },
+
+    {
+        id:31,
+        name:"U. Narasimha",
+        position:"Opposite",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=31"
+    },
+
+    {
+        id:32,
+        name:"C. Prakash",
+        position:"Spiker",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=32"
+    },
+
+    {
+        id:33,
+        name:"chenna",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=33"
+    },
+
+    {
+        id:34,
+        name:"U. Raju",
+        position:"Setter",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=34"
+    },
+
+    {
+        id:35,
+        name:"Raju Chowdary",
+        position:"All Rounder",
+        status:"available",
+        soldTo:null,
+        price:0,
+        photo:"https://i.pravatar.cc/300?img=35"
+    }
+
+];
+
+/* =========================================================
+   AUCTION STATE
+========================================================= */
+
+let auction = {
+
+    currentPlayer:null,
+
+    currentBid:STARTING_BID,
+
+    currentTeam:null,
+
+    timer:0,
+
+    timerInterval:null,
+
+    pendingBid:0,
+
+    lastSale:null,
+
+    history:[]
+
+};
+
+
+/* =========================================================
+   SHORTCUT
+========================================================= */
+
+const $ = id =>
+    document.getElementById(id);
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    const toast = $("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(
+        () => toast.classList.remove("show"),
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT TIME
+========================================================= */
+
+function formatTime(seconds){
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    return (
+        String(minutes).padStart(2,"0")
+        +
+        ":"
+        +
+        String(secs).padStart(2,"0")
+    );
+
+}
+
+
+/* =========================================================
+   PICK RANDOM PLAYER
+   IMPORTANT:
+   ONLY SOLD PLAYERS ARE REMOVED.
+   AVAILABLE + SKIPPED CAN APPEAR AGAIN.
+========================================================= */
+
+function pickRandomPlayer(){
+
+    if(auction.currentPlayer){
+
+        showToast(
+            "⏳ Finish the current player auction first."
+        );
+
+        return;
+    }
+
+
+    const eligiblePlayers =
+        players.filter(
+            player =>
+                player.status !== "sold"
+        );
+
+
+    if(eligiblePlayers.length === 0){
+
+        showToast(
+            "🏆 ALL 35 PLAYERS HAVE BEEN SOLD!"
+        );
+
+        return;
+    }
+
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            eligiblePlayers.length
+        );
+
+
+    const player =
+        eligiblePlayers[randomIndex];
+
+
+    player.status = "selected";
+
+
+    auction.currentPlayer =
+        player;
+
+    auction.currentBid =
+        STARTING_BID;
+
+    auction.currentTeam =
+        null;
+
+    auction.pendingBid =
+        0;
+
+    auction.timer =
+        AUCTION_TIME;
+
+
+    stopTimer();
+
+    updateEverything();
+
+
+    showToast(
+        `🎲 ${player.name} selected — Starting bid: 5 points`
+    );
+
+}
+
+
+/* =========================================================
+   START AUCTION
+========================================================= */
+
+function startAuction(){
+
+    if(!auction.currentPlayer){
+
+        showToast(
+            "🎲 Pick a player first."
+        );
+
+        return;
+    }
+
+
+    stopTimer();
+
+
+    if(auction.timer <= 0){
+
+        auction.timer =
+            AUCTION_TIME;
+
+    }
+
+
+    auction.timerInterval =
+        setInterval(
+            () => {
+
+                auction.timer--;
+
+                updateTimer();
+                updateOwnerPanel();
+
+
+                if(auction.timer <= 0){
+
+                    stopTimer();
+
+                    auction.timer = 0;
+
+                    updateTimer();
+                    updateOwnerPanel();
+
+                    showToast(
+                        "⏱️ Auction time finished!"
+                    );
+
+                }
+
+            },
+            1000
+        );
+
+
+    updateEverything();
+
+}
+
+
+/* =========================================================
+   STOP TIMER
+========================================================= */
+
+function stopTimer(){
+
+    if(auction.timerInterval){
+
+        clearInterval(
+            auction.timerInterval
+        );
+
+        auction.timerInterval = null;
+
+    }
+
+}
+
+
+/* =========================================================
+   PLACE BID
+========================================================= */
+
+function placeBid(teamId,amount){
+
+    const team =
+        teams.find(
+            t => t.id === teamId
+        );
+
+
+    if(!team){
+
+        showToast(
+            "Select a team."
+        );
+
+        return false;
+    }
+
+
+    if(!auction.currentPlayer){
+
+        showToast(
+            "No player is currently selected."
+        );
+
+        return false;
+    }
+
+
+    if(auction.timer <= 0){
+
+        showToast(
+            "⏱️ Auction timer has ended."
+        );
+
+        return false;
+    }
+
+
+    if(team.players.length >= 7){
+
+        showToast(
+            "🚫 This team already has 7 players."
+        );
+
+        return false;
+    }
+
+
+    if(amount < STARTING_BID){
+
+        showToast(
+            "Minimum bid is 5 points."
+        );
+
+        return false;
+    }
+
+
+    if(
+        auction.currentTeam &&
+        amount <= auction.currentBid
+    ){
+
+        showToast(
+            `Bid must be above ${auction.currentBid}.`
+        );
+
+        return false;
+    }
+
+
+    if(amount > team.points){
+
+        showToast(
+            `🚫 ${team.name} has only ${team.points} points.`
+        );
+
+        return false;
+    }
+
+
+    auction.currentBid =
+        amount;
+
+    auction.currentTeam =
+        team;
+
+
+    /*
+       Every successful bid gives the bidder
+       another 3 minutes.
+    */
+
+    auction.timer =
+        AUCTION_TIME;
+
+
+    stopTimer();
+
+    startAuction();
+
+    updateEverything();
+
+
+    showToast(
+        `🔥 ${team.name} quoted ${amount} points for ${auction.currentPlayer.name}`
+    );
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   OWNER BID
+========================================================= */
+
+function ownerBid(){
+
+    const teamId =
+        Number(
+            $("ownerSelect").value
+        );
+
+
+    if(!teamId){
+
+        showToast(
+            "Please select your team owner."
+        );
+
+        return;
+    }
+
+
+    if(!auction.currentPlayer){
+
+        showToast(
+            "No player is currently available."
+        );
+
+        return;
+    }
+
+
+    const quote =
+        auction.pendingBid;
+
+
+    if(quote < STARTING_BID){
+
+        showToast(
+            "Minimum starting bid is 5 points."
+        );
+
+        return;
+    }
+
+
+    if(
+        auction.currentTeam &&
+        quote <= auction.currentBid
+    ){
+
+        showToast(
+            `Your quote must be above ${auction.currentBid}.`
+        );
+
+        return;
+    }
+
+
+    const success =
+        placeBid(
+            teamId,
+            quote
+        );
+
+
+    if(success){
+
+        auction.pendingBid =
+            0;
+
+        updateEverything();
+
+    }
+
+}
+
+
+/* =========================================================
+   SELL PLAYER
+========================================================= */
+
+function sellPlayer(){
+
+    if(!auction.currentPlayer){
+
+        showToast(
+            "No player selected."
+        );
+
+        return;
+    }
+
+
+    if(!auction.currentTeam){
+
+        showToast(
+            "⚠️ No team has bid on this player yet."
+        );
+
+        return;
+    }
+
+
+    const player =
+        auction.currentPlayer;
+
+    const team =
+        auction.currentTeam;
+
+    const price =
+        auction.currentBid;
+
+
+    if(team.players.length >= 7){
+
+        showToast(
+            "🚫 This team already has 7 players."
+        );
+
+        return;
+    }
+
+
+    if(price > team.points){
+
+        showToast(
+            "🚫 Team does not have enough points."
+        );
+
+        return;
+    }
+
+
+    auction.lastSale = {
+
+        player:player,
+
+        team:team,
+
+        price:price
+
+    };
+
+
+    team.points -=
+        price;
+
+
+    team.players.push({
+
+        player:player,
+
+        price:price
+
+    });
+
+
+    /*
+       THIS IS THE IMPORTANT PART.
+
+       Once SOLD, player is permanently
+       removed from random selection.
+    */
+
+    player.status =
+        "sold";
+
+    player.soldTo =
+        team.id;
+
+    player.price =
+        price;
+
+
+    auction.history.unshift({
+
+        player:player,
+
+        team:team,
+
+        price:price,
+
+        owner:team.owner
+
+    });
+
+
+    stopTimer();
+
+
+    $("soldPlayer").textContent =
+        player.name;
+
+
+    $("soldDetails").textContent =
+        `${team.name} • ${team.owner} • ${price} POINTS`;
+
+
+    $("soldModal")
+        .classList
+        .add("show");
+
+
+    auction.currentPlayer =
+        null;
+
+    auction.currentBid =
+        STARTING_BID;
+
+    auction.currentTeam =
+        null;
+
+    auction.timer =
+        0;
+
+    auction.pendingBid =
+        0;
+
+
+    updateEverything();
+
+
+    if(
+        players.every(
+            player =>
+                player.status === "sold"
+        )
+    ){
+
+        showToast(
+            "🏆 AUCTION COMPLETE — ALL 35 PLAYERS SOLD!"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SKIP PLAYER
+
+   IMPORTANT:
+   DO NOT MARK PLAYER AS SOLD.
+
+   Player becomes AVAILABLE again.
+
+   Therefore the same player can appear
+   again when Pick Random Player is clicked.
+========================================================= */
+
+function skipPlayer(){
+
+    if(!auction.currentPlayer){
+
+        showToast(
+            "No player selected."
+        );
+
+        return;
+    }
+
+
+    const player =
+        auction.currentPlayer;
+
+
+    stopTimer();
+
+
+    player.status =
+        "available";
+
+
+    auction.currentPlayer =
+        null;
+
+    auction.currentBid =
+        STARTING_BID;
+
+    auction.currentTeam =
+        null;
+
+    auction.pendingBid =
+        0;
+
+    auction.timer =
+        0;
+
+
+    updateEverything();
+
+
+    showToast(
+        `⏭ ${player.name} skipped — available again!`
+    );
+
+}
+
+
+/* =========================================================
+   UNDO SALE
+========================================================= */
+
+function undoSale(){
+
+    const sale =
+        auction.lastSale;
+
+
+    if(!sale){
+
+        showToast(
+            "Nothing to undo."
+        );
+
+        return;
+    }
+
+
+    sale.team.points +=
+        sale.price;
+
+
+    sale.team.players =
+        sale.team.players.filter(
+            item =>
+                item.player.id !==
+                sale.player.id
+        );
+
+
+    sale.player.status =
+        "available";
+
+    sale.player.soldTo =
+        null;
+
+    sale.player.price =
+        0;
+
+
+    auction.history =
+        auction.history.filter(
+            item =>
+                item.player.id !==
+                sale.player.id
+        );
+
+
+    auction.currentPlayer =
+        sale.player;
+
+    auction.currentBid =
+        STARTING_BID;
+
+    auction.currentTeam =
+        null;
+
+    auction.timer =
+        AUCTION_TIME;
+
+    auction.pendingBid =
+        0;
+
+    auction.lastSale =
+        null;
+
+
+    updateEverything();
+
+
+    showToast(
+        "↩ Sale reversed. Player is available again."
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE EVERYTHING
+========================================================= */
+
+function updateEverything(){
+
+    updateAuctionStage();
+
+    updateTimer();
+
+    updateSoldCount();
+
+    updateOwnerPanel();
+
+    renderSummary();
+
+}
+
+
+/* =========================================================
+   UPDATE AUCTION STAGE
+========================================================= */
+
+function updateAuctionStage(){
+
+    const player =
+        auction.currentPlayer;
+
+    const photo =
+        $("playerPhoto");
+
+
+    if(!player){
+
+        $("playerName").textContent =
+            "Ready?";
+
+        $("playerPosition").textContent =
+            "35 PLAYERS • 5 TEAMS • 100 POINTS";
+
+        $("currentBid").textContent =
+            "0";
+
+        $("currentTeam").textContent =
+            "No bids yet";
+
+        $("playerStatus").textContent =
+            "WAITING FOR PLAYER";
+
+        photo.src =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlfqaaom8l_NwMwmuYibdwhbSE8I6E8QQe9L5oFKHZ61FbzMTqS3sacW_&s=10";
+
+        return;
+
+    }
+
+
+    $("playerName").textContent =
+        player.name;
+
+    $("playerPosition").textContent =
+        player.position;
+
+    $("currentBid").textContent =
+        auction.currentBid;
+
+    $("currentTeam").textContent =
+        auction.currentTeam
+            ?
+            `${auction.currentTeam.name} • ${auction.currentTeam.owner}`
+            :
+            "No bids yet";
+
+
+    $("playerStatus").textContent =
+        "🔴 LIVE AUCTION";
+
+
+    photo.src =
+        player.photo;
+
+
+    photo.onerror =
+        function(){
+
+            this.onerror = null;
+
+            this.src =
+                "https://cdn-icons-png.flaticon.com/512/3075/3075977.png";
+
+        };
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function updateTimer(){
+
+    $("timer").textContent =
+        formatTime(
+            auction.timer
+        );
+
+
+    if(
+        auction.timer > 0 &&
+        auction.timer <= 20
+    ){
+
+        $("timer")
+            .classList
+            .add("hot");
+
+    }
+    else{
+
+        $("timer")
+            .classList
+            .remove("hot");
+
+    }
+
+}
+
+
+/* =========================================================
+   SOLD COUNT
+
+   ONLY status === "sold"
+   counts here.
+
+   Skipped players are NOT counted.
+========================================================= */
+
+function updateSoldCount(){
+
+    const sold =
+        players.filter(
+            player =>
+                player.status === "sold"
+        ).length;
+
+
+    $("soldCount").textContent =
+        `${sold} / ${players.length}`;
+
+
+    $("summaryCount").textContent =
+        `${sold} SOLD`;
+
+}
+
+
+/* =========================================================
+   OWNER PANEL
+========================================================= */
+
+function updateOwnerPanel(){
+
+    const selected =
+        Number(
+            $("ownerSelect").value
+        );
+
+
+    const team =
+        teams.find(
+            t => t.id === selected
+        );
+
+
+    if(!team){
+
+        $("selectedTeamName").textContent =
+            "—";
+
+        $("selectedTeamPoints").textContent =
+            "100";
+
+        $("pendingQuote").textContent =
+            "0";
+
+        $("bidNow").disabled =
+            true;
+
+        $("ownerNotice").textContent =
+            "Select your team owner first.";
+
+    }
+    else{
+
+        $("selectedTeamName").textContent =
+            `${team.name} — ${team.owner}`;
+
+        $("selectedTeamPoints").textContent =
+            team.points;
+
+        $("pendingQuote").textContent =
+            auction.pendingBid;
+
+
+        $("bidNow").disabled =
+            !auction.currentPlayer ||
+            auction.pendingBid < STARTING_BID;
+
+
+        $("ownerNotice").textContent =
+            auction.currentPlayer
+                ?
+                "Select your quote and press BID NOW."
+                :
+                "Waiting for admin to pick a player.";
+
+    }
+
+
+    if(auction.currentPlayer){
+
+        $("ownerCurrentPlayer").textContent =
+            auction.currentPlayer.name;
+
+        $("ownerCurrentPosition").textContent =
+            auction.currentPlayer.position;
+
+
+        if(auction.currentTeam){
+
+            $("ownerCurrentStatus").textContent =
+                `🔥 Leading: ${auction.currentTeam.name} at ${auction.currentBid} points`;
+
+        }
+        else{
+
+            $("ownerCurrentStatus").textContent =
+                "🏐 No bids yet — starting from 5 points";
+
+        }
+
+    }
+    else{
+
+        $("ownerCurrentPlayer").textContent =
+            "No player selected";
+
+        $("ownerCurrentPosition").textContent =
+            "Waiting for admin...";
+
+        $("ownerCurrentStatus").textContent =
+            "🏐 Waiting";
+
+    }
+
+}
+
+
+/* =========================================================
+   SUMMARY BOARD
+========================================================= */
+
+function renderSummary(){
+
+    const container =
+        $("summaryTeams");
+
+
+    let html = "";
+
+
+    teams.forEach(
+        team => {
+
+            html += `
+
+            <div class="summary-team">
+
+                <div class="summary-team-header">
+
+                    <div class="summary-team-top">
+
+                        <div class="summary-team-name">
+
+                            ${team.name}
+
+                        </div>
+
+                        <div class="summary-team-points">
+
+                            ${team.points} pts
+
+                        </div>
+
+                    </div>
+
+                    <div class="summary-owner">
+
+                        👤 ${team.owner}
+
+                        • ${team.players.length}/7 players
+
+                    </div>
+
+                </div>
+
+                <div class="summary-players">
+            `;
+
+
+            if(team.players.length === 0){
+
+                html += `
+
+                    <div class="empty-roster">
+
+                        No players selected yet
+
+                    </div>
+
+                `;
+
+            }
+            else{
+
+                team.players.forEach(
+                    item => {
+
+                        html += `
+
+                        <div class="summary-player">
+
+                            <div class="summary-player-name">
+
+                                <img
+                                    class="summary-player-photo"
+                                    src="${item.player.photo}"
+                                    onerror="
+                                        this.onerror=null;
+                                        this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png';
+                                    "
+                                >
+
+                                <span>
+
+                                    ${item.player.name}
+
+                                </span>
+
+                            </div>
+
+                            <div class="summary-price">
+
+                                ${item.price}
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                );
+
+            }
+
+
+            html += `
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+    );
+
+
+    container.innerHTML =
+        html;
+
+
+    renderHistory();
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+    const container =
+        $("auctionHistory");
+
+
+    if(auction.history.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty-roster">
+
+                No completed sales yet.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        auction.history
+            .slice(0,10)
+            .map(
+                item => `
+
+                    <div class="history-item">
+
+                        <div class="history-player">
+
+                            🏐 ${item.player.name}
+
+                        </div>
+
+                        <div class="history-team">
+
+                            ${item.team.name}
+                            •
+                            ${item.owner}
+
+                        </div>
+
+                        <div class="history-price">
+
+                            SOLD FOR ${item.price} POINTS
+
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   ADMIN MODE
+========================================================= */
+
+$("adminMode")
+.addEventListener(
+    "click",
+    function(){
+
+        $("adminMode")
+            .classList
+            .add("active");
+
+        $("ownerMode")
+            .classList
+            .remove("active");
+
+
+        $("adminControls")
+            .classList
+            .remove("hidden");
+
+
+        $("ownerPanel")
+            .classList
+            .add("hidden");
+
+    }
+);
+
+
+/* =========================================================
+   OWNER MODE
+========================================================= */
+
+$("ownerMode")
+.addEventListener(
+    "click",
+    function(){
+
+        $("ownerMode")
+            .classList
+            .add("active");
+
+        $("adminMode")
+            .classList
+            .remove("active");
+
+
+        $("adminControls")
+            .classList
+            .add("hidden");
+
+
+        $("ownerPanel")
+            .classList
+            .remove("hidden");
+
+
+        updateOwnerPanel();
+
+    }
+);
+
+
+/* =========================================================
+   OWNER SELECTION
+========================================================= */
+
+$("ownerSelect")
+.addEventListener(
+    "change",
+    function(){
+
+        auction.pendingBid =
+            0;
+
+        updateOwnerPanel();
+
+    }
+);
+
+
+/* =========================================================
+   +5 / +10 / +15
+========================================================= */
+document
+.querySelectorAll("[data-bid]")
+.forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const value = this.dataset.bid;
+
+        const teamId =
+            Number($("ownerSelect").value);
+
+        const team =
+            teams.find(t => t.id === teamId);
+
+
+        if (!team) {
+
+            showToast(
+                "Please select your team owner first."
+            );
+
+            return;
+        }
+
+
+        if (!auction.currentPlayer) {
+
+            showToast(
+                "No player is currently being auctioned."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // CUSTOM BID
+        // ==========================================
+
+        if (value === "custom") {
+
+            const customValue =
+                prompt(
+                    "Enter your bid amount:"
+                );
+
+
+            if (
+                customValue === null ||
+                customValue.trim() === ""
+            ) {
+                return;
+            }
+
+
+            const customBid =
+                Number(customValue);
+
+
+            if (
+                !Number.isInteger(customBid) ||
+                customBid <= 0
+            ) {
+
+                showToast(
+                    "Please enter a valid whole number."
+                );
+
+                return;
+            }
+
+
+            setOwnerBid(customBid);
+
+            return;
+        }
+
+
+        // ==========================================
+        // NORMAL +1 / +2 / +5 / +10 / +15
+        // ==========================================
+
+        const increment =
+            Number(value);
+
+
+        let nextQuote;
+
+
+        if (!auction.currentTeam) {
+
+            /*
+             * First bid must be at least 5.
+             */
+
+            nextQuote =
+                Math.max(
+                    STARTING_BID,
+                    increment
+                );
+
+        }
+        else {
+
+            /*
+             * Existing highest bid + increment.
+             */
+
+            nextQuote =
+                auction.currentBid +
+                increment;
+
+        }
+
+
+        setOwnerBid(nextQuote);
+
+    });
+
+});
+function setOwnerBid(amount) {
+
+    const teamId =
+        Number(
+            $("ownerSelect").value
+        );
+
+
+    const team =
+        teams.find(
+            t => t.id === teamId
+        );
+
+
+    if (!team) {
+
+        showToast(
+            "Please select your team owner first."
+        );
+
+        return;
+    }
+
+
+    if (!auction.currentPlayer) {
+
+        showToast(
+            "No player is currently being auctioned."
+        );
+
+        return;
+    }
+
+
+    if (amount < STARTING_BID) {
+
+        showToast(
+            "Minimum bid is 5 points."
+        );
+
+        return;
+    }
+
+
+    if (
+        auction.currentTeam &&
+        amount <= auction.currentBid
+    ) {
+
+        showToast(
+            `Your bid must be higher than ${auction.currentBid} points.`
+        );
+
+        return;
+    }
+
+
+    if (amount > team.points) {
+
+        showToast(
+            `You only have ${team.points} points remaining.`
+        );
+
+        return;
+    }
+
+
+    /*
+     * Store the owner's quote.
+     * It is NOT the actual auction bid until
+     * BID NOW is pressed.
+     */
+
+    auction.pendingBid =
+        amount;
+
+
+    updateOwnerPanel();
+
+
+    showToast(
+        `💰 Your quote: ${amount} points`
+    );
+
+}
+/* =========================================================
+   BID NOW
+========================================================= */
+
+$("bidNow")
+.addEventListener(
+    "click",
+    ownerBid
+);
+
+
+/* =========================================================
+   ADMIN BUTTONS
+========================================================= */
+
+$("pickPlayer")
+.addEventListener(
+    "click",
+    pickRandomPlayer
+);
+
+
+$("startAuction")
+.addEventListener(
+    "click",
+    function(){
+
+        if(!auction.currentPlayer){
+
+            showToast(
+                "🎲 Pick a player first."
+            );
+
+            return;
+        }
+
+
+        auction.timer =
+            AUCTION_TIME;
+
+        startAuction();
+
+    }
+);
+
+
+$("sellPlayer")
+.addEventListener(
+    "click",
+    sellPlayer
+);
+
+
+$("skipPlayer")
+.addEventListener(
+    "click",
+    skipPlayer
+);
+
+
+$("undoSale")
+.addEventListener(
+    "click",
+    undoSale
+);
+
+
+/* =========================================================
+   CLOSE SOLD MODAL
+========================================================= */
+
+$("closeSold")
+.addEventListener(
+    "click",
+    function(){
+
+        $("soldModal")
+            .classList
+            .remove("show");
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderSummary();
+
+updateEverything();
+
+</script>
+
+</body>
+</html>
