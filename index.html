@@ -1091,12 +1091,12 @@ main{
 
     <div class="stat">
         <span>TEAMS</span>
-        <strong>5</strong>
+        <strong>4</strong>
     </div>
 
     <div class="stat">
         <span>POINTS EACH</span>
-        <strong>100</strong>
+        <strong>95</strong>
     </div>
 
     <div class="stat">
@@ -1154,7 +1154,7 @@ main{
     <div
         class="position"
         id="playerPosition">
-        35 PLAYERS • 5 TEAMS • 100 POINTS
+        31 AUCTION PLAYERS • 4 TEAMS • 95 POINTS
     </div>
 
     <div class="starting-bid">
@@ -1247,26 +1247,21 @@ main{
         </option>
 
         <option value="1">
-            1 — Seshu
+            1 — Raju
         </option>
 
         <option value="2">
-            2 — Raju
+            2 — Shyam
         </option>
 
         <option value="3">
-            3 — Anji
+            3 — Hari
         </option>
 
         <option value="4">
-            4 — Owner 4
+            4 — Venky
         </option>
-
-        <option value="5">
-            5 — Owner 5
-        </option>
-
-    </select>
+</select>
 
 
     <div
@@ -1486,8 +1481,8 @@ const teams = [
     {
         id:1,
         name:"Team 1",
-        owner:"Linga Reddy",
-        points:100,
+        owner:"Raju",
+        points:95,
         players:[]
     },
 
@@ -1495,7 +1490,7 @@ const teams = [
         id:2,
         name:"Team 2",
         owner:"Shyam",
-        points:100,
+        points:95,
         players:[]
     },
 
@@ -1503,19 +1498,38 @@ const teams = [
         id:3,
         name:"Team 3",
         owner:"Hari",
-        points:100,
+        points:95,
         players:[]
     },
  
     {
         id:4,
         name:"Team 4",
-        owner:"Venky (BroadRidge)",
-        points:100,
+        owner:"Venky",
+        points:95,
         players:[]
     },
 
 ];
+
+
+
+/* =========================================================
+   CAPTAINS
+   Each captain costs 5 points and is pre-assigned to a team.
+   Captains are NOT available in the auction.
+   Each team can have a maximum of 8 players TOTAL,
+   including the captain.
+========================================================= */
+
+const CAPTAIN_PRICE = 5;
+
+const captainAssignments = {
+    6: 1,   // D. Chandra -> Team 1 (Raju)
+    5: 2,   // B. Ravi -> Team 2 (Shyam)
+    4: 3,   // V. Anji -> Team 3 (Hari)
+    12: 4   // B. Mahendra -> Team 4 (Venky)
+};
 
 
 /* =========================================================
@@ -1551,7 +1565,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=3"
+        photo:"https://i.ibb.co/B2RXmgCT/Screenshot-2026-08-10-222700.png"
     },
 
     {
@@ -1561,7 +1575,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=4"
+        photo:"https://i.ibb.co/QvJ330G6/Screenshot-2026-08-10-221550.png"
     },
 
     {
@@ -1591,7 +1605,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=7"
+        photo:"https://i.ibb.co/pB1DQ6Kk/Screenshot-2026-08-10-222536.png"
     },
 
     {
@@ -1631,7 +1645,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=17"
+        photo:"https://i.ibb.co/bMxC03WF/Screenshot-2026-08-10-221902.png"
     },
 
     {
@@ -1641,7 +1655,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=12"
+        photo:"https://i.ibb.co/JWc9JYqp/Screenshot-2026-08-10-223252.png"
     },
 
     {
@@ -1651,7 +1665,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=14"
+        photo:"https://i.ibb.co/zW3HQjnZ/Screenshot-2026-08-10-222233.png"
     },
 
     {
@@ -1741,7 +1755,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=3"
+        photo:"https://i.ibb.co/v6dFpm2D/Screenshot-2026-08-10-222045.png"
     },
 
     {
@@ -1756,12 +1770,12 @@ const players = [
 
     {
         id:24,
-        name:"V. Duryajaya",
+        name:"V. Dhanunjaya",
         position:"Middle Blocker",
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=24"
+        photo:"https://i.ibb.co/dwD28kv3/Screenshot-2026-08-10-222811.png"
     },
 
     {
@@ -1831,7 +1845,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=31"
+        photo:"https://i.ibb.co/q3cWppgk/Screenshot-2026-08-10-222401.png"
     },
 
     {
@@ -1876,6 +1890,45 @@ const players = [
 
 ];
 
+
+/* =========================================================
+   INITIALIZE CAPTAINS
+========================================================= */
+
+Object.entries(captainAssignments).forEach(([playerId, teamId]) => {
+
+    const player = players.find(
+        p => p.id === Number(playerId)
+    );
+
+    const team = teams.find(
+        t => t.id === Number(teamId)
+    );
+
+    if(!player || !team){
+        return;
+    }
+
+    // Prevent duplicate initialization.
+    if(team.players.some(item => item.player.id === player.id)){
+        return;
+    }
+
+    // Team auction budget is already initialized to 95 points.
+    // Do not deduct the captain price a second time.
+
+    team.players.push({
+        player: player,
+        price: CAPTAIN_PRICE,
+        captain: true
+    });
+
+    // Captain is already part of the team and must never be auctioned.
+    player.status = "captain";
+    player.soldTo = team.id;
+    player.price = CAPTAIN_PRICE;
+});
+
 /* =========================================================
    AUCTION STATE
 ========================================================= */
@@ -1896,9 +1949,28 @@ let auction = {
 
     lastSale:null,
 
-    history:[]
+    history:[],
+
+    // ================================================
+    // ROUND AUCTION STATE
+    // Round 1 contains all 35 players.
+    // A skipped player is saved for the NEXT round.
+    // A sold player is permanently removed.
+    // ================================================
+    roundNumber:1,
+
+    roundQueue:[],
+
+    roundSkipped:[]
 
 };
+
+
+// Build the first round from all players.
+auction.roundQueue =
+    players
+        .filter(player => !Object.prototype.hasOwnProperty.call(captainAssignments, player.id))
+        .map(player => player.id);
 
 
 /* =========================================================
@@ -1953,10 +2025,57 @@ function formatTime(seconds){
 
 
 /* =========================================================
+   ROUND HELPERS
+========================================================= */
+
+function prepareNextRound(){
+
+    // A round is finished only when every player in the
+    // current round has been processed.
+    if(auction.roundQueue.length > 0){
+        return true;
+    }
+
+    // Only skipped players are carried into the next round.
+    if(auction.roundSkipped.length > 0){
+
+        auction.roundNumber++;
+
+        auction.roundQueue =
+            [...auction.roundSkipped];
+
+        auction.roundSkipped = [];
+
+        showToast(
+            `🔄 ROUND ${auction.roundNumber} STARTED — ${auction.roundQueue.length} skipped players are back.`
+        );
+
+        return true;
+    }
+
+    return false;
+}
+
+
+function getRoundQueuePlayers(){
+
+    return auction.roundQueue
+        .map(id => players.find(player => player.id === id))
+        .filter(player =>
+            player && player.status !== "sold" && player.status !== "captain"
+        );
+}
+
+
+/* =========================================================
    PICK RANDOM PLAYER
-   IMPORTANT:
-   ONLY SOLD PLAYERS ARE REMOVED.
-   AVAILABLE + SKIPPED CAN APPEAR AGAIN.
+
+   ROUND RULES:
+   - Round 1: all 35 players are available once.
+   - SOLD players never return.
+   - SKIPPED players are stored in roundSkipped[].
+   - SKIPPED players return only in the NEXT round.
+   - A player cannot appear twice in the same round.
 ========================================================= */
 
 function pickRandomPlayer(){
@@ -1971,32 +2090,66 @@ function pickRandomPlayer(){
     }
 
 
+    // If the current round is exhausted, automatically
+    // move the skipped players into the next round.
+    if(auction.roundQueue.length === 0){
+
+        const hasNextRound =
+            prepareNextRound();
+
+        if(!hasNextRound){
+
+            showToast(
+                "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS HAVE BEEN SOLD!"
+            );
+
+            return;
+        }
+    }
+
+
     const eligiblePlayers =
-        players.filter(
-            player =>
-                player.status !== "sold"
-        );
+        getRoundQueuePlayers();
 
 
     if(eligiblePlayers.length === 0){
 
-        showToast(
-            "🏆 ALL 35 PLAYERS HAVE BEEN SOLD!"
-        );
+        // Remove any stale IDs and try the next round.
+        auction.roundQueue = [];
 
-        return;
+        const hasNextRound =
+            prepareNextRound();
+
+        if(!hasNextRound){
+
+            showToast(
+                "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS HAVE BEEN SOLD!"
+            );
+
+            return;
+        }
+
+        return pickRandomPlayer();
     }
 
 
     const randomIndex =
         Math.floor(
-            Math.random() *
-            eligiblePlayers.length
+            Math.random() * eligiblePlayers.length
         );
 
 
     const player =
         eligiblePlayers[randomIndex];
+
+
+    // IMPORTANT: remove the player from THIS ROUND immediately.
+    // If skipped, they will go to roundSkipped[].
+    // If sold, they are permanently finished.
+    auction.roundQueue =
+        auction.roundQueue.filter(
+            id => id !== player.id
+        );
 
 
     player.status = "selected";
@@ -2024,7 +2177,7 @@ function pickRandomPlayer(){
 
 
     showToast(
-        `🎲 ${player.name} selected — Starting bid: 5 points`
+        `🎲 Round ${auction.roundNumber} • ${player.name} selected — Starting bid: 5 points`
     );
 
 }
@@ -2153,10 +2306,10 @@ function placeBid(teamId,amount){
     }
 
 
-    if(team.players.length >= 7){
+    if(team.players.length >= 8){
 
         showToast(
-            "🚫 This team already has 7 players."
+            "🚫 This team already has 8 players."
         );
 
         return false;
@@ -2343,10 +2496,10 @@ function sellPlayer(){
         auction.currentBid;
 
 
-    if(team.players.length >= 7){
+    if(team.players.length >= 8){
 
         showToast(
-            "🚫 This team already has 7 players."
+            "🚫 This team already has 8 players."
         );
 
         return;
@@ -2453,14 +2606,15 @@ function sellPlayer(){
 
 
     if(
-        players.every(
-            player =>
-                player.status === "sold"
-        )
+        auction.roundQueue.length === 0 &&
+        auction.roundSkipped.length === 0 &&
+        players
+            .filter(player => player.status !== "captain")
+            .every(player => player.status === "sold")
     ){
 
         showToast(
-            "🏆 AUCTION COMPLETE — ALL 35 PLAYERS SOLD!"
+            "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS SOLD!"
         );
 
     }
@@ -2472,12 +2626,9 @@ function sellPlayer(){
    SKIP PLAYER
 
    IMPORTANT:
-   DO NOT MARK PLAYER AS SOLD.
-
-   Player becomes AVAILABLE again.
-
-   Therefore the same player can appear
-   again when Pick Random Player is clicked.
+   - Do NOT return the player to the current round queue.
+   - Store the player in roundSkipped[].
+   - The player becomes available only in the NEXT round.
 ========================================================= */
 
 function skipPlayer(){
@@ -2503,6 +2654,15 @@ function skipPlayer(){
         "available";
 
 
+    // Make sure the same player is not duplicated in
+    // the skipped list.
+    if(!auction.roundSkipped.includes(player.id)){
+
+        auction.roundSkipped.push(player.id);
+
+    }
+
+
     auction.currentPlayer =
         null;
 
@@ -2522,15 +2682,41 @@ function skipPlayer(){
     updateEverything();
 
 
-    showToast(
-        `⏭ ${player.name} skipped — available again!`
-    );
+    if(auction.roundQueue.length === 0){
+
+        if(auction.roundSkipped.length > 0){
+
+            showToast(
+                `⏭ ${player.name} skipped. Round ${auction.roundNumber} finished — ${auction.roundSkipped.length} players will enter Round ${auction.roundNumber + 1}.`
+            );
+
+        }
+        else{
+
+            showToast(
+                `⏭ ${player.name} skipped.`
+            );
+
+        }
+
+    }
+    else{
+
+        showToast(
+            `⏭ ${player.name} skipped — it will return in Round ${auction.roundNumber + 1}.`
+        );
+
+    }
 
 }
 
 
 /* =========================================================
    UNDO SALE
+
+   If a sale is undone, the player is returned to the
+   CURRENT round queue so the admin can auction that
+   player again.
 ========================================================= */
 
 function undoSale(){
@@ -2539,7 +2725,7 @@ function undoSale(){
         auction.lastSale;
 
 
-    if(!sale){
+    if(!sale || sale.player.status === "captain"){
 
         showToast(
             "Nothing to undo."
@@ -2571,6 +2757,23 @@ function undoSale(){
         0;
 
 
+    // Remove the player from skipped list if present.
+    auction.roundSkipped =
+        auction.roundSkipped.filter(
+            id => id !== sale.player.id
+        );
+
+
+    // Return the undone player to the current round.
+    if(!auction.roundQueue.includes(sale.player.id)){
+
+        auction.roundQueue.push(
+            sale.player.id
+        );
+
+    }
+
+
     auction.history =
         auction.history.filter(
             item =>
@@ -2580,7 +2783,7 @@ function undoSale(){
 
 
     auction.currentPlayer =
-        sale.player;
+        null;
 
     auction.currentBid =
         STARTING_BID;
@@ -2589,7 +2792,7 @@ function undoSale(){
         null;
 
     auction.timer =
-        AUCTION_TIME;
+        0;
 
     auction.pendingBid =
         0;
@@ -2602,7 +2805,7 @@ function undoSale(){
 
 
     showToast(
-        "↩ Sale reversed. Player is available again."
+        "↩ Sale reversed. Player returned to the current round."
     );
 
 }
@@ -2683,7 +2886,7 @@ function updateAuctionStage(){
 
 
     $("playerStatus").textContent =
-        "🔴 LIVE AUCTION";
+        `🔴 LIVE AUCTION • ROUND ${auction.roundNumber}`;
 
 
     photo.src =
@@ -2788,7 +2991,7 @@ function updateOwnerPanel(){
             "—";
 
         $("selectedTeamPoints").textContent =
-            "100";
+            "95";
 
         $("pendingQuote").textContent =
             "0";
@@ -2908,7 +3111,7 @@ function renderSummary(){
 
                         👤 ${team.owner}
 
-                        • ${team.players.length}/7 players
+                        • ${team.players.length}/8 players
 
                     </div>
 
