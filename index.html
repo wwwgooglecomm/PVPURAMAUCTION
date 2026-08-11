@@ -1157,8 +1157,8 @@ main{
         31 AUCTION PLAYERS • 4 TEAMS • 95 POINTS
     </div>
 
-    <div class="starting-bid">
-        🏷️ STARTING BID: 5 POINTS
+    <div class="starting-bid" id="baseBidDisplay">
+        🏷️ BASE BID: 5 POINTS
     </div>
 
     <div class="bid-label">
@@ -1317,7 +1317,7 @@ main{
             <br>
 
             <strong id="selectedTeamPoints">
-                100
+                95
             </strong>
 
         </div>
@@ -1545,6 +1545,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/HDg2YRtN/Screenshot-2026-08-11-100820.png"
     },
 
@@ -1555,6 +1556,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/6RQssW3B/Screenshot-2026-08-10-004215.png"
     },
 
@@ -1565,6 +1567,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/B2RXmgCT/Screenshot-2026-08-10-222700.png"
     },
 
@@ -1575,6 +1578,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:0,
         photo:"https://i.ibb.co/QvJ330G6/Screenshot-2026-08-10-221550.png"
     },
 
@@ -1585,6 +1589,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:0,
         photo:"https://i.ibb.co/Ngwff8kh/Screenshot-2026-08-10-000539.png"
     },
 
@@ -1595,6 +1600,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:0,
         photo:"https://i.ibb.co/9H68R5PQ/Screenshot-2026-08-09-183817.png"
     },
 
@@ -1605,6 +1611,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/pB1DQ6Kk/Screenshot-2026-08-10-222536.png"
     },
 
@@ -1615,6 +1622,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/Q360d4XG/Screenshot-2026-08-10-005139.png"
     },
 
@@ -1625,6 +1633,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/p6cs0NRF/Screenshot-2026-08-11-100338.png"
     },
 
@@ -1635,7 +1644,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=10"
+        basePoints:2,
+        photo:"https://i.ibb.co/Q3BpC1QZ/Screenshot-2026-08-11-183732.png"
     },
 
     {
@@ -1645,6 +1655,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/bMxC03WF/Screenshot-2026-08-10-221902.png"
     },
 
@@ -1655,6 +1666,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:0,
         photo:"https://i.ibb.co/JWc9JYqp/Screenshot-2026-08-10-223252.png"
     },
 
@@ -1665,6 +1677,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/zW3HQjnZ/Screenshot-2026-08-10-222233.png"
     },
 
@@ -1675,7 +1688,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=14"
+        basePoints:2,
+        photo:"https://i.ibb.co/dJzjw1Gh/Screenshot-2026-08-11-184041.png"
     },
 
     {
@@ -1685,6 +1699,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/vCjhVbmB/Screenshot-2026-08-11-095903.png"
     },
 
@@ -1695,6 +1710,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/B2G2GwG3/Screenshot-2026-08-10-003814.png"
     },
  
@@ -1705,7 +1721,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=17"
+        basePoints:5,
+        photo:"https://i.ibb.co/mF6rM2p7/Screenshot-2026-08-11-183506.png"
     },
 
     {
@@ -1715,7 +1732,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=30"
+        basePoints:5,
+        photo:"https://i.ibb.co/ZDrSXB0/Screenshot-2026-08-11-184500.png"
     },
 
     {
@@ -1725,6 +1743,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/zTb54c7g/Screenshot-2026-08-11-095130.png"
     },
 
@@ -1735,6 +1754,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/6cg9B7FM/Myimage.jpg"
     },
 
@@ -1745,6 +1765,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/3yKZ2QrB/Screenshot-2026-08-10-004643.png"
     },
 
@@ -1755,6 +1776,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/v6dFpm2D/Screenshot-2026-08-10-222045.png"
     },
 
@@ -1765,6 +1787,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/SDpyr5rR/Screenshot-2026-08-10-004421.png"
     },
 
@@ -1775,6 +1798,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.ibb.co/dwD28kv3/Screenshot-2026-08-10-222811.png"
     },
 
@@ -1785,6 +1809,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/7JNg2T6D/Screenshot-2026-08-11-100657.png"
     },
 
@@ -1795,7 +1820,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=26"
+        basePoints:2,
+        photo:"https://i.ibb.co/kbr4qrZ/Screenshot-2026-08-11-184200.png"
     },
 
     {
@@ -1805,6 +1831,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/gMQTqKwR/Screenshot-2026-08-11-095448.png"
     },
 
@@ -1815,7 +1842,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=28"
+        basePoints:2,
+        photo:"https://i.ibb.co/cS3hHQ2y/Screenshot-2026-08-11-101553.png"
     },
 
     {
@@ -1825,6 +1853,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.pravatar.cc/300?img=29"
     },
 
@@ -1835,6 +1864,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:5,
         photo:"https://i.pravatar.cc/300?img=20"
     },
 
@@ -1845,6 +1875,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/q3cWppgk/Screenshot-2026-08-10-222401.png"
     },
 
@@ -1855,6 +1886,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.ibb.co/C3QTyxBF/Screenshot-2026-08-11-095654.png"
     },
 
@@ -1865,7 +1897,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=33"
+        basePoints:2,
+        photo:"https://i.ibb.co/vC8fBQL2/Screenshot-2026-08-11-183854.png"
     },
 
     {
@@ -1875,7 +1908,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=34"
+        basePoints:5,
+        photo:"https://i.ibb.co/dqhtGrw/Screenshot-2026-08-11-184730.png"
     },
 
     {
@@ -1885,7 +1919,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=35"
+        basePoints:5,
+        photo:"https://i.ibb.co/BKcm69rx/Screenshot-2026-08-11-184326.png"
     },
     {
         id:36,
@@ -1894,6 +1929,7 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
+        basePoints:2,
         photo:"https://i.pravatar.cc/300?img=36"
     },
      {
@@ -1903,7 +1939,8 @@ const players = [
         status:"available",
         soldTo:null,
         price:0,
-        photo:"https://i.pravatar.cc/300?img=37"
+        basePoints:2,
+        photo:"https://i.ibb.co/WJzJTKp/Screenshot-2026-08-11-102524.png"
     }
 
 ];
@@ -1990,6 +2027,22 @@ auction.roundQueue =
         .filter(player => !Object.prototype.hasOwnProperty.call(captainAssignments, player.id))
         .map(player => player.id);
 
+
+/* =========================================================
+   PLAYER BASE BID
+   Each player has an individual base point value.
+========================================================= */
+
+function getPlayerBaseBid(player){
+
+    if(!player){
+        return STARTING_BID;
+    }
+
+    return Number.isFinite(Number(player.basePoints))
+        ? Number(player.basePoints)
+        : STARTING_BID;
+}
 
 /* =========================================================
    SHORTCUT
@@ -2177,7 +2230,7 @@ function pickRandomPlayer(){
         player;
 
     auction.currentBid =
-        STARTING_BID;
+        getPlayerBaseBid(player);
 
     auction.currentTeam =
         null;
@@ -2334,10 +2387,10 @@ function placeBid(teamId,amount){
     }
 
 
-    if(amount < STARTING_BID){
+    if(amount < getPlayerBaseBid(auction.currentPlayer)){
 
         showToast(
-            "Minimum bid is 5 points."
+            `Minimum bid for ${auction.currentPlayer.name} is ${getPlayerBaseBid(auction.currentPlayer)} points.`
         );
 
         return false;
@@ -2436,10 +2489,10 @@ function ownerBid(){
         auction.pendingBid;
 
 
-    if(quote < STARTING_BID){
+    if(quote < getPlayerBaseBid(auction.currentPlayer)){
 
         showToast(
-            "Minimum starting bid is 5 points."
+            `Minimum starting bid for ${auction.currentPlayer.name} is ${getPlayerBaseBid(auction.currentPlayer)} points.`
         );
 
         return;
@@ -2867,7 +2920,10 @@ function updateAuctionStage(){
             "Ready?";
 
         $("playerPosition").textContent =
-            "35 PLAYERS • 5 TEAMS • 100 POINTS";
+            "37 AUCTION PLAYERS • 4 TEAMS • 95 POINTS";
+
+        $("baseBidDisplay").textContent =
+            "🏷️ BASE BID: —";
 
         $("currentBid").textContent =
             "0";
@@ -2891,6 +2947,9 @@ function updateAuctionStage(){
 
     $("playerPosition").textContent =
         player.position;
+
+    $("baseBidDisplay").textContent =
+        `🏷️ BASE BID: ${getPlayerBaseBid(player)} POINTS`;
 
     $("currentBid").textContent =
         auction.currentBid;
@@ -3035,7 +3094,7 @@ function updateOwnerPanel(){
 
         $("bidNow").disabled =
             !auction.currentPlayer ||
-            auction.pendingBid < STARTING_BID;
+            auction.pendingBid < getPlayerBaseBid(auction.currentPlayer);
 
 
         $("ownerNotice").textContent =
@@ -3463,7 +3522,7 @@ document
 
             nextQuote =
                 Math.max(
-                    STARTING_BID,
+                    getPlayerBaseBid(auction.currentPlayer),
                     increment
                 );
 
