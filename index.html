@@ -1067,7 +1067,12 @@ const TEAM_META = [
 /* Captains (pre-assigned, never auctioned) */
 const captainAssignments = { 6:1, 5:2, 4:3, 12:4 };
 /* Owners as players (pre-assigned, cost 0) */
-const ownerAssignments   = { 35:1, 2:2, 19:3, 1:4 };
+const ownerAssignments = {
+  35:1,
+  2:2,
+  19:3,
+  38:4
+};
 
 /* =========================================================
    PLAYERS
@@ -2370,52 +2375,40 @@ function sfxSold(){
 /* fire crackers */
 function sfxCrackers(){
 
-  for(let i = 0; i < 25; i++){
+  for(let i = 0; i < 20; i++){
 
-    const at = 0.3 + Math.random() * 4.5;
+    const at = 0.2 + Math.random() * 4;
 
-    // loud blast
+    // Big firework boom
     noise(
-      0.22 + Math.random() * 0.18,
+      0.35,
       {
-        vol: 0.55,
+        vol:0.9,
         at,
-        hp: 80,
-        lp: 2500
+        hp:40,
+        lp:1200
       }
     );
 
-    // crackling tail
+    // Crackle effect
     noise(
-      0.35,
+      0.22,
       {
-        vol: 0.18,
-        at: at + 0.05,
-        hp: 1000,
-        lp: 7000
+        vol:0.35,
+        at:at + 0.08,
+        hp:1800,
+        lp:8000
       }
     );
 
-    // boom resonance
+    // Deep explosion body
     tone(
-      70 + Math.random() * 50,
-      0.35,
+      60 + Math.random() * 40,
+      0.45,
       {
-        type: "sawtooth",
-        vol: 0.08,
+        type:"sawtooth",
+        vol:0.08,
         at
-      }
-    );
-
-    // sparkle whistle
-    tone(
-      1800 + Math.random() * 2200,
-      0.15,
-      {
-        type: "triangle",
-        vol: 0.05,
-        at: at + 0.02,
-        glide: 500
       }
     );
   }
