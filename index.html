@@ -3,3726 +3,2786 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Palaveknatapuram Live Volleyball Auction</title>
-
 <style>
-
 :root{
-    --bg:#100b09;
-    --panel:#1d1512;
-    --panel2:#291b16;
-    --gold:#d6a647;
-    --gold-light:#f4d58b;
-    --cream:#fffaf0;
-    --muted:#b9aa99;
-    --red:#e75b5b;
-    --green:#4da36b;
-    --border:rgba(244,213,139,.18);
+  --bg:#100b09;
+  --panel:#1d1512;
+  --panel2:#291b16;
+  --gold:#d6a647;
+  --gold-light:#f4d58b;
+  --cream:#fffaf0;
+  --muted:#b9aa99;
+  --red:#e75b5b;
+  --green:#4da36b;
+  --border:rgba(244,213,139,.18);
 }
-
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
-    margin:0;
-    min-height:100vh;
-    font-family:Inter,Arial,sans-serif;
-    color:var(--cream);
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(214,166,71,.18),
-            transparent 35%
-        ),
-        var(--bg);
+  margin:0;min-height:100vh;
+  font-family:Inter,Arial,sans-serif;color:var(--cream);
+  background:radial-gradient(circle at 50% -10%,rgba(214,166,71,.18),transparent 35%),var(--bg);
 }
+button,select,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none !important}
 
-button,
-select{
-    font:inherit;
+/* ================= LOGIN ================= */
+.login-screen{
+  position:fixed;inset:0;z-index:500;
+  display:grid;place-items:center;padding:20px;
+  background:radial-gradient(circle at 50% 0%,rgba(214,166,71,.22),transparent 45%),var(--bg);
+  overflow-y:auto;
 }
-
-button{
-    cursor:pointer;
+.login-box{
+  width:min(440px,100%);padding:28px 24px;
+  background:linear-gradient(150deg,#241815,#1a1210);
+  border:1px solid var(--gold);border-radius:24px;
+  box-shadow:0 30px 90px rgba(0,0,0,.6);text-align:center;
 }
-
-.hidden{
-    display:none !important;
+.login-logo{width:112px;height:112px;display:block;margin:0 auto 4px}
+.login-box h1{margin:6px 0 2px;font:700 25px Georgia,serif}
+.login-box .sub{color:var(--gold-light);font-size:11px;letter-spacing:3px;font-weight:900}
+.login-label{
+  display:block;margin:20px 0 6px;text-align:left;
+  color:var(--muted);font-size:11px;letter-spacing:2px;font-weight:900;
 }
+.login-box select,.login-box input{
+  width:100%;padding:14px;border:2px solid var(--gold);border-radius:12px;
+  background:#fffaf0;color:#211407;font-weight:800;outline:none;
+}
+.login-btn{
+  width:100%;padding:16px;margin-top:18px;border:0;border-radius:12px;
+  background:var(--gold);color:#211407;font-weight:1000;font-size:17px;
+}
+.login-error{margin-top:12px;color:var(--red);font-size:12px;font-weight:900;min-height:16px}
+.take-over{
+  margin-top:10px;background:#631b1b;color:#ffe6e6;
+  border:1px solid rgba(244,213,139,.45);font-size:15px;
+}
+.login-hint{margin-top:16px;color:var(--muted);font-size:11px;line-height:1.6}
+.lock-list{
+  margin-top:14px;padding:10px 12px;border-radius:12px;text-align:left;
+  background:rgba(214,166,71,.08);border:1px solid var(--border);
+  font-size:11px;font-weight:800;line-height:1.7;color:var(--gold-light);
+}
+.lock-list b{color:var(--cream)}
 
 /* ================= HEADER ================= */
-
 header{
-    padding:20px 5%;
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
+  padding:16px 4%;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
 }
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
+.brand{display:flex;align-items:center;gap:12px}
 .logo{
-    width:50px;
-    height:50px;
-
-    display:grid;
-    place-items:center;
-
-    border:1px solid var(--gold-light);
-    border-radius:50%;
-
-    font-size:27px;
+  width:50px;height:50px;display:grid;place-items:center;overflow:hidden;
+  border:1px solid var(--gold-light);border-radius:50%;background:#150f0d;flex:0 0 auto;
 }
-
-.brand-title{
-    font-weight:900;
-    letter-spacing:2px;
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.brand-title{font-weight:900;letter-spacing:2px}
+.brand-subtitle{display:block;margin-top:4px;color:var(--gold-light);font-size:10px;letter-spacing:2px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.who{
+  padding:8px 14px;border:1px solid var(--border);border-radius:999px;
+  background:var(--panel2);font-size:12px;font-weight:900;
 }
-
-.brand-subtitle{
-    display:block;
-    margin-top:4px;
-
-    color:var(--gold-light);
-
-    font-size:11px;
-    letter-spacing:2px;
+.who b{color:var(--gold-light)}
+.sync-pill{
+  padding:8px 12px;border-radius:999px;font-size:11px;font-weight:900;
+  background:rgba(77,163,107,.14);color:#9fe0b6;border:1px solid rgba(77,163,107,.35);
 }
-
-.mode-buttons{
-    display:flex;
-    gap:8px;
-}
-
-.mode-buttons button{
-    padding:10px 17px;
-
-    border:1px solid var(--border);
-    border-radius:10px;
-
-    background:var(--panel2);
-    color:white;
-
-    font-weight:800;
-}
-
-.mode-buttons button.active{
-    background:var(--gold);
-    color:#211407;
+.sync-pill.local{background:rgba(214,166,71,.14);color:var(--gold-light);border-color:rgba(214,166,71,.35)}
+.logout-btn{
+  padding:9px 14px;border:1px solid var(--border);border-radius:10px;
+  background:var(--panel2);color:#fff;font-weight:900;font-size:12px;
 }
 
 /* ================= MAIN ================= */
+main{width:min(1700px,96%);margin:20px auto 60px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
+.stat{padding:14px;background:var(--panel);border:1px solid var(--border);border-radius:16px}
+.stat span{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}
+.stat strong{display:block;margin-top:4px;font-size:24px}
 
-main{
-    width:min(1450px,94%);
-    margin:25px auto 60px;
+/* ================= 3 COLUMN BOARD ================= */
+.board{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr) 300px;
+  gap:16px;align-items:start;
 }
-
-/* ================= STATS ================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
-
-    margin-bottom:18px;
-}
-
-.stat{
-    padding:17px;
-
-    background:var(--panel);
-
-    border:1px solid var(--border);
-    border-radius:17px;
-}
-
-.stat span{
-    display:block;
-
-    color:var(--muted);
-    font-size:11px;
-}
-
-.stat strong{
-    display:block;
-
-    margin-top:5px;
-
-    font-size:27px;
-}
-
-/* ================= AUCTION GRID ================= */
-
-.auction-grid{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 430px;
-    gap:18px;
-}
-
-/* ================= AUCTION STAGE ================= */
-
-.auction-stage{
-    min-height:650px;
-
-    position:relative;
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #241815,
-            #1b1210
-        );
-
-    border:1px solid var(--border);
-    border-radius:25px;
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.25);
-}
-
-.auction-stage::before{
-    content:"";
-
-    position:absolute;
-
-    width:400px;
-    height:400px;
-
-    border-radius:50%;
-
-    background:
-        rgba(214,166,71,.06);
-
-    top:-200px;
-    right:-150px;
-}
-
-.kicker{
-    color:var(--gold-light);
-
-    font-size:12px;
-    letter-spacing:4px;
-
-    font-weight:900;
-}
-
-.player-status{
-    margin-top:12px;
-
-    padding:7px 15px;
-
-    border-radius:999px;
-
-    background:
-        rgba(214,166,71,.12);
-
-    color:var(--gold-light);
-
-    font-size:12px;
-    font-weight:900;
-}
-
-/* ================= PLAYER PHOTO ================= */
-
-.player-photo-wrapper{
-    width:190px;
-    height:190px;
-
-    margin:20px 0 10px;
-
-    border-radius:50%;
-    overflow:hidden;
-
-    border:4px solid var(--gold);
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.45);
-
-    background:#291b16;
-
-    animation:
-        playerFloat 2s ease-in-out infinite;
-}
-
-.player-photo{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-}
-
-@keyframes playerFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-8px);
-    }
-
-}
-
-/* ================= PLAYER ================= */
-
-.player-name{
-    font:
-        700 clamp(38px,6vw,72px)
-        Georgia,serif;
-
-    line-height:1;
-
-    margin:10px 0;
-}
-
-.position{
-    color:var(--gold-light);
-
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.starting-bid{
-    margin-top:18px;
-
-    padding:7px 13px;
-
-    border:1px solid rgba(214,166,71,.35);
-
-    border-radius:999px;
-
-    color:var(--gold-light);
-
-    background:
-        rgba(214,166,71,.08);
-
-    font-size:12px;
-    font-weight:900;
-}
-
-.bid-label{
-    margin-top:20px;
-
-    color:var(--muted);
-
-    font-size:11px;
-    letter-spacing:3px;
-}
-
-.current-bid{
-    font-size:75px;
-
-    line-height:1;
-
-    color:var(--gold-light);
-
-    font-weight:1000;
-}
-
-.current-team{
-    font-size:18px;
-    font-weight:900;
-}
-
-.timer{
-    margin-top:12px;
-
-    font-size:45px;
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-}
-
-.timer.hot{
-    color:var(--red);
-
-    animation:
-        timerPulse
-        .4s
-        infinite alternate;
-}
-
-@keyframes timerPulse{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
-
-}
-
-/* ================= CONTROLS ================= */
-
-.controls{
-    display:flex;
-    flex-wrap:wrap;
-
-    gap:9px;
-
-    margin-top:16px;
-}
-
-.btn{
-    padding:13px 17px;
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    background:var(--panel2);
-
-    color:white;
-
-    font-weight:900;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-primary{
-    background:var(--gold);
-    color:#211407;
-}
-
-.btn-green{
-    background:#214d32;
-}
-
-.btn-danger{
-    background:#631b1b;
-}
-
-/* ================= RIGHT SIDE ================= */
-
-.right-area{
-    display:flex;
-    flex-direction:column;
-
-    gap:15px;
-}
-
-/* ================= OWNER PANEL ================= */
-
-.owner-panel{
-    padding:18px;
-
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-}
-
-.owner-title{
-    font-size:18px;
-
-    color:var(--gold-light);
-
-    font-weight:900;
-
-    margin-bottom:10px;
-}
-
-.owner-select{
-    width:100%;
-
-    padding:14px;
-
-    margin:8px 0 12px;
-
-    border:2px solid var(--gold);
-
-    border-radius:10px;
-
-    background:#fffaf0;
-
-    color:#211407;
-
-    font-weight:800;
-
-    outline:none;
-}
-
-/* ================= OWNER INFO ================= */
-
-.owner-info{
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    padding:12px;
-
-    margin-bottom:10px;
-
-    background:
-        rgba(214,166,71,.08);
-
-    border-radius:10px;
-}
-
-.owner-info span{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.owner-info strong{
-    color:var(--gold-light);
-    font-size:21px;
-}
-
-/* ================= LIVE PLAYER ================= */
-
-.live-player-card{
-    margin-bottom:12px;
-
-    padding:13px;
-
-    border:
-        1px solid
-        rgba(214,166,71,.35);
-
-    border-radius:12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(214,166,71,.12),
-            rgba(255,255,255,.02)
-        );
-}
-
-.live-player-label{
-    color:var(--muted);
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    font-weight:900;
-}
-
-.live-player-name{
-    margin-top:5px;
-
-    color:var(--gold-light);
-
-    font-size:21px;
-
-    font-weight:1000;
-}
-
-.live-player-position{
-    margin-top:3px;
-
-    color:var(--muted);
-
-    font-size:11px;
-}
-
-.live-player-status{
-    margin-top:8px;
-
-    font-size:12px;
-
-    font-weight:900;
-}
-
-/* ================= BID BUTTONS ================= */
-
-.bid-buttons{
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:8px;
-}
-
-.bid-buttons button{
-    padding:14px;
-
-    background:var(--panel2);
-
-    color:white;
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    font-weight:900;
-}
-
-.bid-buttons button:hover{
-    border-color:var(--gold);
-}
-
-.quote-display{
-    margin-top:10px;
-
-    padding:10px;
-
-    text-align:center;
-
-    border-radius:10px;
-
-    background:
-        rgba(214,166,71,.08);
-}
-
-.quote-display span{
-    display:block;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    letter-spacing:2px;
-}
-
-.quote-display strong{
-    display:block;
-
-    margin-top:4px;
-
-    color:var(--gold-light);
-
-    font-size:25px;
-}
-
-.bid-now{
-    width:100%;
-
-    padding:15px;
-
-    margin-top:10px;
-
-    background:var(--gold);
-
-    color:#211407;
-
-    border:0;
-
-    border-radius:10px;
-
-    font-weight:1000;
-
-    font-size:18px;
-}
-
-.bid-now:disabled{
-    opacity:.4;
-    cursor:not-allowed;
-}
-
-.owner-notice{
-    margin-top:10px;
-
-    color:var(--gold-light);
-
-    font-size:12px;
-
-    line-height:1.5;
-}
-
-/* ================= SUMMARY ================= */
-
-.summary-board{
-    padding:18px;
-
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    max-height:calc(100vh - 150px);
-
-    overflow-y:auto;
-}
-
-.summary-header{
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:14px;
-}
-
-.summary-header h3{
-    margin:0;
-
-    color:var(--gold-light);
-}
-
-.summary-header span{
-    padding:5px 9px;
-
-    border-radius:999px;
-
-    background:
-        rgba(214,166,71,.12);
-
-    color:var(--gold-light);
-
-    font-size:11px;
-
-    font-weight:900;
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.col-title{
+  padding:9px 14px;border-radius:999px;text-align:center;
+  background:rgba(214,166,71,.1);border:1px solid var(--border);
+  color:var(--gold-light);font-size:11px;letter-spacing:2px;font-weight:900;
 }
 
 /* ================= TEAM CARD ================= */
-
-.summary-team{
-    margin-bottom:12px;
-
-    border:1px solid var(--border);
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    background:
-        rgba(255,255,255,.02);
+.team-card{
+  border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  background:rgba(255,255,255,.02);
 }
-
-.summary-team-header{
-    padding:12px;
-
-    background:
-        rgba(214,166,71,.08);
+.team-card.leading{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px rgba(214,166,71,.4),0 12px 40px rgba(214,166,71,.15);
 }
+.team-card.you{background:rgba(214,166,71,.06)}
+.team-head{padding:13px 15px;background:rgba(214,166,71,.1)}
+.team-head-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.team-name{font-weight:1000;font-size:14px;line-height:1.2}
+.team-points{color:var(--gold-light);font-weight:1000;font-size:19px;white-space:nowrap}
+.team-owner{margin-top:5px;font-size:12px;font-weight:700}
+.team-badges{margin-top:7px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:11px;font-weight:900}
+.badge{padding:4px 9px;border-radius:999px;background:rgba(214,166,71,.18);color:var(--gold-light)}
+.badge.you-badge{background:var(--gold);color:#211407}
+.badge.lead{background:rgba(231,91,91,.2);color:#ffc0c0}
+.slots-note{color:var(--muted);font-weight:700}
+.slots-note.full{color:var(--green)}
 
-.summary-team-top{
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    gap:8px;
+/* ================= ROSTER ================= */
+.roster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:12px 14px 14px}
+.roster-slot{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:104px;padding:7px 4px;text-align:center;
+  border-radius:11px;border:1px solid var(--border);
 }
-
-.summary-team-name{
-    font-weight:1000;
+.roster-slot.filled{background:rgba(214,166,71,.07);border-color:rgba(214,166,71,.3)}
+.roster-slot.filled.slot-owner{border-color:rgba(214,166,71,.55)}
+.roster-slot.filled.slot-captain{border-color:rgba(244,213,139,.45)}
+.roster-slot.empty{border-style:dashed;border-color:rgba(244,213,139,.22);color:var(--muted)}
+.roster-slot.just-sold{
+  animation:slotPop .6s ease, slotBlink 1s ease-in-out 7;
+  border-color:var(--gold) !important;
 }
-
-.summary-team-points{
-    color:var(--gold-light);
-
-    font-weight:1000;
+.roster-slot.just-sold .roster-slot-photo{border-color:#fff}
+@keyframes slotPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes slotBlink{
+  0%,100%{background:rgba(214,166,71,.07);box-shadow:none}
+  50%{background:rgba(244,213,139,.4);box-shadow:0 0 0 3px rgba(244,213,139,.55),0 0 26px rgba(244,213,139,.6)}
 }
-
-.summary-owner{
-    margin-top:4px;
-
-    color:var(--muted);
-
-    font-size:11px;
+/* the team that just won a player */
+.team-card.just-won{animation:cardBlink 1s ease-in-out 7}
+@keyframes cardBlink{
+  0%,100%{box-shadow:0 0 0 1px rgba(214,166,71,.4)}
+  50%{box-shadow:0 0 0 2px var(--gold-light),0 0 40px rgba(244,213,139,.45)}
 }
-
-.summary-players{
-    padding:7px 12px 10px;
+/* somebody just bid on this team's behalf */
+.team-card.bid-flash{animation:bidFlash .7s ease-out 2}
+@keyframes bidFlash{
+  0%{box-shadow:0 0 0 2px var(--gold-light),0 0 30px rgba(244,213,139,.5)}
+  100%{box-shadow:0 0 0 1px rgba(214,166,71,.4)}
 }
-
-.summary-player{
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    gap:8px;
-
-    padding:9px 0;
-
-    border-bottom:
-        1px solid
-        rgba(244,213,139,.08);
-
-    font-size:12px;
+.badge.lead{animation:leadBlink 1.1s ease-in-out infinite}
+@keyframes leadBlink{0%,100%{opacity:1}50%{opacity:.45}}
+.roster-slot-photo{
+  width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;
+  border:2px solid var(--gold);cursor:pointer;background:#291b16;
+  image-rendering:-webkit-optimize-contrast;
 }
-
-.summary-player:last-child{
-    border-bottom:0;
+.roster-slot-photo:hover{transform:scale(1.08);border-color:var(--gold-light)}
+.roster-slot-empty-icon{
+  width:52px;height:52px;display:grid;place-items:center;border-radius:50%;
+  border:2px dashed rgba(244,213,139,.3);font-size:15px;color:var(--muted);
 }
+.roster-slot-name{font-size:11px;font-weight:900;line-height:1.15}
+.roster-slot-meta{font-size:9.5px;font-weight:900;letter-spacing:.3px;color:var(--gold-light)}
+.roster-slot-empty-text{font-size:9.5px;font-style:italic;color:var(--muted)}
 
-.summary-player-name{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
+/* ================= AUCTION STAGE ================= */
+.auction-stage{
+  position:relative;overflow:hidden;min-height:600px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:26px;
+  background:linear-gradient(145deg,#241815,#1b1210);
+  border:1px solid var(--border);border-radius:24px;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
 }
-
-.summary-player-photo{
-    width:32px;
-    height:32px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:1px solid var(--gold);
+.auction-stage::before{
+  content:"";position:absolute;width:400px;height:400px;border-radius:50%;
+  background:rgba(214,166,71,.06);top:-200px;right:-150px;
 }
-
-.summary-price{
-    color:var(--gold-light);
-
-    font-weight:900;
+.auction-stage::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:var(--stage-logo,none);
+  background-repeat:no-repeat;background-position:center 46%;
+  background-size:min(60%,430px);opacity:.05;
 }
-
-.empty-roster{
-    padding:9px 0;
-
-    color:var(--muted);
-
-    font-size:11px;
-
-    font-style:italic;
+.auction-stage > *{position:relative;z-index:1}
+.stage-inner{
+  position:relative;z-index:1;width:100%;height:100%;min-height:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
+.stage-photo-col{display:flex;align-items:center;justify-content:center;min-width:0}
+.stage-info-col{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:0;max-width:100%;
+}
+.kicker{color:var(--gold-light);font-size:11px;letter-spacing:4px;font-weight:900}
+.player-status{
+  margin-top:10px;padding:6px 14px;border-radius:999px;
+  background:rgba(214,166,71,.12);color:var(--gold-light);font-size:12px;font-weight:900;
+}
+.player-photo-wrapper{
+  width:210px;height:210px;margin:16px 0 8px;border-radius:50%;overflow:hidden;cursor:pointer;
+  border:4px solid var(--gold);box-shadow:0 15px 40px rgba(0,0,0,.45);background:#291b16;
+  animation:playerFloat 2s ease-in-out infinite;
+}
+.player-photo{
+  width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+  image-rendering:-webkit-optimize-contrast;
+}
+/* When no player is up, the stage shows the PVP LEAGUE crest */
+/* Idle screen: big crest, and the bid/timer rows step aside */
+.auction-stage.stage-idle #baseBidDisplay,
+.auction-stage.stage-idle .bid-label,
+.auction-stage.stage-idle #currentBid,
+.auction-stage.stage-idle #timer{display:none}
+.auction-stage.stage-idle #currentTeam{
+  margin-top:14px;color:var(--gold-light);font-size:13px;letter-spacing:3px;font-weight:900;
+}
+.auction-stage.stage-idle::after{opacity:0}
+.player-photo-wrapper.idle{
+  width:clamp(150px,27vh,260px);height:clamp(150px,27vh,260px);
+  border-color:transparent;background:transparent;box-shadow:none;overflow:visible;
+  margin:10px 0 2px;
+}
+.player-photo-wrapper.idle .player-photo{
+  object-fit:contain;
+  filter:drop-shadow(0 14px 34px rgba(214,166,71,.45));
+}
+@keyframes playerFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.player-name{font:700 clamp(34px,5vw,64px) Georgia,serif;line-height:1;margin:8px 0}
+.position{color:var(--gold-light);font-weight:900;letter-spacing:2px;font-size:14px}
+.base-line{
+  display:inline-block;margin-top:8px;padding:5px 14px;border-radius:999px;
+  color:#211407;background:linear-gradient(120deg,var(--gold-light),var(--gold));
+  font-weight:1000;letter-spacing:.5px;line-height:1.2;
+  font-size:clamp(12px,2.1vh,17px);
+  box-shadow:0 6px 18px rgba(214,166,71,.3);
+}
+.bid-label{margin-top:16px;color:var(--muted);font-size:10px;letter-spacing:3px}
+.current-bid{font-size:70px;line-height:1;color:var(--gold-light);font-weight:1000}
+.current-team{font-size:17px;font-weight:900;min-height:22px}
+.timer{margin-top:10px;font-size:42px;font-weight:1000;letter-spacing:2px}
+.timer.hot{color:var(--red);animation:timerPulse .4s infinite alternate}
+@keyframes timerPulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+
+/* ================= CONTROLS ================= */
+.panel{padding:16px;background:var(--panel);border:1px solid var(--border);border-radius:18px}
+.panel-title{margin-bottom:12px;color:var(--gold-light);font-size:15px;font-weight:900}
+.controls{display:flex;flex-wrap:wrap;gap:8px}
+.btn{
+  padding:12px 16px;border:1px solid var(--border);border-radius:10px;
+  background:var(--panel2);color:#fff;font-weight:900;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--gold);color:#211407}
+.btn-green{background:#214d32}
+.btn-danger{background:#631b1b}
+.admin-behalf{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.admin-behalf select,.admin-behalf input{
+  padding:11px;border:2px solid var(--gold);border-radius:10px;
+  background:#fffaf0;color:#211407;font-weight:800;outline:none;
+}
+.admin-behalf input{width:92px}
+.behalf-quick{display:flex;flex-wrap:wrap;gap:6px}
+.behalf-quick .btn{
+  padding:10px 12px;background:rgba(214,166,71,.16);
+  border-color:rgba(214,166,71,.45);color:var(--gold-light);
+}
+.behalf-quick .btn:hover{background:rgba(214,166,71,.32)}
+
+/* ================= OWNER BID PANEL ================= */
+.owner-panel{
+  padding:16px;border-radius:18px;
+  background:linear-gradient(140deg,rgba(214,166,71,.13),rgba(255,255,255,.02));
+  border:1px solid rgba(214,166,71,.4);
+}
+.owner-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.owner-top-block span{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;font-weight:900}
+.owner-top-block strong{display:block;margin-top:3px;color:var(--gold-light);font-size:20px}
+.bid-buttons{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:14px}
+.bid-buttons button{
+  padding:14px 6px;background:var(--panel2);color:#fff;
+  border:1px solid var(--border);border-radius:10px;font-weight:900;
+}
+.bid-buttons button:hover{border-color:var(--gold)}
+.quote-row{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;margin-top:12px;align-items:stretch}
+.quote-display{padding:10px;text-align:center;border-radius:10px;background:rgba(0,0,0,.25)}
+.quote-display span{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;font-weight:900}
+.quote-display strong{display:block;margin-top:3px;color:var(--gold-light);font-size:26px}
+.bid-now{
+  border:0;border-radius:10px;background:var(--gold);color:#211407;
+  font-weight:1000;font-size:18px;padding:14px;
+}
+.bid-now:disabled{opacity:.4;cursor:not-allowed}
+.owner-notice{margin-top:10px;color:var(--gold-light);font-size:12px;line-height:1.5;font-weight:700}
 
 /* ================= HISTORY ================= */
+.history-item{padding:9px 0;border-bottom:1px solid rgba(244,213,139,.08);font-size:11.5px}
+.history-player{font-weight:900}
+.history-team{color:var(--muted);margin-top:2px}
+.history-price{color:var(--gold-light);font-weight:900}
+.empty-note{padding:8px 0;color:var(--muted);font-size:11px;font-style:italic}
+.scroll-box{max-height:340px;overflow-y:auto}
 
-.history-title{
-    margin:18px 0 10px;
-
-    color:var(--gold-light);
-
-    font-size:14px;
+/* ================= CELEBRATION / SOLD ================= */
+#fireworks{
+  position:fixed;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:1;
 }
-
-.history-item{
-    padding:9px 0;
-
-    border-bottom:
-        1px solid
-        rgba(244,213,139,.08);
-
-    font-size:11px;
+.sold-box{
+  position:relative;z-index:2;width:min(660px,96%);
+  padding:26px 22px;text-align:center;
+  border:1px solid var(--gold-light);border-radius:26px;
+  background:linear-gradient(150deg,#3d0d0d,#651b1b,#24120f);
+  animation:modalPop .5s cubic-bezier(.17,.89,.32,1.28);
 }
-
-.history-player{
-    font-weight:900;
+.sold-crest{width:52px;height:52px;display:block;margin:0 auto 4px;animation:soldSpin 1.2s ease}
+.sold-pair{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(10px,3vw,26px);margin:14px 0 6px;
 }
-
-.history-team{
-    color:var(--muted);
-
-    margin-top:3px;
+.sold-face{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.sold-face img{
+  width:clamp(96px,26vw,150px);height:clamp(96px,26vw,150px);
+  border-radius:50%;object-fit:cover;object-position:center top;
+  border:4px solid var(--gold);background:#291b16;
+  box-shadow:0 14px 36px rgba(0,0,0,.55);
 }
-
-.history-price{
-    color:var(--gold-light);
-
-    font-weight:900;
+.sold-face.player img{animation:flyLeft .7s cubic-bezier(.17,.89,.32,1.28)}
+.sold-face.owner  img{animation:flyRight .7s cubic-bezier(.17,.89,.32,1.28)}
+.sold-face-name{font-weight:1000;font-size:clamp(13px,3.4vw,17px);line-height:1.15}
+.sold-face-tag{
+  font-size:9.5px;letter-spacing:1.5px;font-weight:900;color:var(--gold-light);
+  padding:3px 9px;border-radius:999px;background:rgba(244,213,139,.14);
 }
+.sold-join{
+  font-size:clamp(26px,7vw,42px);
+  animation:joinPop .9s ease-out .35s backwards, joinBeat 1.1s ease-in-out 3 .9s;
+}
+.sold-welcome{
+  margin-top:10px;font:700 clamp(19px,4.6vw,30px) Georgia,serif;color:var(--cream);
+}
+.sold-welcome b{color:var(--gold-light)}
+.sold-price{
+  margin-top:8px;font-size:clamp(17px,4.4vw,24px);font-weight:1000;color:var(--gold-light);
+  letter-spacing:1px;
+}
+@keyframes flyLeft{from{transform:translateX(-90px) scale(.5);opacity:0}to{transform:none;opacity:1}}
+@keyframes flyRight{from{transform:translateX(90px) scale(.5);opacity:0}to{transform:none;opacity:1}}
+@keyframes joinPop{from{transform:scale(0) rotate(-40deg);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes joinBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
 
 /* ================= SOLD MODAL ================= */
-
 .modal{
-    position:fixed;
-
-    inset:0;
-
-    display:none;
-
-    place-items:center;
-
-    background:
-        rgba(0,0,0,.82);
-
-    backdrop-filter:blur(8px);
-
-    z-index:100;
+  position:fixed;inset:0;display:none;place-items:center;
+  background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:300;padding:16px;
 }
-
-.modal.show{
-    display:grid;
-}
-
+.modal.show{display:grid}
 .modal-box{
-    width:min(550px,92%);
-
-    padding:40px 25px;
-
-    text-align:center;
-
-    border:
-        1px solid
-        var(--gold-light);
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #3d0d0d,
-            #651b1b,
-            #24120f
-        );
-
-    animation:
-        modalPop
-        .5s
-        cubic-bezier(.17,.89,.32,1.28);
+  width:min(540px,96%);padding:36px 24px;text-align:center;
+  border:1px solid var(--gold-light);border-radius:24px;
+  background:linear-gradient(145deg,#3d0d0d,#651b1b,#24120f);
+  animation:modalPop .5s cubic-bezier(.17,.89,.32,1.28);
 }
+.modal-logo{width:96px;height:96px;display:block;margin:0 auto;animation:soldSpin 1.2s ease}
+.modal-box h2{font:700 40px Georgia,serif;margin:8px 0}
+.modal-box h2 span{color:var(--gold-light)}
+.sold-details{font-size:19px;font-weight:900;color:var(--gold-light)}
+@keyframes modalPop{from{transform:scale(.65);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes soldSpin{from{transform:rotate(-180deg) scale(.4)}to{transform:rotate(0) scale(1)}}
 
-.modal-ball{
-    font-size:90px;
-
-    animation:
-        soldSpin
-        1.2s
-        ease;
+/* ================= PHOTO ZOOM ================= */
+.photo-zoom{width:min(430px,94%);text-align:center}
+.photo-zoom img{
+  width:min(74vw,340px);height:min(74vw,340px);object-fit:cover;object-position:center top;
+  border-radius:50%;border:5px solid var(--gold);background:#291b16;
+  box-shadow:0 25px 70px rgba(0,0,0,.6);
 }
+.zoom-name{margin-top:16px;font:700 clamp(26px,6vw,40px) Georgia,serif;color:var(--cream)}
+.zoom-meta{margin-top:4px;color:var(--gold-light);font-size:13px;font-weight:900;letter-spacing:2px}
 
-.modal-box h2{
-    font:
-        700 45px Georgia,serif;
-
-    margin:10px 0;
+/* ================= DATABASE MODAL ================= */
+.data-modal{
+  width:min(880px,96%);max-height:88vh;overflow-y:auto;text-align:left;padding:20px;
+  background:linear-gradient(150deg,#241815,#171110);border-color:var(--gold);
 }
-
-.modal-box h2 span{
-    color:var(--gold-light);
+.data-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.data-head h3{margin:5px 0 0;font-size:15px;color:var(--gold-light);word-break:break-all;line-height:1.4}
+.data-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.data-section{margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.data-title{color:var(--gold-light);font-size:11px;letter-spacing:2px;font-weight:900;margin-bottom:8px}
+.data-row{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 11px;margin-bottom:6px;border-radius:10px;
+  background:rgba(255,255,255,.03);font-size:12px;font-weight:800;
 }
-
-.sold-details{
-    font-size:20px;
-
-    font-weight:900;
-
-    color:var(--gold-light);
+.data-row small{display:block;color:var(--muted);font-weight:700;font-size:10.5px;margin-top:2px}
+.data-row .price{color:var(--gold-light);font-weight:1000;white-space:nowrap}
+.rm-btn{
+  padding:7px 11px;border-radius:8px;white-space:nowrap;
+  border:1px solid rgba(231,91,91,.5);background:rgba(231,91,91,.16);
+  color:#ffc9c9;font-weight:900;font-size:11px;
 }
-
-@keyframes modalPop{
-
-    from{
-        transform:scale(.65);
-        opacity:0;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-
+.rm-btn:hover{background:rgba(231,91,91,.3)}
+.free-btn{
+  padding:7px 12px;border-radius:8px;white-space:nowrap;
+  border:1px solid rgba(214,166,71,.55);background:rgba(214,166,71,.18);
+  color:var(--gold-light);font-weight:900;font-size:11px;
 }
-
-@keyframes soldSpin{
-
-    from{
-        transform:
-            rotate(-180deg)
-            scale(.4);
-    }
-
-    to{
-        transform:
-            rotate(0)
-            scale(1);
-    }
-
+.free-btn:hover{background:rgba(214,166,71,.34)}
+.login-live{color:#9fe0b6;font-weight:900;white-space:nowrap}
+.login-free{color:var(--muted);font-weight:900;white-space:nowrap}
+.data-json{
+  max-height:230px;overflow:auto;margin:0;padding:11px;border-radius:10px;
+  background:#0c0807;color:#cdbb9f;font:11px/1.55 ui-monospace,Menlo,Consolas,monospace;
+  white-space:pre-wrap;word-break:break-word;
 }
+.data-note{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.6}
 
 /* ================= TOAST ================= */
-
 .toast{
-    position:fixed;
+  position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:400;display:none;
+  text-align:center;
+  padding:13px 17px;background:var(--cream);color:#211407;border-radius:12px;
+  font-weight:900;max-width:min(360px,86vw);box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+.toast.show{display:block}
 
-    right:20px;
-    bottom:20px;
-
-    z-index:200;
-
-    display:none;
-
-    padding:14px 18px;
-
-    background:var(--cream);
-
-    color:#211407;
-
-    border-radius:12px;
-
-    font-weight:900;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.5);
+/* =========================================================
+   FIT-TO-SCREEN (desktop / laptop / big screen)
+   Everything lives inside the viewport — no page scrollbar.
+   Phones and short windows fall back to normal scrolling.
+========================================================= */
+@media(min-width:1151px) and (min-height:600px){
+  html,body{height:100%;overflow:hidden}
+  #app{height:100%;display:flex;flex-direction:column}
+  header{flex:0 0 auto;padding:9px 3%}
+  .logo{width:42px;height:42px}
+  .brand-title{font-size:14px}
+  main{
+    flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;
+    width:min(1850px,98%);margin:9px auto 10px;
+  }
+  .stats{flex:0 0 auto;gap:8px;margin-bottom:0}
+  .stat{padding:7px 12px;border-radius:12px}
+  .stat span{font-size:9px}
+  .stat strong{margin-top:1px;font-size:clamp(15px,2.4vh,22px)}
+  .board{flex:1;min-height:0;gap:11px}
+  .col{height:100%;min-height:0}
+  .col-title{flex:0 0 auto;padding:5px 12px;font-size:10px}
+  #leftTeams,#rightTeams{flex:1;min-height:0;gap:11px !important}
+  .team-card{flex:1;min-height:0;display:flex;flex-direction:column}
+  .team-head{flex:0 0 auto;padding:8px 11px}
+  .team-name{font-size:13px}
+  .team-points{font-size:17px}
+  .team-owner{margin-top:3px;font-size:11px}
+  .team-badges{margin-top:5px;gap:5px;font-size:10px}
+  .roster-grid{
+    flex:1;min-height:0;padding:7px 9px 9px;gap:6px;
+    grid-template-rows:repeat(3,minmax(0,1fr));
+  }
+  .roster-slot{min-height:0;padding:3px 2px;gap:1px;overflow:hidden}
+  .roster-slot-photo,.roster-slot-empty-icon{
+    width:clamp(32px,5.8vh,62px);height:clamp(32px,5.8vh,62px);
+  }
+  .roster-slot-name{
+    font-size:clamp(8.5px,1.3vh,12px);line-height:1.05;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+  }
+  .roster-slot-meta{font-size:clamp(7.5px,1.05vh,10px);line-height:1.05}
+  .roster-slot-empty-text{font-size:clamp(7px,1.1vh,10px)}
+  .col-center{display:flex;flex-direction:column;min-height:0;gap:10px}
+  .auction-stage{flex:1;min-height:0;padding:12px;border-radius:20px}
+  .kicker{font-size:10px}
+  .player-status{margin-top:5px;padding:4px 12px;font-size:11px}
+  .player-photo-wrapper{
+    flex:1 1 auto;width:auto;height:auto;aspect-ratio:1;
+    min-height:clamp(92px,13vh,150px);max-height:34vh;max-width:min(100%,330px);
+    margin:6px auto 3px;
+  }
+  .player-photo-wrapper.idle{
+    min-height:clamp(120px,20vh,240px);max-height:42vh;max-width:min(100%,360px);margin:4px auto 2px;
+  }
+  .player-name{font-size:clamp(23px,4.2vh,54px);margin:1px 0}
+  .position{font-size:12px}
+  .bid-label{margin-top:6px}
+  .current-bid{font-size:clamp(28px,5.9vh,64px)}
+  .current-team{font-size:15px;min-height:18px}
+  .timer{margin-top:2px;font-size:clamp(19px,3.9vh,40px)}
+  #ownerPanel,#adminPanel,#historyPanel{flex:0 0 auto}
+  .panel,.owner-panel{padding:11px}
+  .panel-title{margin-bottom:7px;font-size:13px}
+  .owner-top-block strong{font-size:17px}
+  .bid-buttons{margin-top:8px;gap:6px}
+  .bid-buttons button{padding:10px 4px}
+  .quote-row{margin-top:8px;gap:8px}
+  .quote-display{padding:6px}
+  .quote-display strong{font-size:21px}
+  .bid-now{padding:11px;font-size:16px}
+  .owner-notice{margin-top:6px;font-size:11px}
+  .controls{gap:6px}
+  .btn{padding:9px 12px;font-size:12.5px}
+  .admin-behalf{margin-top:8px;gap:6px}
+  .admin-behalf select,.admin-behalf input{padding:8px}
+  .behalf-quick{gap:5px}
+  .behalf-quick .btn{padding:8px 10px}
+  .history-item{padding:6px 0;font-size:11px}
+  .scroll-box{max-height:clamp(64px,11vh,120px)}
 }
 
-.toast.show{
-    display:block;
+/* Extra-short desktop windows (e.g. 1152x700) — squeeze a little more */
+@media(min-width:1151px) and (min-height:600px) and (max-height:770px){
+  .player-photo-wrapper{
+    flex:0 1 auto;aspect-ratio:auto;max-height:none;max-width:none;
+    width:clamp(84px,12.6vh,150px);height:clamp(84px,12.6vh,150px);min-height:0;
+  }
+  .player-photo-wrapper.idle{
+    min-height:0;max-height:none;max-width:none;
+    width:clamp(100px,15vh,190px);height:clamp(100px,15vh,190px);
+  }
+  .player-name{font-size:clamp(22px,4.2vh,44px)}
+  .current-bid{font-size:clamp(25px,5.4vh,54px)}
+  .timer{font-size:clamp(18px,3.5vh,34px)}
+  .position{font-size:11px}
+  .kicker{display:none}
+  .roster-slot-photo,.roster-slot-empty-icon{width:clamp(32px,5.7vh,56px);height:clamp(32px,5.7vh,56px)}
+  .bid-label{margin-top:4px}
+  .player-status{margin-top:4px;padding:3px 10px;font-size:10px}
+  .current-team{font-size:13px}
+  .scroll-box{max-height:54px}
+  .panel,.owner-panel{padding:9px}
 }
 
-/* ================= MOBILE ================= */
-
-@media(max-width:1100px){
-
-    .auction-grid{
-        grid-template-columns:1fr;
-    }
-
-    .right-area{
-        display:grid;
-
-        grid-template-columns:1fr 1fr;
-
-        align-items:start;
-    }
-
+/* Very short windows: trim the roster face a touch so nothing clips */
+@media(min-width:1151px) and (min-height:600px) and (max-height:735px){
+  .roster-slot-photo,.roster-slot-empty-icon{width:clamp(30px,5.1vh,50px);height:clamp(30px,5.1vh,50px)}
 }
 
+/* =========================================================
+   WIDE SCREENS — photo on the left, details on the right.
+   This fills the empty space and lets the face be big.
+========================================================= */
+@media(min-width:1151px) and (min-height:600px){
+  /* the stage becomes a sizing container, so everything inside it
+     scales to the space the stage actually has — admin or owner */
+  .auction-stage{container-type:size;container-name:stage}
+
+  .stage-inner{
+    flex-direction:row;align-items:center;justify-content:center;
+    gap:clamp(14px,2.2vw,42px);
+  }
+  .stage-photo-col{align-self:stretch;flex:0 0 auto;padding:4px 0}
+  .player-photo-wrapper{
+    flex:0 0 auto;height:100%;width:auto;aspect-ratio:1;
+    min-height:110px;max-height:min(97cqh,470px);max-width:min(36vw,470px);
+    margin:0;
+  }
+  /* the details take the rest of the width, centred in it */
+  .stage-info-col{align-items:center;text-align:center;flex:1 1 auto;min-width:0}
+  .stage-info-col .player-name{font-size:clamp(22px,10cqh,66px);margin:4px 0 2px}
+  .stage-info-col .position{font-size:clamp(11px,3cqh,14px)}
+  .stage-info-col .current-bid{font-size:clamp(28px,17cqh,100px);line-height:.95}
+  .stage-info-col .current-team{font-size:clamp(12px,3.4cqh,17px);min-height:0}
+  .stage-info-col .timer{font-size:clamp(17px,8cqh,48px);margin-top:4px}
+  .stage-info-col .bid-label{margin-top:8px}
+
+  /* short stage (owner screens / small laptops): drop the decoration */
+  @container stage (max-height:330px){
+    .kicker{display:none}
+    .stage-info-col .player-status{margin-top:0;padding:3px 10px;font-size:10px}
+    .stage-info-col .bid-label{margin-top:4px}
+  }
+  /* a very short stage: drop the round pill, but ALWAYS keep the base bid */
+  @container stage (max-height:250px){
+    .stage-info-col .player-status{display:none}
+    .stage-info-col .position{font-size:10px}
+    .stage-info-col .bid-label{margin-top:2px;font-size:9px}
+  }
+
+  /* nothing up for auction: centre the crest again */
+  .stage-idle .stage-inner{flex-direction:column;gap:0}
+  .stage-idle .stage-photo-col{align-self:center;padding:0}
+  .stage-idle .stage-info-col{align-items:center;text-align:center}
+  .stage-idle .player-photo-wrapper{
+    height:min(58cqh,320px);width:auto;max-height:min(58cqh,320px);min-height:110px;
+  }
+  .stage-idle .player-name{font-size:clamp(22px,9cqh,58px)}
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1150px){
+  .board{grid-template-columns:1fr 1fr}
+  .col-center{grid-column:1 / -1;order:-1}
+}
 @media(max-width:900px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .bid-buttons{grid-template-columns:repeat(3,1fr)}
 }
-
-@media(max-width:650px){
-
-    header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .mode-buttons{
-        width:100%;
-    }
-
-    .mode-buttons button{
-        flex:1;
-    }
-
-    .auction-stage{
-        min-height:540px;
-        padding:20px;
-    }
-
-    .player-name{
-        font-size:40px;
-    }
-
-    .current-bid{
-        font-size:58px;
-    }
-
-    .right-area{
-        display:flex;
-    }
-
+@media(max-width:760px){
+  .board{grid-template-columns:1fr}
+  .col-center{grid-column:auto}
+  .auction-stage{min-height:auto;padding:18px}
+  .player-photo-wrapper{width:min(58vw,215px);height:min(58vw,215px);margin:12px 0 6px}
+  .roster-slot-photo,.roster-slot-empty-icon{width:58px;height:58px}
+  .player-name{font-size:34px}
+  .current-bid{font-size:52px}
+  .timer{font-size:34px}
+  .quote-row{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,1fr);gap:7px}
+  .stat{padding:10px}
+  .stat strong{font-size:18px}
+  header{padding:12px 4%}
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <img class="login-logo" id="loginLogo" alt="PVP League">
+    <h1>PALAVEKNATAPURAM</h1>
+    <div class="sub">LIVE VOLLEYBALL AUCTION • SEASON ONE</div>
+
+    <label class="login-label" for="loginUser">WHO ARE YOU?</label>
+    <select id="loginUser"></select>
+
+    <label class="login-label" for="loginPass">PASSWORD</label>
+    <input id="loginPass" type="password" placeholder="Enter your password" autocomplete="off">
+
+    <button class="login-btn" id="loginBtn">ENTER AUCTION 🏐</button>
+    <button class="login-btn take-over hidden" id="forceLogin">
+      🔓 LOG IN HERE ANYWAY
+    </button>
+    <div class="login-error" id="loginError"></div>
+    <div class="lock-list" id="lockList">Checking who is online…</div>
+    <div class="login-hint" id="loginHint"></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     APP
+========================================================= -->
+<div id="app" class="hidden">
+
 <header>
-
-    <div class="brand">
-
-        <div class="logo">
-            🏐
-        </div>
-
-        <div>
-
-            <div class="brand-title">
-                PALAVEKNATAPURAM
-            </div>
-
-            <span class="brand-subtitle">
-                LIVE VOLLEYBALL AUCTION • SEASON ONE
-            </span>
-
-        </div>
-
+  <div class="brand">
+    <div class="logo"><img id="brandLogo" alt="PVP League"></div>
+    <div>
+      <div class="brand-title">PALAVEKNATAPURAM</div>
+      <span class="brand-subtitle">LIVE VOLLEYBALL AUCTION • SEASON ONE</span>
     </div>
-
-    <div class="mode-buttons">
-
-        <button id="adminMode" class="active">
-            🖥️ Admin
-        </button>
-
-        <button id="ownerMode">
-            📱 Owner
-        </button>
-
-    </div>
-
+  </div>
+  <div class="header-right">
+    <div class="sync-pill local" id="syncPill">CONNECTING…</div>
+    <button class="logout-btn" id="soundToggle" title="Sound on / off">🔊</button>
+    <div class="who" id="whoAmI">—</div>
+    <button class="logout-btn hidden" id="openData">🗄️ Database</button>
+    <button class="logout-btn" id="logoutBtn">Log out</button>
+  </div>
 </header>
-
 
 <main>
 
 <div class="stats">
-
-    <div class="stat">
-        <span>TEAMS</span>
-        <strong>4</strong>
-    </div>
-
-    <div class="stat">
-        <span>POINTS EACH</span>
-        <strong>95</strong>
-    </div>
-
-    <div class="stat">
-        <span>STARTING BID</span>
-        <strong>5</strong>
-    </div>
-
-    <div class="stat">
-        <span>PLAYERS SOLD</span>
-        <strong id="soldCount">0 / 35</strong>
-    </div>
-
-    <div class="stat">
-        <span>AUCTION TIME</span>
-        <strong>03:00</strong>
-    </div>
-
+  <div class="stat"><span>TEAMS</span><strong>4</strong></div>
+  <div class="stat"><span>POINTS EACH</span><strong>95</strong></div>
+  <div class="stat"><span>ROUND</span><strong id="statRound">1</strong></div>
+  <div class="stat"><span>BASE POINTS</span><strong id="statBase">—</strong></div>
+  <div class="stat"><span>PLAYERS SOLD</span><strong id="soldCount">0 / 28</strong></div>
+  <div class="stat"><span>AUCTION TIME</span><strong id="statTimer">15:00</strong></div>
 </div>
 
+<div class="board">
 
-<div class="auction-grid">
+  <!-- ============ LEFT: TEAM 1 + TEAM 2 ============ -->
+  <div class="col col-left">
+    <div class="col-title">TEAM 1 &amp; TEAM 2</div>
+    <div id="leftTeams" class="col" style="gap:14px"></div>
+  </div>
 
+  <!-- ============ CENTER: LIVE AUCTION ============ -->
+  <div class="col col-center">
 
-<section>
+    <div class="auction-stage">
+      <div class="stage-inner">
 
-<div class="auction-stage">
-
-    <div class="kicker">
-        PALAVEKNATAPURAM • LIVE AUCTION
-    </div>
-
-    <div
-        class="player-status"
-        id="playerStatus">
-        WAITING FOR PLAYER
-    </div>
-
-    <div class="player-photo-wrapper">
-
-        <img
-            id="playerPhoto"
-            class="player-photo"
-            src=""
-            alt="Player Photo"
-        >
-
-    </div>
-
-    <div
-        class="player-name"
-        id="playerName">
-        Ready?
-    </div>
-
-    <div
-        class="position"
-        id="playerPosition">
-        31 AUCTION PLAYERS • 4 TEAMS • 95 POINTS
-    </div>
-
-    <div class="starting-bid" id="baseBidDisplay">
-        🏷️ BASE BID: 5 POINTS
-    </div>
-
-    <div class="bid-label">
-        CURRENT BID
-    </div>
-
-    <div
-        class="current-bid"
-        id="currentBid">
-        0
-    </div>
-
-    <div
-        class="current-team"
-        id="currentTeam">
-        No bids yet
-    </div>
-
-    <div
-        class="timer"
-        id="timer">
-        03:00
-    </div>
-
-</div>
-
-
-<div
-    class="controls"
-    id="adminControls">
-
-    <button
-        class="btn btn-primary"
-        id="pickPlayer">
-        🎲 Pick Random Player
-    </button>
-
-    <button
-        class="btn btn-green"
-        id="startAuction">
-        ▶ Start 3-Minute Auction
-    </button>
-
-    <button
-        class="btn btn-primary"
-        id="sellPlayer">
-        🔨 SELL PLAYER
-    </button>
-
-    <button
-        class="btn"
-        id="skipPlayer">
-        ⏭ Skip
-    </button>
-
-    <button
-        class="btn btn-danger"
-        id="undoSale">
-        ↩ Undo Last Sale
-    </button>
-
-</div>
-
-</section>
-
-
-<div class="right-area">
-
-
-<!-- OWNER PANEL -->
-
-<div
-    class="owner-panel hidden"
-    id="ownerPanel">
-
-    <div class="owner-title">
-        📱 TEAM OWNER PANEL
-    </div>
-
-    <select
-        id="ownerSelect"
-        class="owner-select">
-
-        <option value="">
-            Select Team Owner
-        </option>
-
-        <option value="1">
-            1 — Raju
-        </option>
-
-        <option value="2">
-            2 — Shyam
-        </option>
-
-        <option value="3">
-            3 — Hari
-        </option>
-
-        <option value="4">
-            4 — Venky
-        </option>
-</select>
-
-
-    <div
-        class="live-player-card">
-
-        <div class="live-player-label">
-            CURRENT AUCTION PLAYER
+        <div class="stage-photo-col">
+          <div class="player-photo-wrapper">
+            <img id="playerPhoto" class="player-photo" src="" alt="Player Photo">
+          </div>
         </div>
 
-        <div
-            class="live-player-name"
-            id="ownerCurrentPlayer">
-            No player selected
+        <div class="stage-info-col">
+          <div class="kicker">PALAVEKNATAPURAM • LIVE AUCTION</div>
+          <div class="player-status" id="playerStatus">WAITING FOR PLAYER</div>
+          <div class="player-name" id="playerName">Ready?</div>
+          <div class="position" id="playerPosition">28 AUCTION PLAYERS • 4 TEAMS • 95 POINTS</div>
+          <div class="base-line" id="baseBidDisplay">BASE 0 PTS</div>
+          <div class="bid-label">CURRENT BID</div>
+          <div class="current-bid" id="currentBid">0</div>
+          <div class="current-team" id="currentTeam">No bids yet</div>
+          <div class="timer" id="timer">15:00</div>
         </div>
 
-        <div
-            class="live-player-position"
-            id="ownerCurrentPosition">
-            Waiting for admin...
+      </div>
+    </div>
+
+    <!-- OWNER BID PANEL -->
+    <div class="owner-panel hidden" id="ownerPanel">
+      <div class="owner-top">
+        <div class="owner-top-block">
+          <span>YOUR TEAM</span>
+          <strong id="myTeamName">—</strong>
         </div>
-
-        <div
-            class="live-player-status"
-            id="ownerCurrentStatus">
-            🏐 Waiting
+        <div class="owner-top-block" style="text-align:center">
+          <span>POINTS LEFT</span>
+          <strong id="myPoints">95</strong>
         </div>
-
-    </div>
-
-
-    <div class="owner-info">
-
-        <div>
-
-            <span>
-                Selected Team
-            </span>
-
-            <br>
-
-            <strong id="selectedTeamName">
-                —
-            </strong>
-
+        <div class="owner-top-block" style="text-align:right">
+          <span>SLOTS LEFT</span>
+          <strong id="mySlots">7</strong>
         </div>
+      </div>
 
-        <div style="text-align:right">
+      <div class="bid-buttons">
+        <button data-bid="min">MIN</button>
+        <button data-bid="1">+1</button>
+        <button data-bid="2">+2</button>
+        <button data-bid="5">+5</button>
+        <button data-bid="10">+10</button>
+        <button data-bid="custom">✏️</button>
+      </div>
 
-            <span>
-                Remaining
-            </span>
-
-            <br>
-
-            <strong id="selectedTeamPoints">
-                95
-            </strong>
-
+      <div class="quote-row">
+        <div class="quote-display">
+          <span>YOUR QUOTE</span>
+          <strong id="pendingQuote">0</strong>
         </div>
+        <button class="bid-now" id="bidNow" disabled>🔥 BID NOW</button>
+      </div>
 
+      <div class="owner-notice" id="ownerNotice">Waiting for the admin to pick a player.</div>
     </div>
 
-
-    <div class="bid-buttons">
-
-        <button data-bid="1">
-            +1
-        </button>
-
-        <button data-bid="2">
-            +2
-        </button>
-
-        <button data-bid="5">
-            +5
-        </button>
-         <button data-bid="10">
-            +10
-        </button>
-
-        <button data-bid="15">
-            +15
-        </button>
-
-        <button data-bid="custom">
-            + Custom
-        </button>
+    <!-- ADMIN CONTROLS -->
+    <div class="panel hidden" id="adminPanel">
+      <div class="panel-title">🖥️ AUCTIONEER CONTROLS</div>
+      <div class="controls">
+        <button class="btn btn-primary" id="pickPlayer">🎲 Pick Random Player</button>
+        <button class="btn btn-green" id="startAuction">▶ Start Timer</button>
+        <button class="btn btn-primary" id="sellPlayer">🔨 SELL PLAYER</button>
+        <button class="btn" id="skipPlayer">⏭ Skip</button>
+        <button class="btn btn-danger" id="undoSale">↩ Undo Last Sale</button>
+        <button class="btn" id="freeLogins">🔓 Free Logins</button>
+        <button class="btn btn-danger" id="resetAuction">♻ Reset Auction</button>
+      </div>
+      <div class="admin-behalf">
+        <span style="color:var(--muted);font-size:11px;font-weight:900">BID FOR:</span>
+        <select id="behalfTeam"></select>
+        <div class="behalf-quick">
+          <button class="btn" data-behalf="min">MIN</button>
+          <button class="btn" data-behalf="1">+1</button>
+          <button class="btn" data-behalf="2">+2</button>
+          <button class="btn" data-behalf="3">+3</button>
+          <button class="btn" data-behalf="5">+5</button>
+          <button class="btn" data-behalf="10">+10</button>
+        </div>
+        <input id="behalfAmount" type="number" min="0" placeholder="pts">
+        <button class="btn" id="behalfBid">Place Bid</button>
+      </div>
     </div>
 
-
-    <div class="quote-display">
-
-        <span>
-            YOUR QUOTE
-        </span>
-
-        <strong id="pendingQuote">
-            0
-        </strong>
-
+    <!-- HISTORY -->
+    <div class="panel" id="historyPanel">
+      <div class="panel-title">🏷️ RECENT AUCTION HISTORY</div>
+      <div class="scroll-box" id="auctionHistory"></div>
     </div>
 
+  </div>
 
-    <button
-        class="bid-now"
-        id="bidNow"
-        disabled>
-        🔥 BID NOW
-    </button>
-
-
-    <div
-        class="owner-notice"
-        id="ownerNotice">
-        Select your team owner first.
-    </div>
+  <!-- ============ RIGHT: TEAM 3 + TEAM 4 ============ -->
+  <div class="col col-right">
+    <div class="col-title">TEAM 3 &amp; TEAM 4</div>
+    <div id="rightTeams" class="col" style="gap:14px"></div>
+  </div>
 
 </div>
-
-
-<!-- SUMMARY -->
-
-<div class="summary-board">
-
-    <div class="summary-header">
-
-        <h3>
-            📋 AUCTION SUMMARY
-        </h3>
-
-        <span id="summaryCount">
-            0 SOLD
-        </span>
-
-    </div>
-
-    <div id="summaryTeams"></div>
-
-    <div class="history-title">
-        🏷️ RECENT AUCTION HISTORY
-    </div>
-
-    <div id="auctionHistory"></div>
-
-</div>
-
-</div>
-
-</div>
-
 </main>
-
+</div>
 
 <!-- SOLD MODAL -->
+<div class="modal" id="soldModal">
+  <canvas id="fireworks"></canvas>
+  <div class="sold-box">
+    <img class="sold-crest" id="modalLogo" alt="PVP League">
+    <div class="kicker">🔨 SOLD 🎉</div>
 
-<div
-    class="modal"
-    id="soldModal">
+    <div class="sold-pair">
+      <div class="sold-face player">
+        <img id="soldPlayerPhoto" alt="">
+        <div class="sold-face-name" id="soldPlayer">PLAYER</div>
+        <div class="sold-face-tag">NEW PLAYER</div>
+      </div>
 
-    <div class="modal-box">
+      <div class="sold-join" id="soldJoin">🤝</div>
 
-        <div class="modal-ball">
-            🏐
-        </div>
-
-        <div class="kicker">
-            PLAYER SOLD
-        </div>
-
-        <h2>
-            <span id="soldPlayer">
-                PLAYER
-            </span>
-        </h2>
-
-        <div
-            class="sold-details"
-            id="soldDetails">
-        </div>
-
-        <button
-            class="btn btn-primary"
-            id="closeSold"
-            style="margin-top:25px">
-
-            Continue Auction 🏐
-
-        </button>
-
+      <div class="sold-face owner">
+        <img id="soldOwnerPhoto" alt="">
+        <div class="sold-face-name" id="soldOwnerName">OWNER</div>
+        <div class="sold-face-tag">TEAM OWNER</div>
+      </div>
     </div>
 
+    <div class="sold-welcome" id="soldWelcome"></div>
+    <div class="sold-price" id="soldDetails"></div>
+    <button class="btn btn-primary" id="closeSold" style="margin-top:18px">Continue Auction 🏐</button>
+  </div>
 </div>
 
-
-<div
-    class="toast"
-    id="toast">
+<!-- PHOTO ZOOM -->
+<div class="modal" id="photoModal">
+  <div class="photo-zoom">
+    <img id="zoomPhoto" alt="">
+    <div class="zoom-name" id="zoomName"></div>
+    <div class="zoom-meta" id="zoomMeta"></div>
+    <button class="btn btn-primary" id="closeZoom" style="margin-top:16px">✕ Close</button>
+  </div>
 </div>
 
+<!-- DATABASE / DATA MODAL -->
+<div class="modal" id="dataModal">
+  <div class="modal-box data-modal">
+    <div class="data-head">
+      <div>
+        <div class="kicker">AUCTION DATABASE</div>
+        <h3 id="dataWhere">—</h3>
+        <div class="data-note" id="dataBuild" style="margin-top:6px"></div>
+      </div>
+      <button class="btn" id="closeData">✕ Close</button>
+    </div>
 
-<script>
+    <div class="data-actions">
+      <button class="btn" id="copyJson">📋 Copy all data</button>
+      <button class="btn" id="downloadJson">⬇ Download .json</button>
+      <button class="btn btn-danger" id="clearAllData">🗑️ Clear ALL data</button>
+    </div>
+    <div class="data-note" id="dataHint"></div>
+
+    <div class="data-section" id="loginSection">
+      <div class="data-title">WHO IS LOGGED IN — FREE ANYONE WHO WALKED AWAY</div>
+      <div id="dataLogins"></div>
+      <button class="btn btn-danger" id="freeAllInData" style="margin-top:8px">
+        🔓 Free ALL logins
+      </button>
+    </div>
+
+    <div class="data-section">
+      <div class="data-title">TEAMS</div>
+      <div id="dataTeams"></div>
+    </div>
+
+    <div class="data-section">
+      <div class="data-title">SOLD PLAYERS — REMOVE ANY ONE TO CANCEL THAT SALE</div>
+      <div id="dataSales"></div>
+    </div>
+
+    <div class="data-section">
+      <div class="data-title">RAW STORED DATA</div>
+      <pre class="data-json" id="dataJson"></pre>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+/* =========================================================
+   ⚙️ 1. FIREBASE SETUP  (for bidding from DIFFERENT phones)
+   ---------------------------------------------------------
+   Leave this EMPTY and the auction still works, but only
+   between tabs/windows on the SAME device.
+
+   To let every owner bid from their own phone:
+     1. Go to https://console.firebase.google.com → Add project (free)
+     2. Build → Realtime Database → Create Database
+        → start in TEST MODE (or use the rules below)
+     3. Project settings → General → Your apps → Web app (</>)
+        → copy the config values into the block below
+     4. Save index.html, push to GitHub Pages, done.
+
+   Test-mode rules (fine for a one-day tournament):
+     { "rules": { ".read": true, ".write": true } }
+========================================================= */
+const FIREBASE_CONFIG = {
+  apiKey:       "",
+  authDomain:   "",
+  databaseURL:  "",   // e.g. https://my-auction-default-rtdb.firebaseio.com
+  projectId:    "",
+  appId:        ""
+};
+
+/* Change this if you want a fresh auction on the same Firebase project */
+const ROOM_ID = "palaveknatapuram-season-1";
+
+/* bump this when you replace the file — shown in the Database screen */
+const BUILD = "2026-08-14 · build 12 · base-points-always-on";
+console.log("PVP LEAGUE auction —", BUILD);
 
 /* =========================================================
-   CONFIG
+   🖼️ PVP LEAGUE LOGO
+   Paste a link to your own logo image between the quotes
+   (any .png / .jpg / .svg URL, e.g. an i.ibb.co upload).
+   Leave it empty to use the built-in PVP LEAGUE crest.
 ========================================================= */
+const LOGO_URL = "";
 
-const STARTING_BID = 5;
-const AUCTION_TIME = 180;
+const DEFAULT_LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjdlMGE2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNDUlIiBzdG9wLWNvbG9yPSIjZDZhNjQ3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2E5NzYxZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iaW5uZXIiIGN4PSI1MCUiIGN5PSIzMCUiIHI9IjgwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJlMWYxOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxNTBmMGQiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTkiIGZpbGw9InVybCgjaW5uZXIpIi8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjYiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgzIiBmaWxsPSJub25lIiBzdHJva2U9IiNmNGQ1OGIiIHN0cm9rZS1vcGFjaXR5PSIuMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmNGQ1OGIiIHN0cm9rZS1vcGFjaXR5PSIuMTYiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik0xMDAgMTQgQzU4IDU1IDU4IDE0NSAxMDAgMTg2Ii8+CiAgICA8cGF0aCBkPSJNMTAwIDE0IEMxNDIgNTUgMTQyIDE0NSAxMDAgMTg2Ii8+CiAgICA8cGF0aCBkPSJNMTYgMTAwIEM1NiA3OCAxNDQgNzggMTg0IDEwMCIvPgogIDwvZz4KICA8dGV4dCB4PSIxMDAiIHk9IjEwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsJ1RpbWVzIE5ldyBSb21hbicsc2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9InVybCgjZ29sZCkiIGxldHRlci1zcGFjaW5nPSIxIj5QVlA8L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSIxMzQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmFmMCIgbGV0dGVyLXNwYWNpbmc9IjYiPkxFQUdVRTwvdGV4dD4KICA8dGV4dCB4PSIxMDAiIHk9IjE1NyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZDZhNjQ3IiBsZXR0ZXItc3BhY2luZz0iMi41Ij7imIUgU0VBU09OIDEg4piFPC90ZXh0Pgo8L3N2Zz4K";
+const LOGO = LOGO_URL || DEFAULT_LOGO;
 
+["brandLogo","loginLogo","modalLogo"].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.src = LOGO;
+});
+document.documentElement.style.setProperty("--stage-logo", 'url("' + LOGO + '")');
+
+(function setFavicon(){
+  const link = document.createElement("link");
+  link.rel = "icon";
+  link.href = LOGO;
+  document.head.appendChild(link);
+})();
+
+/* =========================================================
+   🔐 2. LOGINS — change the passwords here
+   ---------------------------------------------------------
+   ONE DEVICE PER LOGIN: once someone signs in with an
+   account, that same account is locked everywhere else
+   until they press "Log out" (or the admin presses
+   "🔓 Free Logins"). Add  multi:true  to an account if you
+   DO want it open on several screens at once.
+========================================================= */
+const ACCOUNTS = [
+  { key:"admin",  role:"admin",  label:"🖥️ Admin / Auctioneer",     password:"admin123" },
+  { key:"own1",   role:"owner",  teamId:1, label:"Team 1 — Raju",         password:"raju123" },
+  { key:"own2",   role:"owner",  teamId:2, label:"Team 2 — Harsha",       password:"harsha123" },
+  { key:"own3",   role:"owner",  teamId:3, label:"Team 3 — Harikrishna",  password:"hari123" },
+  { key:"own4",   role:"owner",  teamId:4, label:"Team 4 — Venky",        password:"venky123" },
+  { key:"screen", role:"viewer", label:"📺 Big Screen / Viewer",     password:"view", multi:true }
+];
+
+/* =========================================================
+   👀 3. WHAT THE BIG SCREEN / VIEWER MAY DO
+   The viewer can open the Database screen and free a login
+   for someone who walked away, but cannot delete sales or
+   wipe the auction. Set the second one to true if you want
+   the viewer to have the admin's full data powers.
+========================================================= */
+const VIEWER_CAN_MANAGE_LOGINS = true;
+const VIEWER_CAN_EDIT_DATA     = false;
+
+/* =========================================================
+   🔊 4. SPOKEN ANNOUNCEMENTS
+   The browser's own voice reads the result out loud —
+   no sound files, nothing to upload.
+   Edit the sentences below to change the wording.
+========================================================= */
+const SPEAK_SOLD        = true;   // announce every sale
+const SPEAK_NEXT_PLAYER = true;   // announce each new player
+const SPEAK_BIDS        = false;  // set true to also call out every bid
+const SPEECH_RATE       = 0.92;   // 0.8 = slower, 1.2 = faster
+const SPEECH_PITCH      = 1.0;
+
+/* Voices are tried in this order. A Telugu voice is used when the device
+   has one; otherwise it falls back to English automatically. */
+const SPEECH_LANG_ORDER = ["te-IN", "te", "en-IN", "en-GB", "en-US", "en"];
+
+/* ---------- TELUGU sentences (used when a Telugu voice exists) ---------- */
+const SAY_SOLD_TE = (player, owner, teamNo, price) =>
+  `అమ్మకం పూర్తి! ${player} ను, టీమ్ ${teamNo} యజమాని ${owner} గారు, ${price} పాయింట్లకు కొనుగోలు చేశారు.`;
+
+const SAY_NEXT_TE = (player, position, base) =>
+  `తదుపరి ఆటగాడు, ${player}. ${position}. బేస్ ${base} పాయింట్లు.`;
+
+const SAY_BID_TE = (owner, amount) => `${owner} గారు, ${amount} పాయింట్లు.`;
+
+/* ---------- ENGLISH fallback sentences ---------- */
+const SAY_SOLD = (player, owner, teamNo, price) =>
+  `Sold! ${player} is sold to ${owner}. Team ${teamNo}. For ${price} ${price === 1 ? "point" : "points"}.`;
+
+const SAY_NEXT = (player, position, base) =>
+  `Next player. ${player}. ${position}. Base ${base} ${base === 1 ? "point" : "points"}.`;
+
+const SAY_BID = (owner, amount) => `${owner}, ${amount}.`;
+
+/* volleyball positions in Telugu */
+const POSITION_TE = {
+  "Spiker":"స్పైకర్",
+  "Setter":"సెట్టర్",
+  "Libero":"లిబెరో",
+  "All Rounder":"ఆల్ రౌండర్",
+  "Opposite":"ఆపోజిట్",
+  "Middle Blocker":"మిడిల్ బ్లాకర్"
+};
+
+/* numbers in Telugu words, so points are always pronounced correctly */
+const TE_ONES = ["సున్నా","ఒకటి","రెండు","మూడు","నాలుగు","ఐదు","ఆరు","ఏడు","ఎనిమిది","తొమ్మిది",
+  "పది","పదకొండు","పన్నెండు","పదమూడు","పదునాలుగు","పదిహేను","పదహారు","పదిహేడు","పదెనిమిది","పంతొమ్మిది"];
+const TE_TENS = { 20:"ఇరవై", 30:"ముప్పై", 40:"నలభై", 50:"ఏభై", 60:"అరవై", 70:"డెబ్బై", 80:"ఎనభై", 90:"తొంభై" };
+
+function teNum(n){
+  n = Number(n) || 0;
+  if(n < 20) return TE_ONES[n];
+  if(n === 100) return "వంద";
+  if(n > 100) return "వంద " + teNum(n - 100);
+  const t = Math.floor(n / 10) * 10, u = n % 10;
+  return TE_TENS[t] + (u ? " " + TE_ONES[u] : "");
+}
+
+/* =========================================================
+   🏐 5. AUCTION RULES
+========================================================= */
+const TEAM_POINTS      = 95;   // budget per team
+const MAX_SQUAD        = 9;    // owner + captain + 7 auctioned players
+const AUCTION_SECONDS  = 900;  // 15:00 on the clock
+const BID_RESET_SECONDS= 900;  // clock after every bid (set to 30 for a fast close)
+const CAPTAIN_PRICE    = 5;    // shown on the captain card (not deducted)
+const OWNER_PRICE      = 0;
 
 /* =========================================================
    TEAMS
 ========================================================= */
-
-const teams = [
-
-    {
-        id:1,
-        name:"Team 1 ----> RAJU OWNER",
-        owner:"Raju",
-        points:95,
-        players:[]
-    },
-
-    {
-        id:2,
-        name:"Team 2 ----> SHYAM OWNER",
-        owner:"Shyam",
-        points:95,
-        players:[]
-    },
-
-    {
-        id:3,
-        name:"Team 3 ----> HARI OWNER",
-        owner:"Hari",
-        points:95,
-        players:[]
-    },
- 
-    {
-        id:4,
-        name:"Team 4 ----> VENKY OWNER",
-        owner:"Venky",
-        points:95,
-        players:[]
-    },
-
+const TEAM_META = [
+  { id:1, name:"TEAM 1 — RAJU",        owner:"Raju" },
+  { id:2, name:"TEAM 2 — HARSHA",      owner:"Harsha" },
+  { id:3, name:"TEAM 3 — HARIKRISHNA", owner:"Harikrishna" },
+  { id:4, name:"TEAM 4 — VENKY",       owner:"Venky" }
 ];
 
-
-
-/* =========================================================
-   CAPTAINS
-   Each captain costs 5 points and is pre-assigned to a team.
-   Captains are NOT available in the auction.
-   Each team can have a maximum of 8 players TOTAL,
-   including the captain.
-========================================================= */
-
-const CAPTAIN_PRICE = 5;
-
-const captainAssignments = {
-    6: 1,   // D. Chandra -> Team 1 (Raju)
-    5: 2,   // B. Ravi -> Team 2 (Shyam)
-    4: 3,   // V. Anji -> Team 3 (Hari)
-    12: 4   // B. Mahendra -> Team 4 (Venky)
-};
-
+/* Captains (pre-assigned, never auctioned) */
+const captainAssignments = { 6:1, 5:2, 4:3, 12:4 };
+/* Owners as players (pre-assigned, cost 0) */
+const ownerAssignments   = { 35:1, 2:2, 19:3, 1:4 };
 
 /* =========================================================
-   35 PLAYERS
+   PLAYERS
 ========================================================= */
-
 const players = [
-
-    {
-        id:1,
-        name:"V. Venkatesulu",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/HDg2YRtN/Screenshot-2026-08-11-100820.png"
-    },
-
-    {
-        id:2,
-        name:"S. Harsha",
-        position:"Libero",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/6RQssW3B/Screenshot-2026-08-10-004215.png"
-    },
-
-    {
-        id:3,
-        name:"V. Madhu",
-        position:"Libero",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/B2RXmgCT/Screenshot-2026-08-10-222700.png"
-    },
-
-    {
-        id:4,
-        name:"V. Anji",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:0,
-        photo:"https://i.ibb.co/QvJ330G6/Screenshot-2026-08-10-221550.png"
-    },
-
-    {
-        id:5,
-        name:"B. Ravi",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:0,
-        photo:"https://i.ibb.co/Ngwff8kh/Screenshot-2026-08-10-000539.png"
-    },
-
-    {
-        id:6,
-        name:"D. Chandra",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:0,
-        photo:"https://i.ibb.co/9H68R5PQ/Screenshot-2026-08-09-183817.png"
-    },
-
-    {
-        id:7,
-        name:"V. Aravindhu",
-        position:"Opposite",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/pB1DQ6Kk/Screenshot-2026-08-10-222536.png"
-    },
-
-    {
-        id:8,
-        name:"B. Devaraju",
-        position:"Middle Blocker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/Q360d4XG/Screenshot-2026-08-10-005139.png"
-    },
-
-    {
-        id:9,
-        name:"P. Dileep",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/p6cs0NRF/Screenshot-2026-08-11-100338.png"
-    },
-
-    {
-        id:10,
-        name:"V. Thippeswamy",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/Q3BpC1QZ/Screenshot-2026-08-11-183732.png"
-    },
-
-    {
-        id:11,
-        name:"V. Veeranji",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/bMxC03WF/Screenshot-2026-08-10-221902.png"
-    },
-
-    {
-        id:12,
-        name:"B. Mahendra",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:0,
-        photo:"https://i.ibb.co/JWc9JYqp/Screenshot-2026-08-10-223252.png"
-    },
-
-    {
-        id:13,
-        name:"P. Ajay",
-        position:"Libero",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/zW3HQjnZ/Screenshot-2026-08-10-222233.png"
-    },
-
-    {
-        id:14,
-        name:"C. Yerriswamy",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/dJzjw1Gh/Screenshot-2026-08-11-184041.png"
-    },
-
-    {
-        id:15,
-        name:"B. Vamsi",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/vCjhVbmB/Screenshot-2026-08-11-095903.png"
-    },
-
-    {
-        id:16,
-        name:"G. Naresh",
-        position:"Middle Blocker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/B2G2GwG3/Screenshot-2026-08-10-003814.png"
-    },
- 
-    {
-        id:17,
-        name:"Daresh",
-        position:"Opposite",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/mF6rM2p7/Screenshot-2026-08-11-183506.png"
-    },
-
-    {
-        id:18,
-        name:"V. Amaresh",
-        position:"Opposite",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/ZDrSXB0/Screenshot-2026-08-11-184500.png"
-    },
-
-    {
-        id:19,
-        name:"V. Harikrishna",
-        position:"Middle Blocker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/zTb54c7g/Screenshot-2026-08-11-095130.png"
-    },
-
-    {
-        id:20,
-        name:"V. Babu",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/6cg9B7FM/Myimage.jpg"
-    },
-
-    {
-        id:21,
-        name:"B. Dinesh",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/3yKZ2QrB/Screenshot-2026-08-10-004643.png"
-    },
-
-    {
-        id:22,
-        name:"B. Maruthi",
-        position:"Libero",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/v6dFpm2D/Screenshot-2026-08-10-222045.png"
-    },
-
-    {
-        id:23,
-        name:"G. Ramakrishna",
-        position:"Middle Blocker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/SDpyr5rR/Screenshot-2026-08-10-004421.png"
-    },
-
-    {
-        id:24,
-        name:"V. Dhanunjaya",
-        position:"Middle Blocker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/dwD28kv3/Screenshot-2026-08-10-222811.png"
-    },
-
-    {
-        id:25,
-        name:"S. Rajasimha",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/7JNg2T6D/Screenshot-2026-08-11-100657.png"
-    },
-
-    {
-        id:26,
-        name:"A. Praveen",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/kbr4qrZ/Screenshot-2026-08-11-184200.png"
-    },
-
-    {
-        id:27,
-        name:"V. Yerriswamy",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/gMQTqKwR/Screenshot-2026-08-11-095448.png"
-    },
-
-    {
-        id:28,
-        name:"S. Tharun",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/cS3hHQ2y/Screenshot-2026-08-11-101553.png"
-    },
-
-    {
-        id:29,
-        name:"T. Hemadri",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.pravatar.cc/300?img=29"
-    },
-
-    {
-        id:30,
-        name:"BOGAM Akash",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.pravatar.cc/300?img=20"
-    },
-
-    {
-        id:31,
-        name:"U. Narasimha",
-        position:"Opposite",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/q3cWppgk/Screenshot-2026-08-10-222401.png"
-    },
-
-    {
-        id:32,
-        name:"C. Prakash",
-        position:"Spiker",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/C3QTyxBF/Screenshot-2026-08-11-095654.png"
-    },
-
-    {
-        id:33,
-        name:"chenna",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/vC8fBQL2/Screenshot-2026-08-11-183854.png"
-    },
-
-    {
-        id:34,
-        name:"H.Ramakrishna",
-        position:"Setter",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/dqhtGrw/Screenshot-2026-08-11-184730.png"
-    },
-
-    {
-        id:35,
-        name:"Raju Chowdary",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:5,
-        photo:"https://i.ibb.co/BKcm69rx/Screenshot-2026-08-11-184326.png"
-    },
-    {
-        id:36,
-        name:"T.Anil",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.pravatar.cc/300?img=36"
-    },
-     {
-        id:37,
-        name:"V.Naveen",
-        position:"All Rounder",
-        status:"available",
-        soldTo:null,
-        price:0,
-        basePoints:2,
-        photo:"https://i.ibb.co/WJzJTKp/Screenshot-2026-08-11-102524.png"
-    }
-
+  { id:1,  name:"V. Venkatesulu", position:"Spiker",         basePoints:5, nameTe:"వి వెంకటేసులు", photo:"https://i.ibb.co/HDg2YRtN/Screenshot-2026-08-11-100820.png" },
+  { id:2,  name:"S. Harsha",      position:"Libero",         basePoints:5, nameTe:"ఎస్ హర్ష", photo:"https://i.ibb.co/6RQssW3B/Screenshot-2026-08-10-004215.png" },
+  { id:3,  name:"V. Madhu",       position:"Libero",         basePoints:2, nameTe:"వి మధు", photo:"https://i.ibb.co/B2RXmgCT/Screenshot-2026-08-10-222700.png" },
+  { id:4,  name:"V. Anji",        position:"Setter",         basePoints:0, nameTe:"వి అంజి", photo:"https://i.ibb.co/QvJ330G6/Screenshot-2026-08-10-221550.png" },
+  { id:5,  name:"B. Ravi",        position:"All Rounder",    basePoints:0, nameTe:"బి రవి", photo:"https://i.ibb.co/Ngwff8kh/Screenshot-2026-08-10-000539.png" },
+  { id:6,  name:"D. Chandra",     position:"All Rounder",    basePoints:0, nameTe:"డి చంద్ర", photo:"https://i.ibb.co/9H68R5PQ/Screenshot-2026-08-09-183817.png" },
+  { id:7,  name:"V. Aravindhu",   position:"Opposite",       basePoints:5, nameTe:"వి అరవిందు", photo:"https://i.ibb.co/pB1DQ6Kk/Screenshot-2026-08-10-222536.png" },
+  { id:8,  name:"B. Devaraju",    position:"Middle Blocker", basePoints:5, nameTe:"బి దేవరాజు", photo:"https://i.ibb.co/Q360d4XG/Screenshot-2026-08-10-005139.png" },
+  { id:9,  name:"P. Dileep",      position:"Spiker",         basePoints:5, nameTe:"పి దిలీప్", photo:"https://i.ibb.co/p6cs0NRF/Screenshot-2026-08-11-100338.png" },
+  { id:10, name:"V. Thippeswamy", position:"Setter",         basePoints:2, nameTe:"వి తిప్పేస్వామి", photo:"https://i.ibb.co/Q3BpC1QZ/Screenshot-2026-08-11-183732.png" },
+  { id:11, name:"V. Veeranji",    position:"Setter",         basePoints:2, nameTe:"వి వీరాంజి", photo:"https://i.ibb.co/bMxC03WF/Screenshot-2026-08-10-221902.png" },
+  { id:12, name:"B. Mahendra",    position:"Spiker",         basePoints:0, nameTe:"బి మహేంద్ర", photo:"https://i.ibb.co/JWc9JYqp/Screenshot-2026-08-10-223252.png" },
+  { id:13, name:"P. Ajay",        position:"Libero",         basePoints:2, nameTe:"పి అజయ్", photo:"https://i.ibb.co/zW3HQjnZ/Screenshot-2026-08-10-222233.png" },
+  { id:14, name:"C. Yerriswamy",  position:"Setter",         basePoints:2, nameTe:"సి ఎర్రిస్వామి", photo:"https://i.ibb.co/dJzjw1Gh/Screenshot-2026-08-11-184041.png" },
+  { id:15, name:"B. Vamsi",       position:"Setter",         basePoints:5, nameTe:"బి వంశీ", photo:"https://i.ibb.co/vCjhVbmB/Screenshot-2026-08-11-095903.png" },
+  { id:16, name:"G. Naresh",      position:"Middle Blocker", basePoints:5, nameTe:"జి నరేష్", photo:"https://i.ibb.co/B2G2GwG3/Screenshot-2026-08-10-003814.png" },
+  { id:17, name:"Daresh",         position:"Opposite",       basePoints:5, nameTe:"దరేష్", photo:"https://i.ibb.co/mF6rM2p7/Screenshot-2026-08-11-183506.png" },
+  { id:18, name:"V. Amaresh",     position:"Opposite",       basePoints:5, nameTe:"వి అమరేష్", photo:"https://i.ibb.co/ZDrSXB0/Screenshot-2026-08-11-184500.png" },
+  { id:19, name:"V. Harikrishna", position:"Middle Blocker", basePoints:5, nameTe:"వి హరికృష్ణ", photo:"https://i.ibb.co/zTb54c7g/Screenshot-2026-08-11-095130.png" },
+  { id:20, name:"V. Babu",        position:"All Rounder",    basePoints:5, nameTe:"వి బాబు", photo:"https://i.ibb.co/6cg9B7FM/Myimage.jpg" },
+  { id:21, name:"B. Dinesh",      position:"Setter",         basePoints:5, nameTe:"బి దినేష్", photo:"https://i.ibb.co/3yKZ2QrB/Screenshot-2026-08-10-004643.png" },
+  { id:22, name:"B. Maruthi",     position:"Libero",         basePoints:5, nameTe:"బి మారుతి", photo:"https://i.ibb.co/v6dFpm2D/Screenshot-2026-08-10-222045.png" },
+  { id:23, name:"G. Ramakrishna", position:"Middle Blocker", basePoints:5, nameTe:"జి రామకృష్ణ", photo:"https://i.ibb.co/SDpyr5rR/Screenshot-2026-08-10-004421.png" },
+  { id:24, name:"V. Dhanunjaya",  position:"Middle Blocker", basePoints:5, nameTe:"వి ధనుంజయ", photo:"https://i.ibb.co/dwD28kv3/Screenshot-2026-08-10-222811.png" },
+  { id:25, name:"S. Rajasimha",   position:"All Rounder",    basePoints:2, nameTe:"ఎస్ రాజసింహ", photo:"https://i.ibb.co/7JNg2T6D/Screenshot-2026-08-11-100657.png" },
+  { id:26, name:"A. Praveen",     position:"Spiker",         basePoints:2, nameTe:"ఎ ప్రవీణ్", photo:"https://i.ibb.co/kbr4qrZ/Screenshot-2026-08-11-184200.png" },
+  { id:27, name:"V. Yerriswamy",  position:"Setter",         basePoints:2, nameTe:"వి ఎర్రిస్వామి", photo:"https://i.ibb.co/gMQTqKwR/Screenshot-2026-08-11-095448.png" },
+  { id:28, name:"S. Tharun",      position:"Spiker",         basePoints:2, nameTe:"ఎస్ తరుణ్", photo:"https://i.ibb.co/cS3hHQ2y/Screenshot-2026-08-11-101553.png" },
+  { id:30, name:"T. Anil",        position:"Spiker",         basePoints:2, nameTe:"టి అనిల్", photo:"https://i.pravatar.cc/300?img=20" },
+  { id:31, name:"U. Narasimha",   position:"Opposite",       basePoints:2, nameTe:"యు నరసింహ", photo:"https://i.ibb.co/q3cWppgk/Screenshot-2026-08-10-222401.png" },
+  { id:32, name:"C. Prakash",     position:"Spiker",         basePoints:2, nameTe:"సి ప్రకాష్", photo:"https://i.ibb.co/C3QTyxBF/Screenshot-2026-08-11-095654.png" },
+  { id:33, name:"Chenna",         position:"All Rounder",    basePoints:2, nameTe:"చెన్న", photo:"https://i.ibb.co/vC8fBQL2/Screenshot-2026-08-11-183854.png" },
+  { id:34, name:"H. Ramakrishna", position:"Setter",         basePoints:5, nameTe:"హెచ్ రామకృష్ణ", photo:"https://i.ibb.co/dqhtGrw/Screenshot-2026-08-11-184730.png" },
+  { id:35, name:"Raju Chowdary",  position:"All Rounder",    basePoints:5, nameTe:"రాజు చౌదరి", photo:"https://i.ibb.co/BKcm69rx/Screenshot-2026-08-11-184326.png" },
+  { id:36, name:"T. Anil (2)",    position:"All Rounder",    basePoints:2, nameTe:"టి అనిల్ రెండు", photo:"https://i.pravatar.cc/300?img=36" },
+  { id:37, name:"V. Naveen",      position:"All Rounder",    basePoints:2, nameTe:"వి నవీన్", photo:"https://i.ibb.co/WJzJTKp/Screenshot-2026-08-11-102524.png" },
+  { id:38, name:"V. Venkatesh",   position:"All Rounder",    basePoints:2, nameTe:"వి వెంకటేష్", photo:"https://i.pravatar.cc/300?img=12" }
 ];
 
+const PLAYER_BY_ID = {};
+players.forEach(p => PLAYER_BY_ID[p.id] = p);
+
+/* Built into the file so nothing depends on an outside image host */
+const FALLBACK_PHOTO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCI+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNjAiIGZpbGw9IiMyOTFiMTYiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjQ3IiByPSIyMCIgZmlsbD0iI2Q2YTY0NyIgZmlsbC1vcGFjaXR5PSIuNyIvPgogIDxwYXRoIGQ9Ik0xOCAxMTBjNC0yMyAyMC0zNCA0Mi0zNHMzOCAxMSA0MiAzNHoiIGZpbGw9IiNkNmE2NDciIGZpbGwtb3BhY2l0eT0iLjciLz4KPC9zdmc+Cg==";
+const IDLE_PHOTO     = LOGO;   /* the PVP LEAGUE crest */
+
+/* Pre-load every photo so a new player appears instantly
+   instead of showing the previous face for a moment */
+players.forEach(p => { const img = new Image(); img.src = p.photo; });
+
+const AUCTION_POOL = players
+  .filter(p => !(p.id in captainAssignments) && !(p.id in ownerAssignments))
+  .map(p => p.id);
+
+const $ = id => document.getElementById(id);
 
 /* =========================================================
-   INITIALIZE CAPTAINS
+   FRESH STATE
 ========================================================= */
+function freshState(){
+  const teams = TEAM_META.map(t => ({
+    id:t.id, name:t.name, owner:t.owner, points:TEAM_POINTS, players:[]
+  }));
 
-Object.entries(captainAssignments).forEach(([playerId, teamId]) => {
+  Object.entries(ownerAssignments).forEach(([pid, tid]) => {
+    const team = teams.find(t => t.id === Number(tid));
+    if(team) team.players.push({ playerId:Number(pid), price:OWNER_PRICE, role:"owner" });
+  });
+  Object.entries(captainAssignments).forEach(([pid, tid]) => {
+    const team = teams.find(t => t.id === Number(tid));
+    if(team) team.players.push({ playerId:Number(pid), price:CAPTAIN_PRICE, role:"captain" });
+  });
 
-    const player = players.find(
-        p => p.id === Number(playerId)
-    );
-
-    const team = teams.find(
-        t => t.id === Number(teamId)
-    );
-
-    if(!player || !team){
-        return;
-    }
-
-    // Prevent duplicate initialization.
-    if(team.players.some(item => item.player.id === player.id)){
-        return;
-    }
-
-    // Team auction budget is already initialized to 95 points.
-    // Do not deduct the captain price a second time.
-
-    team.players.push({
-        player: player,
-        price: CAPTAIN_PRICE,
-        captain: true
-    });
-
-    // Captain is already part of the team and must never be auctioned.
-    player.status = "captain";
-    player.soldTo = team.id;
-    player.price = CAPTAIN_PRICE;
-});
-
-/* =========================================================
-   AUCTION STATE
-========================================================= */
-
-let auction = {
-
-    currentPlayer:null,
-
-    currentBid:STARTING_BID,
-
-    currentTeam:null,
-
-    timer:0,
-
-    timerInterval:null,
-
-    pendingBid:0,
-
-    lastSale:null,
-
-    history:[],
-
-    // ================================================
-    // ROUND AUCTION STATE
-    // Round 1 contains all 35 players.
-    // A skipped player is saved for the NEXT round.
-    // A sold player is permanently removed.
-    // ================================================
+  return {
+    rev:1,
+    teams,
     roundNumber:1,
+    roundQueue:[...AUCTION_POOL],
+    roundSkipped:[],
+    currentPlayerId:null,
+    currentBid:0,
+    currentTeamId:null,
+    timerRunning:false,
+    timerEndsAt:null,
+    timerRemaining:0,
+    history:[],
+    lastSale:null,
+    saleTicket:0,
+    flash:null,
+    sessions:{},      // who is logged in, on which device
+    sessionEpoch:0,   // bumped when every login is freed at once
+    kicks:{}          // per-account counter, bumped when one login is freed
+  };
+}
 
-    roundQueue:[],
-
-    roundSkipped:[]
-
-};
-
-
-// Build the first round from all players.
-auction.roundQueue =
-    players
-        .filter(player => !Object.prototype.hasOwnProperty.call(captainAssignments, player.id))
-        .map(player => player.id);
-
-
-/* =========================================================
-   PLAYER BASE BID
-   Each player has an individual base point value.
-========================================================= */
-
-function getPlayerBaseBid(player){
-
-    if(!player){
-        return STARTING_BID;
-    }
-
-    return Number.isFinite(Number(player.basePoints))
-        ? Number(player.basePoints)
-        : STARTING_BID;
+/* Firebase drops empty arrays / nulls — rebuild them */
+function normalize(s){
+  const base = freshState();
+  if(!s || typeof s !== "object") return base;
+  s.teams = Array.isArray(s.teams) ? s.teams : base.teams;
+  s.teams.forEach(t => { t.players = Array.isArray(t.players) ? t.players : []; });
+  s.roundQueue   = Array.isArray(s.roundQueue)   ? s.roundQueue   : [];
+  s.roundSkipped = Array.isArray(s.roundSkipped) ? s.roundSkipped : [];
+  s.history      = Array.isArray(s.history)      ? s.history      : [];
+  s.roundNumber    = s.roundNumber || 1;
+  s.currentPlayerId= s.currentPlayerId ?? null;
+  s.currentBid     = s.currentBid ?? 0;
+  s.currentTeamId  = s.currentTeamId ?? null;
+  s.timerRunning   = !!s.timerRunning;
+  s.timerEndsAt    = s.timerEndsAt ?? null;
+  s.timerRemaining = s.timerRemaining ?? 0;
+  s.saleTicket     = s.saleTicket || 0;
+  s.lastSale       = s.lastSale || null;
+  s.flash          = s.flash || null;
+  s.sessions       = (s.sessions && typeof s.sessions === "object") ? s.sessions : {};
+  s.sessionEpoch   = s.sessionEpoch || 0;
+  s.kicks          = (s.kicks && typeof s.kicks === "object") ? s.kicks : {};
+  s.rev            = s.rev || 1;
+  return s;
 }
 
 /* =========================================================
-   SHORTCUT
+   STATE HELPERS
 ========================================================= */
+const teamOf   = (s, id) => s.teams.find(t => t.id === Number(id));
+const baseBid  = p => (p && Number.isFinite(Number(p.basePoints)) ? Number(p.basePoints) : 0);
 
-const $ = id =>
-    document.getElementById(id);
+function rosterEntry(s, playerId){
+  for(const t of s.teams){
+    const e = t.players.find(x => x.playerId === playerId);
+    if(e) return { team:t, entry:e };
+  }
+  return null;
+}
+function isFree(s, playerId){ return !rosterEntry(s, playerId); }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-    const toast = $("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(
-        () => toast.classList.remove("show"),
-        2500
-    );
-
+/* the photo of a team's owner (they exist in the player list too) */
+function ownerPhotoOf(teamId){
+  const pid = Object.keys(ownerAssignments).find(k => Number(ownerAssignments[k]) === Number(teamId));
+  const p = pid ? PLAYER_BY_ID[Number(pid)] : null;
+  return p ? p.photo : FALLBACK_PHOTO;
+}
+function ownerPlayerOf(teamId){
+  const pid = Object.keys(ownerAssignments).find(k => Number(ownerAssignments[k]) === Number(teamId));
+  return pid ? PLAYER_BY_ID[Number(pid)] : null;
+}
+function ownerPlayerName(teamId){
+  const pid = Object.keys(ownerAssignments).find(k => Number(ownerAssignments[k]) === Number(teamId));
+  const p = pid ? PLAYER_BY_ID[Number(pid)] : null;
+  return p ? p.name : "";
 }
 
-
-/* =========================================================
-   FORMAT TIME
-========================================================= */
-
-function formatTime(seconds){
-
-    const minutes =
-        Math.floor(seconds / 60);
-
-    const secs =
-        seconds % 60;
-
-    return (
-        String(minutes).padStart(2,"0")
-        +
-        ":"
-        +
-        String(secs).padStart(2,"0")
-    );
-
+function minRequired(s){
+  const p = PLAYER_BY_ID[s.currentPlayerId];
+  if(!p) return 0;
+  return s.currentTeamId ? s.currentBid + 1 : baseBid(p);
 }
-
-
-/* =========================================================
-   ROUND HELPERS
-========================================================= */
-
-function prepareNextRound(){
-
-    // A round is finished only when every player in the
-    // current round has been processed.
-    if(auction.roundQueue.length > 0){
-        return true;
-    }
-
-    // Only skipped players are carried into the next round.
-    if(auction.roundSkipped.length > 0){
-
-        auction.roundNumber++;
-
-        auction.roundQueue =
-            [...auction.roundSkipped];
-
-        auction.roundSkipped = [];
-
-        showToast(
-            `🔄 ROUND ${auction.roundNumber} STARTED — ${auction.roundQueue.length} skipped players are back.`
-        );
-
-        return true;
-    }
-
-    return false;
+function secondsLeft(s){
+  if(s.timerRunning && s.timerEndsAt) return Math.max(0, Math.round((s.timerEndsAt - Date.now())/1000));
+  return Math.max(0, s.timerRemaining || 0);
 }
-
-
-function getRoundQueuePlayers(){
-
-    return auction.roundQueue
-        .map(id => players.find(player => player.id === id))
-        .filter(player =>
-            player && player.status !== "sold" && player.status !== "captain"
-        );
+function soldCount(s){
+  return s.teams.reduce((n,t) => n + t.players.filter(e => e.role !== "owner" && e.role !== "captain").length, 0);
 }
-
-
-/* =========================================================
-   PICK RANDOM PLAYER
-
-   ROUND RULES:
-   - Round 1: all 35 players are available once.
-   - SOLD players never return.
-   - SKIPPED players are stored in roundSkipped[].
-   - SKIPPED players return only in the NEXT round.
-   - A player cannot appear twice in the same round.
-========================================================= */
-
-function pickRandomPlayer(){
-
-    if(auction.currentPlayer){
-
-        showToast(
-            "⏳ Finish the current player auction first."
-        );
-
-        return;
-    }
-
-
-    // If the current round is exhausted, automatically
-    // move the skipped players into the next round.
-    if(auction.roundQueue.length === 0){
-
-        const hasNextRound =
-            prepareNextRound();
-
-        if(!hasNextRound){
-
-            showToast(
-                "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS HAVE BEEN SOLD!"
-            );
-
-            return;
-        }
-    }
-
-
-    const eligiblePlayers =
-        getRoundQueuePlayers();
-
-
-    if(eligiblePlayers.length === 0){
-
-        // Remove any stale IDs and try the next round.
-        auction.roundQueue = [];
-
-        const hasNextRound =
-            prepareNextRound();
-
-        if(!hasNextRound){
-
-            showToast(
-                "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS HAVE BEEN SOLD!"
-            );
-
-            return;
-        }
-
-        return pickRandomPlayer();
-    }
-
-
-    const randomIndex =
-        Math.floor(
-            Math.random() * eligiblePlayers.length
-        );
-
-
-    const player =
-        eligiblePlayers[randomIndex];
-
-
-    // IMPORTANT: remove the player from THIS ROUND immediately.
-    // If skipped, they will go to roundSkipped[].
-    // If sold, they are permanently finished.
-    auction.roundQueue =
-        auction.roundQueue.filter(
-            id => id !== player.id
-        );
-
-
-    player.status = "selected";
-
-
-    auction.currentPlayer =
-        player;
-
-    auction.currentBid =
-        getPlayerBaseBid(player);
-
-    auction.currentTeam =
-        null;
-
-    auction.pendingBid =
-        0;
-
-    auction.timer =
-        AUCTION_TIME;
-
-
-    stopTimer();
-
-    updateEverything();
-
-
-    showToast(
-        `🎲 Round ${auction.roundNumber} • ${player.name} selected — Starting bid: 5 points`
-    );
-
-}
-
-
-/* =========================================================
-   START AUCTION
-========================================================= */
-
-function startAuction(){
-
-    if(!auction.currentPlayer){
-
-        showToast(
-            "🎲 Pick a player first."
-        );
-
-        return;
-    }
-
-
-    stopTimer();
-
-
-    if(auction.timer <= 0){
-
-        auction.timer =
-            AUCTION_TIME;
-
-    }
-
-
-    auction.timerInterval =
-        setInterval(
-            () => {
-
-                auction.timer--;
-
-                updateTimer();
-                updateOwnerPanel();
-
-
-                if(auction.timer <= 0){
-
-                    stopTimer();
-
-                    auction.timer = 0;
-
-                    updateTimer();
-                    updateOwnerPanel();
-
-                    showToast(
-                        "⏱️ Auction time finished!"
-                    );
-
-                }
-
-            },
-            1000
-        );
-
-
-    updateEverything();
-
-}
-
-
-/* =========================================================
-   STOP TIMER
-========================================================= */
-
-function stopTimer(){
-
-    if(auction.timerInterval){
-
-        clearInterval(
-            auction.timerInterval
-        );
-
-        auction.timerInterval = null;
-
-    }
-
-}
-
-
-/* =========================================================
-   PLACE BID
-========================================================= */
-
-function placeBid(teamId,amount){
-
-    const team =
-        teams.find(
-            t => t.id === teamId
-        );
-
-
-    if(!team){
-
-        showToast(
-            "Select a team."
-        );
-
-        return false;
-    }
-
-
-    if(!auction.currentPlayer){
-
-        showToast(
-            "No player is currently selected."
-        );
-
-        return false;
-    }
-
-
-    if(auction.timer <= 0){
-
-        showToast(
-            "⏱️ Auction timer has ended."
-        );
-
-        return false;
-    }
-
-
-    if(team.players.length >= 8){
-
-        showToast(
-            "🚫 This team already has 8 players."
-        );
-
-        return false;
-    }
-
-
-    if(amount < getPlayerBaseBid(auction.currentPlayer)){
-
-        showToast(
-            `Minimum bid for ${auction.currentPlayer.name} is ${getPlayerBaseBid(auction.currentPlayer)} points.`
-        );
-
-        return false;
-    }
-
-
-    if(
-        auction.currentTeam &&
-        amount <= auction.currentBid
-    ){
-
-        showToast(
-            `Bid must be above ${auction.currentBid}.`
-        );
-
-        return false;
-    }
-
-
-    if(amount > team.points){
-
-        showToast(
-            `🚫 ${team.name} has only ${team.points} points.`
-        );
-
-        return false;
-    }
-
-
-    auction.currentBid =
-        amount;
-
-    auction.currentTeam =
-        team;
-
-
-    /*
-       Every successful bid gives the bidder
-       another 3 minutes.
-    */
-
-    auction.timer =
-        AUCTION_TIME;
-
-
-    stopTimer();
-
-    startAuction();
-
-    updateEverything();
-
-
-    showToast(
-        `🔥 ${team.name} quoted ${amount} points for ${auction.currentPlayer.name}`
-    );
-
-
+function ensureRound(s){
+  if(s.roundQueue.length > 0) return true;
+  if(s.roundSkipped.length > 0){
+    s.roundNumber++;
+    s.roundQueue = [...s.roundSkipped];
+    s.roundSkipped = [];
     return true;
-
+  }
+  return false;
 }
-
+function setFlash(s, text){ s.flash = { text, n:(s.flash && s.flash.n ? s.flash.n : 0) + 1 }; }
 
 /* =========================================================
-   OWNER BID
+   SYNC LAYER — Firebase if configured, else this device only
 ========================================================= */
+const LS_KEY = "pvk-auction-" + ROOM_ID;
+let syncMode = "local";
+let fb = null;               // { db, ref, runTransaction, onValue, set }
+let state = freshState();
+let onStateChange = () => {};
 
-function ownerBid(){
+const useFirebase = !!(FIREBASE_CONFIG.databaseURL && FIREBASE_CONFIG.apiKey);
 
-    const teamId =
-        Number(
-            $("ownerSelect").value
-        );
+async function initSync(cb){
+  onStateChange = cb;
 
+  if(useFirebase){
+    try{
+      const [{ initializeApp }, dbMod] = await Promise.all([
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js")
+      ]);
+      const app = initializeApp(FIREBASE_CONFIG);
+      const db  = dbMod.getDatabase(app);
+      const stateRef = dbMod.ref(db, "auctions/" + ROOM_ID);
+      fb = { dbMod, db, stateRef, path:"auctions/" + ROOM_ID };
+      syncMode = "firebase";
 
-    if(!teamId){
-
-        showToast(
-            "Please select your team owner."
-        );
-
-        return;
+      dbMod.onValue(stateRef, snap => {
+        const val = snap.val();
+        if(!val){ dbMod.set(stateRef, freshState()); return; }
+        state = normalize(val);
+        onStateChange(state);
+      });
+      setSyncPill();
+      return;
+    }catch(err){
+      console.error("Firebase failed, falling back to local sync:", err);
+      syncMode = "local";
     }
+  }
 
+  /* ---- local (same-device) sync ---- */
+  syncMode = "local";
+  setSyncPill();
+  const stored = localStorage.getItem(LS_KEY);
+  state = stored ? normalize(JSON.parse(stored)) : freshState();
+  if(!stored) localStorage.setItem(LS_KEY, JSON.stringify(state));
+  onStateChange(state);
 
-    if(!auction.currentPlayer){
-
-        showToast(
-            "No player is currently available."
-        );
-
-        return;
-    }
-
-
-    const quote =
-        auction.pendingBid;
-
-
-    if(quote < getPlayerBaseBid(auction.currentPlayer)){
-
-        showToast(
-            `Minimum starting bid for ${auction.currentPlayer.name} is ${getPlayerBaseBid(auction.currentPlayer)} points.`
-        );
-
-        return;
-    }
-
-
-    if(
-        auction.currentTeam &&
-        quote <= auction.currentBid
-    ){
-
-        showToast(
-            `Your quote must be above ${auction.currentBid}.`
-        );
-
-        return;
-    }
-
-
-    const success =
-        placeBid(
-            teamId,
-            quote
-        );
-
-
-    if(success){
-
-        auction.pendingBid =
-            0;
-
-        updateEverything();
-
-    }
-
+  window.addEventListener("storage", ev => {
+    if(ev.key !== LS_KEY || !ev.newValue) return;
+    state = normalize(JSON.parse(ev.newValue));
+    onStateChange(state);
+  });
+  try{
+    const bc = new BroadcastChannel(LS_KEY);
+    bc.onmessage = ev => { state = normalize(ev.data); onStateChange(state); };
+    window.__bc = bc;
+  }catch(e){ /* older browsers: storage event is enough */ }
 }
 
+function setSyncPill(){
+  const pill = $("syncPill");
+  if(syncMode === "firebase"){
+    pill.textContent = "🟢 LIVE — all devices";
+    pill.classList.remove("local");
+  }else{
+    pill.textContent = "🟠 THIS DEVICE ONLY";
+    pill.classList.add("local");
+  }
+}
 
-/* =========================================================
-   SELL PLAYER
-========================================================= */
-
-function sellPlayer(){
-
-    if(!auction.currentPlayer){
-
-        showToast(
-            "No player selected."
-        );
-
-        return;
-    }
-
-
-    if(!auction.currentTeam){
-
-        showToast(
-            "⚠️ No team has bid on this player yet."
-        );
-
-        return;
-    }
-
-
-    const player =
-        auction.currentPlayer;
-
-    const team =
-        auction.currentTeam;
-
-    const price =
-        auction.currentBid;
-
-
-    if(team.players.length >= 8){
-
-        showToast(
-            "🚫 This team already has 8 players."
-        );
-
-        return;
-    }
-
-
-    if(price > team.points){
-
-        showToast(
-            "🚫 Team does not have enough points."
-        );
-
-        return;
-    }
-
-
-    auction.lastSale = {
-
-        player:player,
-
-        team:team,
-
-        price:price
-
-    };
-
-
-    team.points -=
-        price;
-
-
-    team.players.push({
-
-        player:player,
-
-        price:price
-
+/* Apply a change to the newest state and publish it everywhere.
+   fn(state) may throw an Error (message is shown as a toast)
+   or return false to cancel silently. */
+async function mutate(fn){
+  if(syncMode === "firebase"){
+    let problem = null;
+    await fb.dbMod.runTransaction(fb.stateRef, current => {
+      /* this handler can run several times when two people write at once —
+         clear the previous attempt's result each time */
+      problem = null;
+      const s = normalize(current ? JSON.parse(JSON.stringify(current)) : freshState());
+      try{
+        if(fn(s) === false){ problem = "__cancel"; return; }
+      }catch(err){
+        problem = err.message; return;
+      }
+      s.rev = (s.rev || 0) + 1;
+      return s;
     });
+    if(problem && problem !== "__cancel") showToast(problem);
+    return;
+  }
 
-
-    /*
-       THIS IS THE IMPORTANT PART.
-
-       Once SOLD, player is permanently
-       removed from random selection.
-    */
-
-    player.status =
-        "sold";
-
-    player.soldTo =
-        team.id;
-
-    player.price =
-        price;
-
-
-    auction.history.unshift({
-
-        player:player,
-
-        team:team,
-
-        price:price,
-
-        owner:team.owner
-
-    });
-
-
-    stopTimer();
-
-
-    $("soldPlayer").textContent =
-        player.name;
-
-
-    $("soldDetails").textContent =
-        `${team.name} • ${team.owner} • ${price} POINTS`;
-
-
-    $("soldModal")
-        .classList
-        .add("show");
-
-
-    auction.currentPlayer =
-        null;
-
-    auction.currentBid =
-        STARTING_BID;
-
-    auction.currentTeam =
-        null;
-
-    auction.timer =
-        0;
-
-    auction.pendingBid =
-        0;
-
-
-    updateEverything();
-
-
-    if(
-        auction.roundQueue.length === 0 &&
-        auction.roundSkipped.length === 0 &&
-        players
-            .filter(player => player.status !== "captain")
-            .every(player => player.status === "sold")
-    ){
-
-        showToast(
-            "🏆 AUCTION COMPLETE — ALL AUCTION PLAYERS SOLD!"
-        );
-
-    }
-
+  /* read the newest stored value (not our in-memory copy) so two tabs
+     writing at the same moment cannot overwrite each other */
+  let latest = null;
+  try{ latest = localStorage.getItem(LS_KEY); }catch(e){}
+  const s = normalize(latest ? JSON.parse(latest) : JSON.parse(JSON.stringify(state)));
+  try{
+    if(fn(s) === false) return;
+  }catch(err){
+    showToast(err.message); return;
+  }
+  s.rev = (s.rev || 0) + 1;
+  state = s;
+  localStorage.setItem(LS_KEY, JSON.stringify(s));
+  try{ window.__bc && window.__bc.postMessage(s); }catch(e){}
+  onStateChange(state);
 }
 
-
 /* =========================================================
-   SKIP PLAYER
-
-   IMPORTANT:
-   - Do NOT return the player to the current round queue.
-   - Store the player in roundSkipped[].
-   - The player becomes available only in the NEXT round.
+   ACTIONS
 ========================================================= */
+function actPick(){
+  mutate(s => {
+    if(s.currentPlayerId) throw new Error("⏳ Finish the current player first.");
+    if(s.teams.every(t => t.players.length >= MAX_SQUAD))
+      throw new Error("🏆 Every roster is full — the auction is finished.");
+    if(!ensureRound(s)) throw new Error("🏆 Auction complete — every player is sold.");
 
-function skipPlayer(){
-
-    if(!auction.currentPlayer){
-
-        showToast(
-            "No player selected."
-        );
-
-        return;
+    let pool = s.roundQueue.filter(id => isFree(s, id));
+    if(pool.length === 0){
+      s.roundQueue = [];
+      if(!ensureRound(s)) throw new Error("🏆 Auction complete — every player is sold.");
+      pool = s.roundQueue.filter(id => isFree(s, id));
+      if(pool.length === 0) throw new Error("🏆 Auction complete — every player is sold.");
     }
 
-
-    const player =
-        auction.currentPlayer;
-
-
-    stopTimer();
-
-
-    player.status =
-        "available";
-
-
-    // Make sure the same player is not duplicated in
-    // the skipped list.
-    if(!auction.roundSkipped.includes(player.id)){
-
-        auction.roundSkipped.push(player.id);
-
-    }
-
-
-    auction.currentPlayer =
-        null;
-
-    auction.currentBid =
-        STARTING_BID;
-
-    auction.currentTeam =
-        null;
-
-    auction.pendingBid =
-        0;
-
-    auction.timer =
-        0;
-
-
-    updateEverything();
-
-
-    if(auction.roundQueue.length === 0){
-
-        if(auction.roundSkipped.length > 0){
-
-            showToast(
-                `⏭ ${player.name} skipped. Round ${auction.roundNumber} finished — ${auction.roundSkipped.length} players will enter Round ${auction.roundNumber + 1}.`
-            );
-
-        }
-        else{
-
-            showToast(
-                `⏭ ${player.name} skipped.`
-            );
-
-        }
-
-    }
-    else{
-
-        showToast(
-            `⏭ ${player.name} skipped — it will return in Round ${auction.roundNumber + 1}.`
-        );
-
-    }
-
+    const pid = pool[Math.floor(Math.random() * pool.length)];
+    s.roundQueue = s.roundQueue.filter(id => id !== pid);
+    s.currentPlayerId = pid;
+    s.currentBid      = 0;
+    s.currentTeamId   = null;
+    s.timerRunning    = false;
+    s.timerEndsAt     = null;
+    s.timerRemaining  = AUCTION_SECONDS;
+    setFlash(s, `🎲 Round ${s.roundNumber} • ${PLAYER_BY_ID[pid].name} is up — base ${baseBid(PLAYER_BY_ID[pid])} pts`);
+  });
 }
 
-
-/* =========================================================
-   UNDO SALE
-
-   If a sale is undone, the player is returned to the
-   CURRENT round queue so the admin can auction that
-   player again.
-========================================================= */
-
-function undoSale(){
-
-    const sale =
-        auction.lastSale;
-
-
-    if(!sale || sale.player.status === "captain"){
-
-        showToast(
-            "Nothing to undo."
-        );
-
-        return;
-    }
-
-
-    sale.team.points +=
-        sale.price;
-
-
-    sale.team.players =
-        sale.team.players.filter(
-            item =>
-                item.player.id !==
-                sale.player.id
-        );
-
-
-    sale.player.status =
-        "available";
-
-    sale.player.soldTo =
-        null;
-
-    sale.player.price =
-        0;
-
-
-    // Remove the player from skipped list if present.
-    auction.roundSkipped =
-        auction.roundSkipped.filter(
-            id => id !== sale.player.id
-        );
-
-
-    // Return the undone player to the current round.
-    if(!auction.roundQueue.includes(sale.player.id)){
-
-        auction.roundQueue.push(
-            sale.player.id
-        );
-
-    }
-
-
-    auction.history =
-        auction.history.filter(
-            item =>
-                item.player.id !==
-                sale.player.id
-        );
-
-
-    auction.currentPlayer =
-        null;
-
-    auction.currentBid =
-        STARTING_BID;
-
-    auction.currentTeam =
-        null;
-
-    auction.timer =
-        0;
-
-    auction.pendingBid =
-        0;
-
-    auction.lastSale =
-        null;
-
-
-    updateEverything();
-
-
-    showToast(
-        "↩ Sale reversed. Player returned to the current round."
-    );
-
+function actStartTimer(){
+  mutate(s => {
+    if(!s.currentPlayerId) throw new Error("🎲 Pick a player first.");
+    s.timerRunning   = true;
+    s.timerEndsAt    = Date.now() + AUCTION_SECONDS * 1000;
+    s.timerRemaining = AUCTION_SECONDS;
+    setFlash(s, "▶ Timer started — bidding is open!");
+  });
 }
 
+function actBid(teamId, amount){
+  mutate(s => {
+    const team = teamOf(s, teamId);
+    if(!team) throw new Error("Team not found.");
+    if(!s.currentPlayerId) throw new Error("No player is being auctioned right now.");
+    if(secondsLeft(s) <= 0) throw new Error("⏱️ Time is up for this player — wait for the admin.");
+    if(team.players.length >= MAX_SQUAD) throw new Error(`🚫 ${team.name} already has ${MAX_SQUAD} players.`);
 
-/* =========================================================
-   UPDATE EVERYTHING
-========================================================= */
+    const amt = Number(amount);
+    if(!Number.isInteger(amt) || amt < 0) throw new Error("Enter a whole number of points.");
 
-function updateEverything(){
+    const need = minRequired(s);
+    if(amt < need){
+      const lead = teamOf(s, s.currentTeamId);
+      if(lead && amt === s.currentBid){
+        /* two owners tapped the same amount at the same moment —
+           the first one to reach the database wins */
+        throw new Error(`😮 Too late! ${lead.owner} bid ${amt} first. Minimum is now ${s.currentBid + 1}.`);
+      }
+      throw new Error(lead
+        ? `Someone bid ${s.currentBid} already — you need at least ${s.currentBid + 1}.`
+        : `Minimum bid for this player is ${need} points.`);
+    }
+    if(s.currentTeamId === team.id) throw new Error("You are already the highest bidder.");
+    if(amt > team.points) throw new Error(`🚫 You only have ${team.points} points left.`);
 
-    updateAuctionStage();
-
-    updateTimer();
-
-    updateSoldCount();
-
-    updateOwnerPanel();
-
-    renderSummary();
-
+    s.currentBid     = amt;
+    s.currentTeamId  = team.id;
+    s.timerRunning   = true;
+    s.timerEndsAt    = Date.now() + BID_RESET_SECONDS * 1000;
+    s.timerRemaining = BID_RESET_SECONDS;
+    setFlash(s, `🔥 ${team.owner} (${team.name}) bid ${amt} pts for ${PLAYER_BY_ID[s.currentPlayerId].name}`);
+  });
 }
 
+function actSell(){
+  mutate(s => {
+    if(!s.currentPlayerId) throw new Error("No player selected.");
+    if(!s.currentTeamId)   throw new Error("⚠️ Nobody has bid on this player yet.");
+    const team = teamOf(s, s.currentTeamId);
+    const player = PLAYER_BY_ID[s.currentPlayerId];
+    const price = s.currentBid;
+    if(team.players.length >= MAX_SQUAD) throw new Error(`🚫 ${team.name} already has ${MAX_SQUAD} players.`);
+    if(price > team.points) throw new Error("🚫 That team does not have enough points.");
 
-/* =========================================================
-   UPDATE AUCTION STAGE
-========================================================= */
+    team.points -= price;
+    team.players.push({ playerId:player.id, price, role:"player" });
 
-function updateAuctionStage(){
+    s.history.unshift({ playerId:player.id, teamId:team.id, price, owner:team.owner });
+    s.history = s.history.slice(0, 30);
 
-    const player =
-        auction.currentPlayer;
+    s.lastSale   = { playerId:player.id, teamId:team.id, price };
+    s.saleTicket = (s.saleTicket || 0) + 1;
 
-    const photo =
-        $("playerPhoto");
-
-
-    if(!player){
-
-        $("playerName").textContent =
-            "Ready?";
-
-        $("playerPosition").textContent =
-            "37 AUCTION PLAYERS • 4 TEAMS • 95 POINTS";
-
-        $("baseBidDisplay").textContent =
-            "🏷️ BASE BID: —";
-
-        $("currentBid").textContent =
-            "0";
-
-        $("currentTeam").textContent =
-            "No bids yet";
-
-        $("playerStatus").textContent =
-            "WAITING FOR PLAYER";
-
-        photo.src =
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlfqaaom8l_NwMwmuYibdwhbSE8I6E8QQe9L5oFKHZ61FbzMTqS3sacW_&s=10";
-
-        return;
-
-    }
-
-
-    $("playerName").textContent =
-        player.name;
-
-    $("playerPosition").textContent =
-        player.position;
-
-    $("baseBidDisplay").textContent =
-        `🏷️ BASE BID: ${getPlayerBaseBid(player)} POINTS`;
-
-    $("currentBid").textContent =
-        auction.currentBid;
-
-    $("currentTeam").textContent =
-        auction.currentTeam
-            ?
-            `${auction.currentTeam.name} • ${auction.currentTeam.owner}`
-            :
-            "No bids yet";
-
-
-    $("playerStatus").textContent =
-        `🔴 LIVE AUCTION • ROUND ${auction.roundNumber}`;
-
-
-    photo.src =
-        player.photo;
-
-
-    photo.onerror =
-        function(){
-
-            this.onerror = null;
-
-            this.src =
-                "https://cdn-icons-png.flaticon.com/512/3075/3075977.png";
-
-        };
-
+    s.currentPlayerId = null;
+    s.currentBid      = 0;
+    s.currentTeamId   = null;
+    s.timerRunning    = false;
+    s.timerEndsAt     = null;
+    s.timerRemaining  = 0;
+  });
 }
 
-
-/* =========================================================
-   TIMER
-========================================================= */
-
-function updateTimer(){
-
-    $("timer").textContent =
-        formatTime(
-            auction.timer
-        );
-
-
-    if(
-        auction.timer > 0 &&
-        auction.timer <= 20
-    ){
-
-        $("timer")
-            .classList
-            .add("hot");
-
-    }
-    else{
-
-        $("timer")
-            .classList
-            .remove("hot");
-
-    }
-
+function actSkip(){
+  mutate(s => {
+    if(!s.currentPlayerId) throw new Error("No player selected.");
+    const pid = s.currentPlayerId;
+    if(!s.roundSkipped.includes(pid)) s.roundSkipped.push(pid);
+    s.currentPlayerId = null;
+    s.currentBid      = 0;
+    s.currentTeamId   = null;
+    s.timerRunning    = false;
+    s.timerEndsAt     = null;
+    s.timerRemaining  = 0;
+    setFlash(s, `⏭ ${PLAYER_BY_ID[pid].name} skipped — returns in Round ${s.roundNumber + 1}.`);
+  });
 }
 
+function actUndo(){
+  mutate(s => {
+    const sale = s.lastSale;
+    if(!sale) throw new Error("Nothing to undo.");
+    const team = teamOf(s, sale.teamId);
+    if(!team) throw new Error("Nothing to undo.");
+    const idx = team.players.findIndex(e => e.playerId === sale.playerId && e.role === "player");
+    if(idx === -1) throw new Error("Nothing to undo.");
 
-/* =========================================================
-   SOLD COUNT
+    team.players.splice(idx, 1);
+    team.points += sale.price;
 
-   ONLY status === "sold"
-   counts here.
+    s.history = s.history.filter(h => h.playerId !== sale.playerId);
+    s.roundSkipped = s.roundSkipped.filter(id => id !== sale.playerId);
+    if(!s.roundQueue.includes(sale.playerId)) s.roundQueue.push(sale.playerId);
 
-   Skipped players are NOT counted.
-========================================================= */
-
-function updateSoldCount(){
-
-    const sold =
-        players.filter(
-            player =>
-                player.status === "sold"
-        ).length;
-
-
-    $("soldCount").textContent =
-        `${sold} / ${players.length}`;
-
-
-    $("summaryCount").textContent =
-        `${sold} SOLD`;
-
+    s.lastSale = null;
+    s.currentPlayerId = null;
+    s.currentBid      = 0;
+    s.currentTeamId   = null;
+    s.timerRunning    = false;
+    s.timerEndsAt     = null;
+    s.timerRemaining  = 0;
+    setFlash(s, `↩ Sale reversed — ${PLAYER_BY_ID[sale.playerId].name} is back in Round ${s.roundNumber}.`);
+  });
 }
 
-
-/* =========================================================
-   OWNER PANEL
-========================================================= */
-
-function updateOwnerPanel(){
-
-    const selected =
-        Number(
-            $("ownerSelect").value
-        );
-
-
-    const team =
-        teams.find(
-            t => t.id === selected
-        );
-
-
-    if(!team){
-
-        $("selectedTeamName").textContent =
-            "—";
-
-        $("selectedTeamPoints").textContent =
-            "95";
-
-        $("pendingQuote").textContent =
-            "0";
-
-        $("bidNow").disabled =
-            true;
-
-        $("ownerNotice").textContent =
-            "Select your team owner first.";
-
+/* Cancel ONE sale (any sale, not just the last one):
+   the points go back to the team and the player returns to the pool. */
+function actRemoveSale(playerId){
+  mutate(s => {
+    const pid = Number(playerId);
+    let found = null;
+    for(const t of s.teams){
+      const i = t.players.findIndex(e => e.playerId === pid && e.role !== "owner" && e.role !== "captain");
+      if(i > -1){
+        found = { team:t, price:t.players[i].price };
+        t.points += t.players[i].price;
+        t.players.splice(i, 1);
+        break;
+      }
     }
-    else{
+    if(!found) throw new Error("That player is not on any team.");
 
-        $("selectedTeamName").textContent =
-            `${team.name} — ${team.owner}`;
-
-        $("selectedTeamPoints").textContent =
-            team.points;
-
-        $("pendingQuote").textContent =
-            auction.pendingBid;
-
-
-        $("bidNow").disabled =
-            !auction.currentPlayer ||
-            auction.pendingBid < getPlayerBaseBid(auction.currentPlayer);
-
-
-        $("ownerNotice").textContent =
-            auction.currentPlayer
-                ?
-                "Select your quote and press BID NOW."
-                :
-                "Waiting for admin to pick a player.";
-
+    s.history = s.history.filter(h => h.playerId !== pid);
+    if(s.lastSale && s.lastSale.playerId === pid) s.lastSale = null;
+    s.roundSkipped = s.roundSkipped.filter(id => id !== pid);
+    if(!s.roundQueue.includes(pid)) s.roundQueue.push(pid);
+    if(s.currentPlayerId === pid){
+      s.currentPlayerId = null;
+      s.currentBid = 0;
+      s.currentTeamId = null;
+      s.timerRunning = false;
+      s.timerEndsAt = null;
+      s.timerRemaining = 0;
     }
-
-
-    if(auction.currentPlayer){
-
-        $("ownerCurrentPlayer").textContent =
-            auction.currentPlayer.name;
-
-        $("ownerCurrentPosition").textContent =
-            auction.currentPlayer.position;
-
-
-        if(auction.currentTeam){
-
-            $("ownerCurrentStatus").textContent =
-                `🔥 Leading: ${auction.currentTeam.name} at ${auction.currentBid} points`;
-
-        }
-        else{
-
-            $("ownerCurrentStatus").textContent =
-                "🏐 No bids yet — starting from 5 points";
-
-        }
-
-    }
-    else{
-
-        $("ownerCurrentPlayer").textContent =
-            "No player selected";
-
-        $("ownerCurrentPosition").textContent =
-            "Waiting for admin...";
-
-        $("ownerCurrentStatus").textContent =
-            "🏐 Waiting";
-
-    }
-
+    const p = PLAYER_BY_ID[pid];
+    setFlash(s, `🗑️ ${p ? p.name : "Player"} removed from ${found.team.name} — ${found.price} pts refunded.`);
+  });
 }
 
-
-/* =========================================================
-   SUMMARY BOARD
-========================================================= */
-
-function renderSummary(){
-
-    const container =
-        $("summaryTeams");
-
-
-    let html = "";
-
-
-    teams.forEach(
-        team => {
-
-            html += `
-
-            <div class="summary-team">
-
-                <div class="summary-team-header">
-
-                    <div class="summary-team-top">
-
-                        <div class="summary-team-name">
-
-                            ${team.name}
-
-                        </div>
-
-                        <div class="summary-team-points">
-
-                            ${team.points} pts
-
-                        </div>
-
-                    </div>
-
-                    <div class="summary-owner">
-
-                        👤 ${team.owner}
-
-                        • ${team.players.length}/8 players
-
-                    </div>
-
-                </div>
-
-                <div class="summary-players">
-            `;
-
-
-            if(team.players.length === 0){
-
-                html += `
-
-                    <div class="empty-roster">
-
-                        No players selected yet
-
-                    </div>
-
-                `;
-
-            }
-            else{
-
-                team.players.forEach(
-                    item => {
-
-                        html += `
-
-                        <div class="summary-player">
-
-                            <div class="summary-player-name">
-
-                                <img
-                                    class="summary-player-photo"
-                                    src="${item.player.photo}"
-                                    onerror="
-                                        this.onerror=null;
-                                        this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png';
-                                    "
-                                >
-
-                                <span>
-
-                                    ${item.player.name}
-
-                                </span>
-
-                            </div>
-
-                            <div class="summary-price">
-
-                                ${item.price}
-
-                            </div>
-
-                        </div>
-
-                        `;
-
-                    }
-                );
-
-            }
-
-
-            html += `
-
-                </div>
-
-            </div>
-
-            `;
-
-        }
-    );
-
-
-    container.innerHTML =
-        html;
-
-
-    renderHistory();
-
+function actReset(){
+  if(!confirm("Reset the WHOLE auction for everyone? All sales will be erased.")) return;
+  mutate(s => {
+    const keepSessions = s.sessions || {};
+    const keepEpoch    = s.sessionEpoch || 0;
+    const keepKicks    = s.kicks || {};
+    const fresh = freshState();
+    Object.keys(s).forEach(k => delete s[k]);
+    Object.assign(s, fresh);
+    s.sessions     = keepSessions;   // a reset should not kick anyone out
+    s.sessionEpoch = keepEpoch;
+    s.kicks        = keepKicks;
+    setFlash(s, "♻ The auction has been reset.");
+  });
 }
 
-
 /* =========================================================
-   HISTORY
+   SESSION / LOGIN
+   sessionStorage (not localStorage) so that two tabs on the
+   SAME laptop can be logged in as two different owners.
 ========================================================= */
+const SESSION_KEY = "pvk-auction-session";
+const DEVICE_KEY  = "pvk-auction-device";
+const KICK_KEY    = "pvk-auction-kick";
+const SESSION_TTL = 20000;   // a login counts as dead after 20s of silence
+const HEARTBEAT   = 6000;    // "I am still here" every 6s
 
-function renderHistory(){
+let me           = null;
+let pendingForce = null;   // account waiting for a "log in here anyway"
+let myEpoch  = 0;
+let myKick   = 0;
 
-    const container =
-        $("auctionHistory");
+const canManageLogins = () =>
+  !!me && (me.role === "admin" || (me.role === "viewer" && VIEWER_CAN_MANAGE_LOGINS));
+const canEditData = () =>
+  !!me && (me.role === "admin" || (me.role === "viewer" && VIEWER_CAN_EDIT_DATA));
+let beat     = null;
+let kicking  = false;
 
-
-    if(auction.history.length === 0){
-
-        container.innerHTML = `
-
-            <div class="empty-roster">
-
-                No completed sales yet.
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
-        auction.history
-            .slice(0,10)
-            .map(
-                item => `
-
-                    <div class="history-item">
-
-                        <div class="history-player">
-
-                            🏐 ${item.player.name}
-
-                        </div>
-
-                        <div class="history-team">
-
-                            ${item.team.name}
-                            •
-                            ${item.owner}
-
-                        </div>
-
-                        <div class="history-price">
-
-                            SOLD FOR ${item.price} POINTS
-
-                        </div>
-
-                    </div>
-
-                `
-            )
-            .join("");
-
+/* A stable id for THIS browser (survives a page refresh) */
+let MY_DEVICE = sessionStorage.getItem(DEVICE_KEY);
+if(!MY_DEVICE){
+  MY_DEVICE = "d" + Math.floor(Math.random() * 1e9).toString(36) + Date.now().toString(36);
+  sessionStorage.setItem(DEVICE_KEY, MY_DEVICE);
 }
 
+const allowsMany  = acc  => acc && acc.multi === true;
+const liveSession = sess => !!sess && (Date.now() - (sess.at || 0)) < SESSION_TTL;
 
-/* =========================================================
-   ADMIN MODE
-========================================================= */
+function heldByOther(key){
+  const sess = (state.sessions || {})[key];
+  return (liveSession(sess) && sess.device !== MY_DEVICE) ? sess : null;
+}
 
-$("adminMode")
-.addEventListener(
-    "click",
-    function(){
+function buildLoginScreen(){
+  const sel = $("loginUser");
+  sel.innerHTML = ACCOUNTS.map(a => `<option value="${a.key}">${a.label}</option>`).join("");
+  $("loginHint").innerHTML =
+    "Each owner logs in on their own phone and bids from their own screen.<br>" +
+    "<b>One device per login</b> — the same account cannot be opened twice.<br>" +
+    "Closed your tab by mistake? Enter your password again — a " +
+    "<b>LOG IN HERE ANYWAY</b> button appears, or just wait 20 seconds.";
+}
 
-        $("adminMode")
-            .classList
-            .add("active");
+/* Show which logins are already taken, live on the login screen */
+function refreshLoginLocks(){
+  const sel = $("loginUser");
+  if(!sel || !sel.options.length) return;
+  const taken = [];
+  ACCOUNTS.forEach(a => {
+    const opt = sel.querySelector('option[value="' + a.key + '"]');
+    if(!opt) return;
+    const busy = !allowsMany(a) && heldByOther(a.key);
+    opt.textContent = a.label + (busy ? "  🔒 IN USE" : "");
+    if(busy) taken.push(a.label);
+  });
+  const box = $("lockList");
+  if(box){
+    box.innerHTML = taken.length
+      ? "🔒 Already logged in on another device:<br><b>" + taken.join("</b><br><b>") + "</b>"
+      : "✅ Nobody is logged in yet — every login is free.";
+  }
+}
 
-        $("ownerMode")
-            .classList
-            .remove("active");
+/* Take the lock for this account, or fail if another device holds it */
+async function claimLogin(acc, force){
+  if(allowsMany(acc)) return { ok:true };
+  let ok = false;
+  await mutate(s => {
+    ok = false;
+    s.sessions = s.sessions || {};
+    const cur = s.sessions[acc.key];
+    if(!force && cur && cur.device !== MY_DEVICE && (Date.now() - (cur.at || 0)) < SESSION_TTL) return false;
+    s.sessions[acc.key] = { device:MY_DEVICE, at:Date.now() };
+    ok = true;
+  });
+  if(ok && syncMode === "firebase"){
+    /* Firebase frees the lock by itself if this phone drops off */
+    try{
+      const r = fb.dbMod.ref(fb.db, fb.path + "/sessions/" + acc.key);
+      fb.dbMod.onDisconnect(r).remove();
+    }catch(e){ console.warn(e); }
+  }
+  return { ok };
+}
 
+async function touchSession(){
+  if(!me || allowsMany(me) || kicking) return;
+  if(syncMode === "firebase"){
+    try{
+      await fb.dbMod.update(fb.dbMod.ref(fb.db, fb.path + "/sessions/" + me.key),
+                            { device:MY_DEVICE, at:Date.now() });
+    }catch(e){}
+    return;
+  }
+  mutate(s => {
+    s.sessions = s.sessions || {};
+    s.sessions[me.key] = { device:MY_DEVICE, at:Date.now() };
+  });
+}
 
-        $("adminControls")
-            .classList
-            .remove("hidden");
+async function releaseLogin(){
+  if(!me || allowsMany(me)) return;
+  const key = me.key;
+  await mutate(s => {
+    s.sessions = s.sessions || {};
+    const cur = s.sessions[key];
+    if(!cur || cur.device !== MY_DEVICE) return false;
+    delete s.sessions[key];
+  });
+}
 
-
-        $("ownerPanel")
-            .classList
-            .add("hidden");
-
+/* Same thing, but synchronous — used when the tab is closing */
+function releaseLoginSync(){
+  if(!me || allowsMany(me) || syncMode === "firebase") return;
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    const s = normalize(JSON.parse(raw));
+    const cur = (s.sessions || {})[me.key];
+    if(cur && cur.device === MY_DEVICE){
+      delete s.sessions[me.key];
+      s.rev = (s.rev || 0) + 1;
+      localStorage.setItem(LS_KEY, JSON.stringify(s));
     }
-);
+  }catch(e){}
+}
 
+/* Thrown out because the admin freed the logins, or the lock moved */
+function forceLogout(reason){
+  if(kicking) return;
+  kicking = true;
+  clearInterval(beat);
+  sessionStorage.removeItem(SESSION_KEY);
+  sessionStorage.setItem(KICK_KEY, reason);
+  location.reload();
+}
+
+function checkMySession(){
+  if(!me || kicking) return;
+  if((state.sessionEpoch || 0) > myEpoch){
+    forceLogout("🔓 The admin freed all logins — please sign in again.");
+    return;
+  }
+  if(((state.kicks || {})[me.key] || 0) > myKick){
+    forceLogout("🔓 Your login was freed from the auction screen — please sign in again.");
+    return;
+  }
+  if(allowsMany(me)) return;
+  const cur = (state.sessions || {})[me.key];
+  if(cur && cur.device !== MY_DEVICE && liveSession(cur)){
+    forceLogout("🔒 This login was opened on another device.");
+  }
+}
+
+function enterApp(acc){
+  me = acc;
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+
+  $("whoAmI").innerHTML = acc.role === "admin"
+    ? "🖥️ Logged in as <b>ADMIN</b>"
+    : acc.role === "owner"
+      ? `👤 Logged in as <b>${acc.label}</b>`
+      : "📺 <b>VIEW ONLY</b>";
+
+  $("adminPanel").classList.toggle("hidden", acc.role !== "admin");
+  $("openData").classList.toggle("hidden",
+      !(acc.role === "admin" || (acc.role === "viewer" && (VIEWER_CAN_MANAGE_LOGINS || VIEWER_CAN_EDIT_DATA))));
+  $("ownerPanel").classList.toggle("hidden", acc.role !== "owner");
+
+  if(acc.role === "admin"){
+    $("behalfTeam").innerHTML = TEAM_META
+      .map(t => `<option value="${t.id}">${t.name}</option>`).join("");
+  }
+
+  myEpoch = state.sessionEpoch || 0;
+  myKick  = (state.kicks || {})[acc.key] || 0;
+  firstRender = true;
+  render(state);
+
+  clearInterval(beat);
+  if(!allowsMany(acc)){
+    touchSession();
+    beat = setInterval(touchSession, HEARTBEAT);
+  }
+}
+
+async function logout(){
+  clearInterval(beat);
+  await releaseLogin();
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+async function tryLogin(){
+  const key  = $("loginUser").value;
+  const pass = $("loginPass").value.trim();
+  const acc  = ACCOUNTS.find(a => a.key === key);
+  if(!acc) return;
+
+  if(pass !== acc.password){
+    $("loginError").textContent = "❌ Wrong password. Try again.";
+    $("loginPass").value = "";
+    return;
+  }
+
+  $("loginError").textContent = "⏳ Checking…";
+  const res = await claimLogin(acc);
+  if(!res.ok){
+    $("loginError").innerHTML =
+      `🔒 <b>${acc.label}</b> looks like it is open on another device.<br>` +
+      `If that was you (you closed the tab or your phone went to sleep), press ` +
+      `the red <b>LOG IN HERE ANYWAY</b> button above — it frees the old one ` +
+      `and signs you in on this device.`;
+    pendingForce = acc;
+    $("forceLogin").classList.remove("hidden");
+    refreshLoginLocks();
+    return;
+  }
+  finishLogin(acc);
+}
+
+function finishLogin(acc){
+  pendingForce = null;
+  $("forceLogin").classList.add("hidden");
+  $("loginError").textContent = "";
+  $("loginPass").value = "";
+  sessionStorage.setItem(SESSION_KEY, acc.key);
+  enterApp(acc);
+}
 
 /* =========================================================
-   OWNER MODE
+   OWNER QUOTE (local to this screen)
 ========================================================= */
+let quote = 0;
+let quoteForPlayer = null;
 
-$("ownerMode")
-.addEventListener(
-    "click",
-    function(){
+function syncQuote(){
+  if(!me || me.role !== "owner") return;
+  const need = minRequired(state);
+  if(state.currentPlayerId !== quoteForPlayer){
+    quoteForPlayer = state.currentPlayerId;
+    quote = need;
+  }
+  if(quote < need) quote = need;
+  if(!state.currentPlayerId) quote = 0;
+}
 
-        $("ownerMode")
-            .classList
-            .add("active");
+/* =========================================================
+   RENDER
+========================================================= */
+let lastSaleTicket = 0;
+let lastFlashN     = 0;
+let justSoldPlayer = null;
+let justWonTeam    = null;
+let bidFlashTeam   = null;
+let blinkTimeout   = null;
+let flashTimeout   = null;
+let lastBidKey     = null;
+let lastPickedId   = null;
+let iWasLeading    = false;
+let firstRender    = true;
 
-        $("adminMode")
-            .classList
-            .remove("active");
+function render(s){
+  state = s;
+  /* Don't replay old sold-popups / messages to someone who just logged in */
+  if(firstRender){
+    firstRender    = false;
+    lastSaleTicket = s.saleTicket || 0;
+    lastFlashN     = s.flash && s.flash.n ? s.flash.n : 0;
+    lastBidKey     = `${s.currentPlayerId}:${s.currentBid}:${s.currentTeamId}`;
+    lastPickedId   = s.currentPlayerId;
+  }
 
-
-        $("adminControls")
-            .classList
-            .add("hidden");
-
-
-        $("ownerPanel")
-            .classList
-            .remove("hidden");
-
-
-        updateOwnerPanel();
-
+  /* ---- a new player came up ---- */
+  if(s.currentPlayerId && s.currentPlayerId !== lastPickedId){
+    sfxPick();
+    const np = PLAYER_BY_ID[s.currentPlayerId];
+    if(SPEAK_NEXT_PLAYER && np){
+      say(useTelugu()
+        ? SAY_NEXT_TE(spokenName(np), spokenPos(np.position), teNum(baseBid(np)))
+        : SAY_NEXT(speakable(np.name), np.position, baseBid(np)),
+        { after:400 });
     }
-);
+  }
+  lastPickedId = s.currentPlayerId;
 
-
-/* =========================================================
-   OWNER SELECTION
-========================================================= */
-
-$("ownerSelect")
-.addEventListener(
-    "change",
-    function(){
-
-        auction.pendingBid =
-            0;
-
-        updateOwnerPanel();
-
+  /* ---- somebody placed a bid ---- */
+  const bidKey = `${s.currentPlayerId}:${s.currentBid}:${s.currentTeamId}`;
+  if(bidKey !== lastBidKey){
+    lastBidKey = bidKey;
+    if(s.currentPlayerId && s.currentTeamId){
+      sfxBid();
+      if(SPEAK_BIDS){
+        const bt = teamOf(s, s.currentTeamId);
+        if(bt) say(useTelugu()
+          ? SAY_BID_TE(speakable(bt.owner), teNum(s.currentBid))
+          : SAY_BID(speakable(bt.owner), s.currentBid),
+          { after:120 });
+      }
+      bidFlashTeam = s.currentTeamId;
+      clearTimeout(flashTimeout);
+      flashTimeout = setTimeout(() => { bidFlashTeam = null; renderTeams(state); }, 1500);
+      /* were you the highest bidder a moment ago? */
+      if(me && me.role === "owner" && iWasLeading && s.currentTeamId !== me.teamId) sfxOutbid();
     }
-);
+    iWasLeading = !!(me && me.role === "owner" && s.currentTeamId === me.teamId);
+  }
+  syncQuote();
+  renderStage(s);
+  renderStats(s);
+  renderTeams(s);
+  renderOwnerPanel(s);
+  renderHistory(s);
+  renderTimer();
 
+  if(s.flash && s.flash.n > lastFlashN){
+    lastFlashN = s.flash.n;
+    showToast(s.flash.text);
+  }
+  if(!me) refreshLoginLocks(); else checkMySession();
+  renderDataModal();
+
+  if(s.saleTicket > lastSaleTicket){
+    lastSaleTicket = s.saleTicket;
+    if(s.lastSale) showSoldModal(s.lastSale);
+  }
+}
+
+function renderStage(s){
+  const p = PLAYER_BY_ID[s.currentPlayerId];
+  const photo = $("playerPhoto");
+
+  if(!p){
+    $("playerName").textContent     = "PVP LEAGUE";
+    $("playerPosition").textContent = `${AUCTION_POOL.length} AUCTION PLAYERS • 4 TEAMS • ${TEAM_POINTS} POINTS`;
+    $("baseBidDisplay").textContent = "WAITING FOR THE AUCTIONEER";
+    $("statBase").textContent = "—";
+    $("currentBid").textContent     = "0";
+    $("playerStatus").textContent   = `WAITING FOR PLAYER • ROUND ${s.roundNumber}`;
+    photo.parentElement.classList.add("idle");
+    document.querySelector(".auction-stage").classList.add("stage-idle");
+    $("currentTeam").textContent = "WAITING FOR THE NEXT PLAYER";
+    if(photo.dataset.pid !== "idle"){
+      photo.dataset.pid = "idle";
+      photo.onerror = null;
+      photo.src = IDLE_PHOTO;
+    }
+    return;
+  }
+  photo.parentElement.classList.remove("idle");
+  document.querySelector(".auction-stage").classList.remove("stage-idle");
+
+  $("playerName").textContent     = p.name;
+  $("playerPosition").textContent = `${p.position} • BASE ${baseBid(p)} PTS`;
+  $("baseBidDisplay").textContent = `🏷️ BASE BID: ${baseBid(p)} POINTS`;
+  $("statBase").textContent       = `${baseBid(p)} pts`;
+  $("currentBid").textContent     = s.currentBid;
+  $("playerStatus").textContent   = `🔴 LIVE AUCTION • ROUND ${s.roundNumber}`;
+
+  const lead = teamOf(s, s.currentTeamId);
+  $("currentTeam").textContent = lead ? `${lead.name} • ${lead.owner}` : "No bids yet";
+
+  if(photo.dataset.pid !== String(p.id)){
+    photo.dataset.pid = String(p.id);
+    /* never leave the previous player's face on screen while loading:
+       show the neutral silhouette, then swap in the real photo once ready */
+    photo.onerror = null;
+    photo.src = FALLBACK_PHOTO;
+    const pre = new Image();
+    pre.onload  = () => { if(photo.dataset.pid === String(p.id)) photo.src = p.photo; };
+    pre.onerror = () => { if(photo.dataset.pid === String(p.id)) photo.src = FALLBACK_PHOTO; };
+    pre.src = p.photo;
+  }
+}
+
+function renderStats(s){
+  $("statRound").textContent = s.roundNumber;
+  $("soldCount").textContent = `${soldCount(s)} / ${AUCTION_POOL.length}`;
+}
+
+function renderTimer(){
+  const secs = secondsLeft(state);
+  const txt  = `${String(Math.floor(secs/60)).padStart(2,"0")}:${String(secs%60).padStart(2,"0")}`;
+  $("timer").textContent = txt;
+  $("statTimer").textContent = txt;
+  const hot = secs > 0 && secs <= 20;
+  $("timer").classList.toggle("hot", hot);
+}
+
+function startClock(){
+  setInterval(() => {
+    renderTimer();
+    if(me && me.role === "owner") renderOwnerPanel(state);
+  }, 500);
+}
+
+function teamCardHtml(s, team){
+  const ownerEntry   = team.players.find(e => e.role === "owner");
+  const captainEntry = team.players.find(e => e.role === "captain");
+  const bought       = team.players.filter(e => e.role !== "owner" && e.role !== "captain");
+  const slotsLeft    = Math.max(0, MAX_SQUAD - team.players.length);
+  const isLead       = s.currentTeamId === team.id;
+  const isMine       = me && me.role === "owner" && me.teamId === team.id;
+  const justWon      = justWonTeam === team.id;
+  const flashing     = bidFlashTeam === team.id;
+
+  const slots = [
+    { type:"owner",   entry:ownerEntry },
+    { type:"captain", entry:captainEntry }
+  ];
+  for(let i = 0; i < MAX_SQUAD - 2; i++) slots.push({ type:"auction", entry:bought[i] || null });
+
+  const slotsHtml = slots.map((slot, i) => {
+    if(!slot.entry){
+      const label = slot.type === "owner" ? "Owner"
+                  : slot.type === "captain" ? "Captain"
+                  : `Slot ${i + 1}`;
+      return `<div class="roster-slot empty">
+                <div class="roster-slot-empty-icon">?</div>
+                <div class="roster-slot-empty-text">${label} · Open</div>
+              </div>`;
+    }
+    const p   = PLAYER_BY_ID[slot.entry.playerId] || { name:"Unknown", photo:FALLBACK_PHOTO };
+    const tag = slot.type === "owner" ? "OWNER" : slot.type === "captain" ? "CAPTAIN" : "SOLD";
+    const pop = justSoldPlayer === slot.entry.playerId ? " just-sold" : "";
+    return `<div class="roster-slot filled slot-${slot.type}${pop}">
+              <img class="roster-slot-photo" src="${p.photo}" data-zoom="${slot.entry.playerId}"
+                   title="Tap to enlarge"
+                   onerror="this.onerror=null;this.src='${FALLBACK_PHOTO}';">
+              <div class="roster-slot-name" title="${p.name}">${p.name}</div>
+              <div class="roster-slot-meta">${pop ? "🎉 JOINED" : tag} · ${slot.entry.price} pts</div>
+            </div>`;
+  }).join("");
+
+  return `
+  <div class="team-card ${isLead ? "leading" : ""} ${isMine ? "you" : ""} ${justWon ? "just-won" : ""} ${flashing ? "bid-flash" : ""}">
+    <div class="team-head">
+      <div class="team-head-top">
+        <div class="team-name">${team.name}</div>
+        <div class="team-points">${team.points} pts</div>
+      </div>
+      <div class="team-owner">👤 Owner: ${team.owner}</div>
+      <div class="team-badges">
+        <span class="badge">${team.players.length}/${MAX_SQUAD} players</span>
+        ${isMine ? `<span class="badge you-badge">YOUR TEAM</span>` : ""}
+        ${isLead ? `<span class="badge lead">🔥 HIGHEST BID ${s.currentBid}</span>` : ""}
+        <span class="slots-note ${slotsLeft === 0 ? "full" : ""}">
+          ${slotsLeft > 0 ? `${slotsLeft} slot${slotsLeft === 1 ? "" : "s"} left` : "✅ Roster full"}
+        </span>
+      </div>
+    </div>
+    <div class="roster-grid">${slotsHtml}</div>
+  </div>`;
+}
+
+function renderTeams(s){
+  $("leftTeams").innerHTML  = s.teams.filter(t => t.id === 1 || t.id === 2).map(t => teamCardHtml(s, t)).join("");
+  $("rightTeams").innerHTML = s.teams.filter(t => t.id === 3 || t.id === 4).map(t => teamCardHtml(s, t)).join("");
+}
+
+function renderOwnerPanel(s){
+  if(!me || me.role !== "owner") return;
+  const team = teamOf(s, me.teamId);
+  if(!team) return;
+
+  const slotsLeft = Math.max(0, MAX_SQUAD - team.players.length);
+  $("myTeamName").textContent = `${team.name}`;
+  $("myPoints").textContent   = team.points;
+  $("mySlots").textContent    = slotsLeft;
+  $("pendingQuote").textContent = quote;
+
+  const p        = PLAYER_BY_ID[s.currentPlayerId];
+  const running  = secondsLeft(s) > 0;
+  const need     = minRequired(s);
+  const leading  = s.currentTeamId === team.id;
+
+  const canBid = !!p && running && slotsLeft > 0 && !leading &&
+                 quote >= need && quote <= team.points;
+  $("bidNow").disabled = !canBid;
+
+  let notice;
+  if(!p)                    notice = "⏳ Waiting for the admin to pick a player.";
+  else if(slotsLeft === 0)  notice = "✅ Your roster is full — you cannot bid any more.";
+  else if(!running)         notice = "⏱️ Time is up for this player — waiting for the admin.";
+  else if(leading)          notice = `🔥 You are the highest bidder at ${s.currentBid} points.`;
+  else if(team.points < need) notice = `🚫 You need ${need} points to bid and only have ${team.points}.`;
+  else                      notice = `Minimum bid now: ${need} pts. Set your quote and press BID NOW.`;
+  $("ownerNotice").textContent = notice;
+}
+
+function renderHistory(s){
+  const box = $("auctionHistory");
+  if(!s.history.length){
+    box.innerHTML = `<div class="empty-note">No completed sales yet.</div>`;
+    return;
+  }
+  box.innerHTML = s.history.map(h => {
+    const p = PLAYER_BY_ID[h.playerId] || { name:"Unknown" };
+    const t = teamOf(s, h.teamId) || { name:"—" };
+    return `<div class="history-item">
+              <div class="history-player">🏐 ${p.name}</div>
+              <div class="history-team">${t.name} • ${h.owner || ""}</div>
+              <div class="history-price">SOLD FOR ${h.price} POINTS</div>
+            </div>`;
+  }).join("");
+}
 
 /* =========================================================
-   +5 / +10 / +15
+   LOGIN MANAGEMENT (admin + big screen)
 ========================================================= */
-document
-.querySelectorAll("[data-bid]")
-.forEach(button => {
+function freeOneLogin(key){
+  const acc = ACCOUNTS.find(a => a.key === key);
+  if(!acc) return;
+  mutate(s => {
+    s.sessions = s.sessions || {};
+    s.kicks    = s.kicks || {};
+    delete s.sessions[key];
+    s.kicks[key] = (s.kicks[key] || 0) + 1;
+    setFlash(s, `🔓 ${acc.label} was signed out — that login is free again.`);
+  });
+}
 
-    button.addEventListener("click", function () {
+function freeAllLogins(){
+  /* claim the new epoch first so the person pressing it stays signed in */
+  myEpoch = (state.sessionEpoch || 0) + 1;
+  mutate(s => {
+    s.sessions = {};
+    s.sessionEpoch = myEpoch;
+    if(me && !allowsMany(me)) s.sessions[me.key] = { device:MY_DEVICE, at:Date.now() };
+    setFlash(s, "🔓 All logins were freed.");
+  }).then(() => showToast("🔓 All other logins are free again."));
+}
 
-        const value = this.dataset.bid;
+/* =========================================================
+   PHOTO ZOOM — tap any face to see it big (handy on phones)
+========================================================= */
+function openZoom(playerId){
+  const p = PLAYER_BY_ID[Number(playerId)];
+  if(!p) return;
+  const img = $("zoomPhoto");
+  img.onerror = function(){ this.onerror = null; this.src = FALLBACK_PHOTO; };
+  img.src = p.photo;
+  $("zoomName").textContent = p.name;
 
-        const teamId =
-            Number($("ownerSelect").value);
+  const entry = rosterEntry(state, p.id);
+  let meta = p.position + " • BASE " + baseBid(p) + " PTS";
+  if(entry){
+    const role = entry.entry.role === "owner" ? "TEAM OWNER"
+               : entry.entry.role === "captain" ? "CAPTAIN"
+               : "SOLD FOR " + entry.entry.price + " PTS";
+    meta += " • " + role + " • " + entry.team.name;
+  }
+  $("zoomMeta").textContent = meta;
+  $("photoModal").classList.add("show");
+}
 
-        const team =
-            teams.find(t => t.id === teamId);
-
-
-        if (!team) {
-
-            showToast(
-                "Please select your team owner first."
-            );
-
-            return;
-        }
-
-
-        if (!auction.currentPlayer) {
-
-            showToast(
-                "No player is currently being auctioned."
-            );
-
-            return;
-        }
-
-
-        // ==========================================
-        // CUSTOM BID
-        // ==========================================
-
-        if (value === "custom") {
-
-            const customValue =
-                prompt(
-                    "Enter your bid amount:"
-                );
-
-
-            if (
-                customValue === null ||
-                customValue.trim() === ""
-            ) {
-                return;
-            }
-
-
-            const customBid =
-                Number(customValue);
-
-
-            if (
-                !Number.isInteger(customBid) ||
-                customBid <= 0
-            ) {
-
-                showToast(
-                    "Please enter a valid whole number."
-                );
-
-                return;
-            }
-
-
-            setOwnerBid(customBid);
-
-            return;
-        }
-
-
-        // ==========================================
-        // NORMAL +1 / +2 / +5 / +10 / +15
-        // ==========================================
-
-        const increment =
-            Number(value);
-
-
-        let nextQuote;
-
-
-        if (!auction.currentTeam) {
-
-            /*
-             * First bid must be at least 5.
-             */
-
-            nextQuote =
-                Math.max(
-                    getPlayerBaseBid(auction.currentPlayer),
-                    increment
-                );
-
-        }
-        else {
-
-            /*
-             * Existing highest bid + increment.
-             */
-
-            nextQuote =
-                auction.currentBid +
-                increment;
-
-        }
-
-
-        setOwnerBid(nextQuote);
-
-    });
-
+["leftTeams","rightTeams"].forEach(id => {
+  $(id).addEventListener("click", ev => {
+    const img = ev.target.closest("[data-zoom]");
+    if(img) openZoom(img.dataset.zoom);
+  });
 });
-function setOwnerBid(amount) {
+$("playerPhoto").addEventListener("click", () => {
+  if(state.currentPlayerId) openZoom(state.currentPlayerId);
+});
+$("closeZoom").addEventListener("click", () => $("photoModal").classList.remove("show"));
+$("photoModal").addEventListener("click", ev => {
+  if(ev.target.id === "photoModal") $("photoModal").classList.remove("show");
+});
 
-    const teamId =
-        Number(
-            $("ownerSelect").value
-        );
+/* =========================================================
+   DATABASE VIEWER (admin only)
+========================================================= */
+function dataModalOpen(){ return $("dataModal").classList.contains("show"); }
 
+function renderDataModal(){
+  if(!dataModalOpen()) return;
+  const s = state;
 
-    const team =
-        teams.find(
-            t => t.id === teamId
-        );
+  if(syncMode === "firebase"){
+    $("dataWhere").textContent = `Firebase Realtime Database → ${FIREBASE_CONFIG.databaseURL}/auctions/${ROOM_ID}`;
+    $("dataHint").innerHTML =
+      "Open <b>console.firebase.google.com</b> → your project → <b>Realtime Database</b> → " +
+      `open <b>auctions / ${ROOM_ID}</b> to see or delete the same data by hand.`;
+  }else{
+    $("dataWhere").textContent = `This browser's local storage → key: ${LS_KEY}`;
+    $("dataHint").innerHTML =
+      "Nothing is saved on a server yet. To look at it by hand: press <b>F12</b> → " +
+      "<b>Application</b> tab → <b>Local Storage</b> → your site → key <b>" + LS_KEY + "</b>. " +
+      "Paste a Firebase config at the top of index.html if you want the data on a real database.";
+  }
 
+  /* ---- who is logged in right now ---- */
+  const manage = canManageLogins();
+  $("loginSection").classList.toggle("hidden", !manage);
+  $("freeAllInData").classList.toggle("hidden", !manage);
 
-    if (!team) {
+  if(manage){
+    $("dataLogins").innerHTML = ACCOUNTS.map(a => {
+      const sess = (s.sessions || {})[a.key];
+      const live = liveSession(sess);
+      const mine = sess && sess.device === MY_DEVICE;
+      const secs = sess ? Math.max(0, Math.round((Date.now() - (sess.at || 0)) / 1000)) : 0;
 
-        showToast(
-            "Please select your team owner first."
-        );
+      let status, action = "";
+      if(allowsMany(a)){
+        status = `<span class="login-free">open to all screens</span>`;
+      }else if(live){
+        status = `<span class="login-live">🟢 logged in${mine ? " (this device)" : ""} · seen ${secs}s ago</span>`;
+        action = mine ? "" : `<button class="free-btn" data-free="${a.key}">🔓 Free</button>`;
+      }else{
+        status = `<span class="login-free">⚪ free</span>`;
+      }
+      /* passwords are only ever shown on the admin's own screen,
+         never on the big screen where everyone can read them */
+      const sub = me.role === "admin"
+        ? `<small>password: ${a.password}</small>`
+        : `<small>${a.role === "owner" ? "team owner" : a.role === "admin" ? "auctioneer" : "big screen"}</small>`;
+      return `<div class="data-row">
+                <div>${a.label}${sub}</div>
+                <div style="display:flex;align-items:center;gap:10px">${status}${action}</div>
+              </div>`;
+    }).join("");
+  }
 
-        return;
-    }
+  /* ---- destructive controls are admin-only unless you allow the viewer ---- */
+  const edit = canEditData();
+  $("clearAllData").classList.toggle("hidden", !edit);
 
+  $("dataTeams").innerHTML = s.teams.map(t => {
+    const bought = t.players.filter(e => e.role !== "owner" && e.role !== "captain").length;
+    return `<div class="data-row">
+              <div>${t.name}<small>${t.players.length}/${MAX_SQUAD} players · ${bought} bought at auction</small></div>
+              <div class="price">${t.points} pts left</div>
+            </div>`;
+  }).join("");
 
-    if (!auction.currentPlayer) {
+  const sales = [];
+  s.teams.forEach(t => t.players
+    .filter(e => e.role !== "owner" && e.role !== "captain")
+    .forEach(e => sales.push({ team:t, entry:e })));
 
-        showToast(
-            "No player is currently being auctioned."
-        );
+  $("dataSales").innerHTML = sales.length
+    ? sales.map(({team, entry}) => {
+        const p = PLAYER_BY_ID[entry.playerId] || { name:"Unknown #" + entry.playerId };
+        return `<div class="data-row">
+                  <div>${p.name}<small>${team.name} · ${team.owner}</small></div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span class="price">${entry.price} pts</span>
+                    ${edit ? `<button class="rm-btn" data-remove="${entry.playerId}">🗑️ Remove sale</button>` : ""}
+                  </div>
+                </div>`;
+      }).join("")
+    : `<div class="empty-note">No players have been sold yet.</div>`;
 
-        return;
-    }
+  $("dataBuild").textContent = "File version: " + BUILD;
+  $("dataJson").textContent = JSON.stringify(s, null, 2);
+}
 
+function openDataModal(){
+  $("dataModal").classList.add("show");
+  renderDataModal();
+}
 
-    if (amount < STARTING_BID) {
+$("openData").addEventListener("click", openDataModal);
 
-        showToast(
-            "Minimum bid is 5 points."
-        );
+$("dataLogins").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-free]");
+  if(!btn) return;
+  const acc = ACCOUNTS.find(a => a.key === btn.dataset.free);
+  if(!acc) return;
+  if(!confirm(`Free the login for ${acc.label}?\n\nIf they are still on a screen somewhere they will be sent back to the login page.`)) return;
+  freeOneLogin(acc.key);
+});
 
-        return;
-    }
+$("freeAllInData").addEventListener("click", () => {
+  if(!confirm("Free every login? Everyone except you will be sent back to the login screen.")) return;
+  freeAllLogins();
+});
 
+/* keep the "seen Xs ago" numbers ticking while the screen is open */
+setInterval(() => { if(dataModalOpen()) renderDataModal(); }, 2000);
+$("closeData").addEventListener("click", () => $("dataModal").classList.remove("show"));
 
-    if (
-        auction.currentTeam &&
-        amount <= auction.currentBid
-    ) {
+$("dataSales").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-remove]");
+  if(!btn) return;
+  const pid = Number(btn.dataset.remove);
+  const p = PLAYER_BY_ID[pid];
+  if(!confirm(`Remove ${p ? p.name : "this player"} from their team?\n\nThe points go back to the team and the player returns to the auction pool.`)) return;
+  actRemoveSale(pid);
+});
 
-        showToast(
-            `Your bid must be higher than ${auction.currentBid} points.`
-        );
+$("copyJson").addEventListener("click", async () => {
+  const txt = JSON.stringify(state, null, 2);
+  try{
+    await navigator.clipboard.writeText(txt);
+    showToast("📋 All data copied to the clipboard.");
+  }catch(e){
+    showToast("Select the raw data below and copy it manually.");
+  }
+});
 
-        return;
-    }
+$("downloadJson").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type:"application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `pvp-auction-${ROOM_ID}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  showToast("⬇ Data downloaded.");
+});
 
+$("clearAllData").addEventListener("click", () => {
+  if(!confirm("Clear ALL auction data?\n\nEvery sale, every point and the whole history will be wiped and the auction starts from scratch. Logins stay as they are.")) return;
+  mutate(s => {
+    const keepSessions = s.sessions || {};
+    const keepEpoch    = s.sessionEpoch || 0;
+    const fresh = freshState();
+    Object.keys(s).forEach(k => delete s[k]);
+    Object.assign(s, fresh);
+    s.sessions     = keepSessions;
+    s.sessionEpoch = keepEpoch;
+    setFlash(s, "🗑️ All auction data was cleared — fresh auction.");
+  });
+});
 
-    if (amount > team.points) {
+/* =========================================================
+   SOUND — every effect is generated in the browser,
+   so there are no audio files to host.
+========================================================= */
+let audioCtx = null;
+let soundOn  = localStorage.getItem("pvk-sound") !== "off";
 
-        showToast(
-            `You only have ${team.points} points remaining.`
-        );
+function ac(){
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }catch(e){ return null; }
+}
 
-        return;
-    }
+/* one musical note */
+function tone(freq, dur, {type="sine", vol=.22, at=0, glide=null} = {}){
+  if(!soundOn) return;
+  const c = ac(); if(!c) return;
+  try{
+  const t0 = c.currentTime + at;
+  const osc = c.createOscillator();
+  const g   = c.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  if(glide) osc.frequency.exponentialRampToValueAtTime(glide, t0 + dur);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  osc.connect(g).connect(c.destination);
+  osc.start(t0); osc.stop(t0 + dur + 0.03);
+  }catch(e){ console.warn("tone", e); }
+}
 
+/* a burst of noise — used for the gavel and the crackers */
+function noise(dur, {vol=.3, at=0, hp=400, lp=6000} = {}){
+  if(!soundOn) return;
+  const c = ac(); if(!c) return;
+  try{
+  const t0 = c.currentTime + at;
+  const frames = Math.max(1, Math.floor(c.sampleRate * dur));
+  const buf = c.createBuffer(1, frames, c.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i = 0; i < frames; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / frames);
+  const src = c.createBufferSource(); src.buffer = buf;
+  const bp = c.createBiquadFilter(); bp.type = "bandpass";
+  bp.frequency.value = (hp + lp) / 2;
+  bp.Q.value = 0.7;
+  const g = c.createGain();
+  g.gain.setValueAtTime(vol, t0);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  src.connect(bp).connect(g).connect(c.destination);
+  src.start(t0); src.stop(t0 + dur + 0.02);
+  }catch(e){ console.warn("noise", e); }
+}
 
-    /*
-     * Store the owner's quote.
-     * It is NOT the actual auction bid until
-     * BID NOW is pressed.
-     */
+/* a new player comes up for auction */
+function sfxPick(){
+  tone(523, .16, { type:"triangle", vol:.18 });
+  tone(784, .22, { type:"triangle", vol:.16, at:.13 });
+}
+/* somebody placed a bid */
+function sfxBid(){
+  tone(880, .09, { type:"square", vol:.13 });
+  tone(1320, .12, { type:"square", vol:.11, at:.07 });
+}
+/* you were the leader and just got outbid */
+function sfxOutbid(){
+  tone(300, .3, { type:"sawtooth", vol:.13, glide:150 });
+}
+/* the hammer + a short fanfare */
+function sfxSold(){
+  noise(.16, { vol:.5, hp:120, lp:1400 });                  // gavel
+  tone(392, .5, { type:"triangle", vol:.2,  at:.10 });      // G
+  tone(523, .5, { type:"triangle", vol:.2,  at:.22 });      // C
+  tone(659, .5, { type:"triangle", vol:.2,  at:.34 });      // E
+  tone(784, .8, { type:"triangle", vol:.24, at:.46 });      // G
+}
+/* fire crackers */
+function sfxCrackers(){
 
-    auction.pendingBid =
-        amount;
+  for(let i = 0; i < 25; i++){
 
+    const at = 0.3 + Math.random() * 4.5;
 
-    updateOwnerPanel();
-
-
-    showToast(
-        `💰 Your quote: ${amount} points`
+    // loud blast
+    noise(
+      0.22 + Math.random() * 0.18,
+      {
+        vol: 0.55,
+        at,
+        hp: 80,
+        lp: 2500
+      }
     );
 
+    // crackling tail
+    noise(
+      0.35,
+      {
+        vol: 0.18,
+        at: at + 0.05,
+        hp: 1000,
+        lp: 7000
+      }
+    );
+
+    // boom resonance
+    tone(
+      70 + Math.random() * 50,
+      0.35,
+      {
+        type: "sawtooth",
+        vol: 0.08,
+        at
+      }
+    );
+
+    // sparkle whistle
+    tone(
+      1800 + Math.random() * 2200,
+      0.15,
+      {
+        type: "triangle",
+        vol: 0.05,
+        at: at + 0.02,
+        glide: 500
+      }
+    );
+  }
 }
+
+function setSoundButton(){
+  const b = $("soundToggle");
+  if(b) b.textContent = soundOn ? "🔊" : "🔇";
+}
+$("soundToggle").addEventListener("click", () => {
+  soundOn = !soundOn;
+  localStorage.setItem("pvk-sound", soundOn ? "on" : "off");
+  setSoundButton();
+  if(soundOn){
+    unlockAudio();
+    sfxBid();
+    setTimeout(() => {
+      pickVoice();
+      say(useTelugu() ? "పి వి పి లీగ్ వేలం సిద్ధంగా ఉంది." : "PVP League auction is ready.");
+      showToast(useTelugu() ? "🔊 తెలుగు వాయిస్ ఆన్" : "🔊 Sound on — English voice");
+    }, 250);
+  }
+  else{
+    try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(e){}
+    showToast("🔇 Sound off");
+  }
+});
+setSoundButton();
+/* browsers only allow audio after a tap — the login press unlocks it */
+document.addEventListener("click", unlockAudio, { once:true });
+
 /* =========================================================
-   BID NOW
+   VOICE — reads the result out with the browser's own voice
 ========================================================= */
+let speechVoice = null;
+const canSpeak = () => typeof window.speechSynthesis !== "undefined";
 
-$("bidNow")
-.addEventListener(
-    "click",
-    ownerBid
-);
+let speechIsTelugu = false;
+let speechLang     = "en-IN";
 
+function pickVoice(){
+  if(!canSpeak()) return;
+  const voices = window.speechSynthesis.getVoices() || [];
+  if(!voices.length) return;
+  const norm = v => (v.lang || "").replace("_","-").toLowerCase();
+  for(const want of SPEECH_LANG_ORDER){
+    const hit = voices.find(v => norm(v).startsWith(want.toLowerCase()));
+    if(hit){ speechVoice = hit; break; }
+  }
+  if(!speechVoice) speechVoice = voices[0];
+  speechLang     = (speechVoice && speechVoice.lang) || "en-IN";
+  speechIsTelugu = /^te/i.test(speechLang);
+}
+const useTelugu = () => speechIsTelugu;
+
+/* what the voice should call this player / position */
+const spokenName = p => (speechIsTelugu && p && p.nameTe) ? p.nameTe : speakable(p && p.name);
+const spokenPos  = pos => (speechIsTelugu && POSITION_TE[pos]) ? POSITION_TE[pos] : pos;
+const spokenNum  = n => speechIsTelugu ? teNum(n) : n;
+if(canSpeak()){
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+/* clean a name up a little so the voice reads it naturally */
+function speakable(name){
+  return String(name || "")
+    .replace(/[—–]/g, ", ")               // dashes read badly
+    .replace(/\(([^)]*)\)/g, " $1 ")      // "T. Anil (2)" -> "T. Anil 2"
+    .replace(/([A-Za-z])\./g, "$1 ")      // "C." -> "C "
+    .replace(/\s+/g, " ").trim();
+}
+
+function say(text, { after = 0, interrupt = true } = {}){
+  if(!soundOn || !canSpeak() || !text) return;
+  const go = () => {
+    try{
+      if(interrupt) window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      try{ if(speechVoice) u.voice = speechVoice; }catch(e){ speechVoice = null; }
+      u.lang   = speechLang;
+      u.rate   = SPEECH_RATE;
+      u.pitch  = SPEECH_PITCH;
+      u.volume = 1;
+      window.speechSynthesis.speak(u);
+    }catch(e){ console.warn("speech", e); }
+  };
+  after > 0 ? setTimeout(go, after) : go();
+}
+
+/* mobile browsers need one tap before any audio or speech is allowed */
+function unlockAudio(){
+  ac();
+  if(canSpeak()){
+    try{
+      pickVoice();
+      const u = new SpeechSynthesisUtterance(" ");
+      u.volume = 0;
+      window.speechSynthesis.speak(u);
+    }catch(e){}
+  }
+}
 
 /* =========================================================
-   ADMIN BUTTONS
+   FIRE CRACKERS — canvas particles behind the SOLD card
 ========================================================= */
+const fwCanvas = $("fireworks");
+const fwCtx = fwCanvas.getContext("2d");
+let fwParts = [], fwRAF = null, fwUntil = 0;
+const FW_COLORS = ["#f4d58b","#d6a647","#fffaf0","#e75b5b","#ffd76b","#9fe0b6"];
 
-$("pickPlayer")
-.addEventListener(
-    "click",
-    pickRandomPlayer
-);
+function fwSize(){
+  fwCanvas.width  = window.innerWidth;
+  fwCanvas.height = window.innerHeight;
+}
+window.addEventListener("resize", () => { if(fwRAF) fwSize(); });
 
+function fwBurst(x, y){
+  const colour = FW_COLORS[Math.floor(Math.random() * FW_COLORS.length)];
+  const n = 46 + Math.floor(Math.random() * 34);
+  for(let i = 0; i < n; i++){
+    const a = (Math.PI * 2 * i) / n + Math.random() * .3;
+    const sp = 2.2 + Math.random() * 4.6;
+    fwParts.push({
+      x, y, vx:Math.cos(a) * sp, vy:Math.sin(a) * sp,
+      life:1, decay:.012 + Math.random() * .015,
+      col:Math.random() < .22 ? "#fffaf0" : colour,
+      size:1.6 + Math.random() * 2.2
+    });
+  }
+}
 
-$("startAuction")
-.addEventListener(
-    "click",
-    function(){
+function fwFrame(){
+  fwCtx.globalCompositeOperation = "destination-out";
+  fwCtx.fillStyle = "rgba(0,0,0,.22)";
+  fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+  fwCtx.globalCompositeOperation = "lighter";
 
-        if(!auction.currentPlayer){
+  for(let i = fwParts.length - 1; i >= 0; i--){
+    const p = fwParts[i];
+    p.vy += .045;          // gravity
+    p.vx *= .985; p.vy *= .985;
+    p.x += p.vx; p.y += p.vy;
+    p.life -= p.decay;
+    if(p.life <= 0){ fwParts.splice(i, 1); continue; }
+    fwCtx.globalAlpha = Math.max(0, p.life);
+    fwCtx.fillStyle = p.col;
+    fwCtx.beginPath();
+    fwCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    fwCtx.fill();
+  }
+  fwCtx.globalAlpha = 1;
 
-            showToast(
-                "🎲 Pick a player first."
-            );
+  const now = performance.now();
+  if(now < fwUntil && Math.random() < .09){
+    fwBurst(
+      fwCanvas.width  * (.12 + Math.random() * .76),
+      fwCanvas.height * (.14 + Math.random() * .42)
+    );
+  }
+  if(now < fwUntil || fwParts.length) fwRAF = requestAnimationFrame(fwFrame);
+  else fwStop();
+}
 
-            return;
-        }
+function fwStart(ms = 3600){
+  fwSize();
+  fwParts = [];
+  fwUntil = performance.now() + ms;
+  fwBurst(fwCanvas.width * .28, fwCanvas.height * .3);
+  fwBurst(fwCanvas.width * .72, fwCanvas.height * .26);
+  if(!fwRAF) fwRAF = requestAnimationFrame(fwFrame);
+}
 
+function fwStop(){
+  if(fwRAF) cancelAnimationFrame(fwRAF);
+  fwRAF = null; fwParts = []; fwUntil = 0;
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+}
 
-        auction.timer =
-            AUCTION_TIME;
+/* =========================================================
+   SOLD MODAL + TOAST
+========================================================= */
+let soldTimeout = null;
+function showSoldModal(sale){
+  const p = PLAYER_BY_ID[sale.playerId];
+  const t = teamOf(state, sale.teamId);
+  if(!p || !t) return;
 
-        startAuction();
+  /* keep the roster slot + team card blinking after the popup closes */
+  justSoldPlayer = sale.playerId;
+  justWonTeam    = t.id;
+  clearTimeout(blinkTimeout);
+  blinkTimeout = setTimeout(() => {
+    justSoldPlayer = null;
+    justWonTeam    = null;
+    renderTeams(state);
+  }, 9000);
+  renderTeams(state);
 
+  const pPhoto = $("soldPlayerPhoto");
+  pPhoto.onerror = function(){ this.onerror = null; this.src = FALLBACK_PHOTO; };
+  pPhoto.src = p.photo;
+
+  const oPhoto = $("soldOwnerPhoto");
+  oPhoto.onerror = function(){ this.onerror = null; this.src = FALLBACK_PHOTO; };
+  oPhoto.src = ownerPhotoOf(t.id);
+
+  $("soldPlayer").textContent    = p.name;
+  $("soldOwnerName").textContent = ownerPlayerName(t.id) || t.owner;
+  $("soldWelcome").innerHTML     = `Welcome to <b>${t.name}</b>!`;
+  $("soldDetails").textContent   = `SOLD FOR ${sale.price} POINTS`;
+
+  $("soldModal").classList.add("show");
+  try{ sfxSold(); sfxCrackers(); }catch(e){ console.warn(e); }
+  fwStart(3800);
+
+  /* "Sold! Chenna is sold to Harsha. Team 2 — Harsha. For 12 points." */
+  if(SPEAK_SOLD){
+    const ownerPl = ownerPlayerOf(t.id);
+    const ownerSaid = ownerPl ? spokenName(ownerPl) : speakable(t.owner);
+    say(useTelugu()
+      ? SAY_SOLD_TE(spokenName(p), ownerSaid, teNum(t.id), teNum(sale.price))
+      : SAY_SOLD(speakable(p.name), ownerSaid, t.id, sale.price),
+      { after:1500 });
+  }
+
+  clearTimeout(soldTimeout);
+  soldTimeout = setTimeout(closeSold, 9000);
+}
+
+function closeSold(){
+  $("soldModal").classList.remove("show");
+  fwStop();
+}
+
+/* the admin resetting or clearing should not leave the voice talking */
+window.addEventListener("beforeunload", () => {
+  try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(e){}
+});
+
+let toastTimeout = null;
+function showToast(msg){
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => el.classList.remove("show"), 2800);
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+buildLoginScreen();
+
+$("loginBtn").addEventListener("click", tryLogin);
+
+$("forceLogin").addEventListener("click", async () => {
+  const acc = pendingForce;
+  if(!acc) return;
+  $("loginError").textContent = "⏳ Taking the login back…";
+  const res = await claimLogin(acc, true);   // force
+  if(res.ok){
+    showToast("🔓 Login moved to this device.");
+    finishLogin(acc);
+  }else{
+    $("loginError").textContent = "Could not take the login. Please try once more.";
+  }
+});
+
+/* Changing the selected person hides the takeover button again */
+$("loginUser").addEventListener("change", () => {
+  pendingForce = null;
+  $("forceLogin").classList.add("hidden");
+  $("loginError").textContent = "";
+});
+$("loginPass").addEventListener("keydown", e => { if(e.key === "Enter") tryLogin(); });
+$("logoutBtn").addEventListener("click", logout);
+
+/* Owner quote buttons */
+document.querySelectorAll("[data-bid]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if(!me || me.role !== "owner") return;
+    if(!state.currentPlayerId){ showToast("No player is being auctioned right now."); return; }
+    const need = minRequired(state);
+    const kind = btn.dataset.bid;
+
+    if(kind === "min"){ quote = need; }
+    else if(kind === "custom"){
+      const v = prompt(`Enter your bid (minimum ${need} points):`, String(Math.max(quote, need)));
+      if(v === null || v.trim() === "") return;
+      const n = Number(v);
+      if(!Number.isInteger(n) || n < 0){ showToast("Please enter a whole number."); return; }
+      quote = n;
     }
-);
+    else { quote = Math.max(quote, need) + Number(kind); }
 
+    if(quote < need) quote = need;
+    renderOwnerPanel(state);
+    showToast(`💰 Your quote: ${quote} points`);
+  });
+});
 
-$("sellPlayer")
-.addEventListener(
-    "click",
-    sellPlayer
-);
+$("bidNow").addEventListener("click", () => {
+  if(!me || me.role !== "owner") return;
+  actBid(me.teamId, quote);
+});
 
+/* Admin */
+$("pickPlayer").addEventListener("click", actPick);
+$("startAuction").addEventListener("click", actStartTimer);
+$("sellPlayer").addEventListener("click", actSell);
+$("skipPlayer").addEventListener("click", actSkip);
+$("undoSale").addEventListener("click", actUndo);
+$("resetAuction").addEventListener("click", actReset);
+$("freeLogins").addEventListener("click", () => {
+  if(!confirm("Free every login? Everyone except you will be sent back to the login screen.")) return;
+  freeAllLogins();
+});
+/* One-tap bidding for the auctioneer: pick the team, tap an amount.
+   MIN opens at the player's base points; +N raises the current bid by N. */
+document.querySelectorAll("[data-behalf]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tid = Number($("behalfTeam").value);
+    if(!tid){ showToast("Pick a team first."); return; }
+    if(!state.currentPlayerId){ showToast("No player is being auctioned right now."); return; }
+    const need = minRequired(state);
+    const kind = btn.dataset.behalf;
+    const amt  = kind === "min" ? need : need + Number(kind) - (state.currentTeamId ? 1 : 0);
+    actBid(tid, amt);
+  });
+});
 
-$("skipPlayer")
-.addEventListener(
-    "click",
-    skipPlayer
-);
+$("behalfBid").addEventListener("click", () => {
+  const tid = Number($("behalfTeam").value);
+  const amt = Number($("behalfAmount").value);
+  if(!tid || !Number.isInteger(amt)){ showToast("Pick a team and a whole number of points."); return; }
+  actBid(tid, amt);
+  $("behalfAmount").value = "";
+});
 
+$("closeSold").addEventListener("click", closeSold);
 
-$("undoSale")
-.addEventListener(
-    "click",
-    undoSale
-);
+window.addEventListener("pagehide", releaseLoginSync);
+window.addEventListener("beforeunload", releaseLoginSync);
 
+/* ---- boot: connect first so the login screen knows who is online ---- */
+await initSync(render);
+startClock();
+refreshLoginLocks();
 
-/* =========================================================
-   CLOSE SOLD MODAL
-========================================================= */
+const kicked = sessionStorage.getItem(KICK_KEY);
+if(kicked){
+  sessionStorage.removeItem(KICK_KEY);
+  $("loginError").innerHTML = kicked;
+}
 
-$("closeSold")
-.addEventListener(
-    "click",
-    function(){
-
-        $("soldModal")
-            .classList
-            .remove("show");
-
-    }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-renderSummary();
-
-updateEverything();
-
+/* Auto login again if THIS tab was already signed in (e.g. page refresh) */
+const savedAcc = ACCOUNTS.find(a => a.key === sessionStorage.getItem(SESSION_KEY));
+if(savedAcc){
+  const res = await claimLogin(savedAcc);
+  if(res.ok) enterApp(savedAcc);
+  else{
+    sessionStorage.removeItem(SESSION_KEY);
+    $("loginError").innerHTML = "🔒 That login is now open on another device.";
+  }
+}
 </script>
-
 </body>
 </html>
